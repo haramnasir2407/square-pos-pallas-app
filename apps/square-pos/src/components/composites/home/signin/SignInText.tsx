@@ -1,32 +1,33 @@
-import LockIcon from "@/components/primitives/derived/LockIcon";
-import { css } from "~/styled-system/css";
+import LockIcon from '@/components/composites/home/signin/LockIcon'
+import { css } from '~/styled-system/css'
+import { Box } from '~/styled-system/jsx'
 
 export default function SignInText() {
   return (
-    <div
+    <Box
       className={css({
-        textAlign: "center",
-        marginBottom: "32px",
+        textAlign: 'center',
+        mb: 'layout.section.sm',
       })}
     >
       <LockIcon />
       <h1
         className={css({
-          fontSize: "30px",
-          fontWeight: "700",
-          color: "#111827",
-          marginBottom: "8px",
+          fontSize: '30px',
+          fontWeight: 'bold',
+          color: '#111827',
+          marginBottom: '8px',
         })}
       >
         Welcome Back
       </h1>
       <p
         className={css({
-          color: "#6b7280",
+          color: 'text.secondary',
         })}
       >
         Sign in to your Square account to continue
       </p>
-    </div>
-  );
+    </Box>
+  )
 }

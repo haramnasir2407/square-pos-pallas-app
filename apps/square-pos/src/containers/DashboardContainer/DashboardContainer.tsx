@@ -1,16 +1,15 @@
 // * this container contains the business logic and the UI
 
-import DashboardHeader from "@/components/composites/dashboard/header/DashboardHeader";
-import ProductSectionSkeleton from "@/components/composites/dashboard/products/ProductSectionSkeleton";
-import useDashboardData from "./useDashboardData";
-import { redirect } from "next/navigation";
-import { Suspense } from "react";
-import { auth } from "~/auth";
-import { css } from "~/styled-system/css";
-import { center, container, stack } from "~/styled-system/patterns";
-import ErrorBoundary from "@/components/composites/common/ErrorBoundary";
-import ProductSection from "@/components/composites/dashboard/products/ProductSection";
-
+import ErrorBoundary from '@/components/composites/common/ErrorBoundary'
+import DashboardHeader from '@/components/composites/dashboard/header/DashboardHeader'
+import ProductSection from '@/components/composites/dashboard/products/ProductSection'
+import ProductSectionSkeleton from '@/components/composites/dashboard/products/ProductSectionSkeleton'
+import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
+import { auth } from '~/auth'
+import { css } from '~/styled-system/css'
+import { Box, Center, Container, Stack, VStack } from '~/styled-system/jsx'
+import useDashboardData from './useDashboardData'
 
 /**
  * DashboardContainer is an async server component that handles all data fetching
@@ -20,64 +19,70 @@ import ProductSection from "@/components/composites/dashboard/products/ProductSe
 /* @compile */
 export default async function DashboardContainer() {
   // * Check the session
-  const session = await auth();
+  const session = await auth()
   if (!session) {
-    redirect("/signin");
-    return null;
+    redirect('/signin')
+    return null
   }
 
   // * custom hook that fetches data server side
   const { products, inventoryData } = await useDashboardData({
-    accessToken: session.accessToken ?? "",
-  });
+    accessToken: session.accessToken ?? '',
+  })
 
   return (
-    <div className={css({ minH: "100vh", bg: "gray.50" })}>
-      <DashboardHeader />
+    <Box minH="100vh">
+      <DashboardHeader user={session.user?.name ?? ''} />
 
-      <main className={css({ py: ["6", "8", "12"], mt: "6" })}>
-        <div className={container({ maxW: "7xl" })}>
-          <div className={center({ maxW: "6xl", mx: "auto" })}>
-            <div className={stack({ gap: ["4", "6", "8"] })}>
-              <div className={css({ textAlign: "center" })}>
+      <main
+        className={css({
+          py: 'padding.block.lg',
+          mt: 'layout.section.sm',
+        })}
+      >
+        <Container>
+          <Center className={css({ maxW: '6xl', mx: 'auto' })}>
+            <VStack gap="4" align="center" justify="center">
+              <Box className={css({ textAlign: 'center' })}>
                 <h2
                   className={css({
-                    fontSize: ["lg", "2xl", "3xl"],
-                    fontWeight: "bold",
-                    color: "gray.900",
-                    mb: "4",
+                    fontSize: '2xl',
+                    fontWeight: 'bold',
+                    color: 'grey.50.dark',
+                    mb: 'layout.section.sm',
                   })}
                 >
-                  Welcome back, {session.user?.name}!
+                  Welcome back,{' '}
+                  {session.user?.name === 'Default Test Account' ? 'Haram Nasir' : null}!
                 </h2>
                 <p
                   className={css({
-                    fontSize: ["sm", "md", "lg"],
-                    color: "gray.600",
-                    maxW: "1xl",
-                    mx: "auto",
+                    fontSize: 'md',
+                    color: 'grey.50.dark',
+                    mx: 'auto',
+                    textAlign: 'center',
                   })}
                 >
-                  Manage your Square integration, view products, and handle
-                  transactions all in one place.
+                  Manage your Square integration, view products, and handle transactions all in one
+                  place.
                 </p>
-              </div>
+              </Box>
 
               {/* Product Section */}
               {/*  dynamic content on run time  */}
               <ErrorBoundary>
                 <Suspense fallback={<ProductSectionSkeleton />}>
                   <ProductSection
-                    accessToken={session.accessToken ?? ""}
+                    accessToken={session.accessToken ?? ''}
                     products={products}
                     inventory={inventoryData}
                   />
                 </Suspense>
               </ErrorBoundary>
-            </div>
-          </div>
-        </div>
+            </VStack>
+          </Center>
+        </Container>
       </main>
-    </div>
-  );
+    </Box>
+  )
 }

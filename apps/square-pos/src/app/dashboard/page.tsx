@@ -1,4 +1,4 @@
-import { DashboardContainer } from "@/containers/DashboardContainer";
+import { DashboardContainer } from '@/containers/DashboardContainer'
 
 /**
  * Dashboard page for authenticated users.
@@ -6,5 +6,5 @@ import { DashboardContainer } from "@/containers/DashboardContainer";
  * Redirects to home if not authenticated.
  */
 export default function DashboardPage() {
-  return <DashboardContainer />;
+  return <DashboardContainer />
 }

@@ -1,8 +1,13 @@
-"use client";
-import { useCartStore } from "@/shared/store/useCartStore";
-import type { ProductCardProps } from "@/shared/types/catalog";
-import Image from "next/image";
-import { css } from "~/styled-system/css";
+'use client'
+import { ButtonComponent } from '@/components/primitives/derived/Button'
+import { Button } from '@/components/primitives/ui/button'
+import { useCartStore } from '@/shared/store/useCartStore'
+import type { ProductCardProps } from '@/shared/types/catalog'
+import Image from 'next/image'
+import { FiMinus } from 'react-icons/fi'
+import { GoPlus } from 'react-icons/go'
+import { css } from '~/styled-system/css'
+import { Flex } from '~/styled-system/jsx'
 
 /**
  * Card component for displaying product information and cart controls.
@@ -20,171 +25,125 @@ export default function ProductCard({
   taxes,
 }: ProductCardProps) {
   // Use zustand store instead of CartContext
-  const items = useCartStore((state) => state.items);
-  const addItem = useCartStore((state) => state.addItem);
-  const removeItem = useCartStore((state) => state.removeItem);
-  const updateQuantity = useCartStore((state) => state.updateQuantity);
+  const items = useCartStore((state) => state.items)
+  const addItem = useCartStore((state) => state.addItem)
+  const removeItem = useCartStore((state) => state.removeItem)
+  const updateQuantity = useCartStore((state) => state.updateQuantity)
 
   // Find the cart item by id (zustand uses array)
-  const cartItem = items.find((item) => item.id === id);
+  const cartItem = items.find((item) => item.id === id)
 
   /**
    * The available inventory quantity for the product.
    */
-  const inventoryQty =
-    typeof quantity === "string" ? Number(quantity) : (quantity ?? 0);
+  const inventoryQty = typeof quantity === 'string' ? Number(quantity) : (quantity ?? 0)
   /**
    * Whether the product is out of stock.
    */
-  const isOutOfStock = !inventoryQty || inventoryQty <= 0;
+  const isOutOfStock = !inventoryQty || inventoryQty <= 0
   /**
    * Whether the cart already has the maximum allowed quantity for this product.
    */
-  const atMaxQty = cartItem && cartItem.quantity >= inventoryQty;
+  const atMaxQty = cartItem && cartItem.quantity >= inventoryQty
 
   return (
-    <div
+    <Flex
+      direction="column"
+      p="4"
       className={css({
-        display: "flex",
-        flexDirection: "column",
-        borderColor: "gray.200",
-        borderRadius: "lg",
-        padding: "4",
-        background: "white",
-        height: "100%",
+        height: '100%',
+        borderRadius: 'lg',
       })}
     >
-      <div
-        className={css({
-          width: "full",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          mb: "3",
-        })}
-      >
-        <Image
-          priority={true}
-          src={imageUrl}
-          alt={name}
-          width={180}
-          height={180}
-          style={{ objectFit: "cover", maxHeight: "100%" }}
-          className={css({ borderRadius: "md" })}
-        />
-      </div>
+      <Image
+        priority={true}
+        src={imageUrl ?? ''}
+        alt={name}
+        width={180}
+        height={180}
+        style={{ objectFit: 'cover', maxHeight: '100%' }}
+        className={css({ borderRadius: 'md', mb: '4' })}
+      />
 
-      <h3 className={css({ fontSize: "sm", fontWeight: "semibold" })}>
-        {name}
-      </h3>
+      <h3 className={css({ fontSize: 'sm', fontWeight: 'semibold' })}>{name}</h3>
 
-      <p className={css({ color: "gray.600", fontSize: "sm" })}>
-        {price !== null
-          ? `$${(price / 100).toFixed(2)}`
-          : "Price not available"}{" "}
+      <p className={css({ color: 'gray.600', fontSize: 'sm' })}>
+        {price !== null ? `$${(price / 100).toFixed(2)}` : 'Price not available'}{' '}
       </p>
 
-      <div
-        className={css({
-          mt: "2",
-          display: "flex",
-          alignItems: "center",
-          gap: "2",
-        })}
-      >
+      <Flex align="center" mt="2" gap="gap.component.sm">
         <span
           className={css({
-            px: "2",
-            py: "1",
-            borderRadius: "full",
-            fontSize: "xs",
-            fontWeight: "bold",
-            bg: state === "IN_STOCK" ? "green.100" : "red.100",
-            color: state === "IN_STOCK" ? "green.700" : "red.700",
+            px: '2',
+            py: '1',
+            borderRadius: 'full',
+            fontSize: 'xs',
+            fontWeight: 'bold',
+            bg: state === 'IN_STOCK' ? 'green.100' : 'red.100',
+            color: state === 'IN_STOCK' ? 'green.700' : 'red.700',
           })}
         >
-          {state ?? "Unknown"}
+          {state ?? 'Unknown'}
         </span>
         <span
           className={css({
-            fontSize: "sm",
-            color: "gray.700",
-            ml: "2",
+            fontSize: 'sm',
+            color: 'gray.700',
+            ml: '2',
           })}
         >
-          Qty: {quantity ?? "-"}
+          Qty: {quantity ?? '-'}
         </span>
-      </div>
-      <div
-        className={css({
-          display: "flex",
-          alignItems: "center",
-          gap: "2",
-          mt: "4",
-        })}
-      >
+      </Flex>
+      <Flex align="center" mt="layout.section.sm">
         {cartItem ? (
-          <div
-            className={css({
-              display: "flex",
-              alignItems: "center",
-              gap: "2",
-            })}
-          >
-            <button
-              type="button"
+          <Flex align="center" gap="1">
+            <Button
+              variant="text"
+              size="md"
               className={css({
-                px: "2",
-                py: "1",
-                bg: "gray.200",
-                borderRadius: "md",
+                color: 'black',
+                px: '2',
+                py: '1',
+                bg: 'gray.200',
+                borderRadius: 'md',
               })}
               onClick={() => updateQuantity(id, cartItem.quantity - 1)}
               disabled={cartItem.quantity <= 1}
             >
-              -
-            </button>
-            <span className={css({ px: "2" })}>{cartItem.quantity}</span>
-            <button
-              type="button"
+              <FiMinus size={14} />
+            </Button>
+            <span className={css({ px: '2' })}>{cartItem.quantity}</span>
+            <Button
+              variant="text"
+              size="md"
               className={css({
-                px: "2",
-                py: "1",
-                bg: atMaxQty ? "gray.100" : "gray.200",
-                borderRadius: "md",
-                color: atMaxQty ? "gray.400" : undefined,
-                cursor: atMaxQty ? "not-allowed" : undefined,
+                color: 'black',
+                px: '2',
+                py: '1',
+                bg: 'gray.200',
+                borderRadius: 'md',
               })}
               onClick={() => updateQuantity(id, cartItem.quantity + 1)}
               disabled={atMaxQty}
             >
-              +
-            </button>
-            <button
-              type="button"
-              className={css({ ml: "2", color: "red.500", fontSize: "sm" })}
+              <GoPlus size={14} />
+            </Button>
+            <Button
+              variant="text"
+              size="md"
+              className={css({ ml: '1', color: 'red.500', fontSize: 'sm', bg: 'gray.50' })}
               onClick={() => removeItem(id)}
             >
               Remove
-            </button>
-          </div>
+            </Button>
+          </Flex>
         ) : (
-          <button
-            type="button"
-            className={css({
-              mt: "1",
-              px: "4",
-              py: "2",
-              bg: isOutOfStock ? "gray.200" : "gray.800",
-              color: isOutOfStock ? "gray.500" : "white",
-              borderRadius: "md",
-              fontWeight: "medium",
-              fontSize: "md",
-              transition: "all 0.2s",
-              width: "100%",
-              _hover: isOutOfStock ? undefined : { bg: "gray.700" },
-              cursor: isOutOfStock ? "not-allowed" : undefined,
-            })}
+          <ButtonComponent
+            bg={isOutOfStock ? 'gray.200' : 'gray.800'}
+            color={isOutOfStock ? 'gray.500' : 'white'}
+            hover={{ bg: 'gray.700' }}
+            cursor="pointer"
             onClick={() =>
               addItem({
                 id,
@@ -200,10 +159,10 @@ export default function ProductCard({
             }
             disabled={isOutOfStock}
           >
-            {isOutOfStock ? "Out of Stock" : "Add to Cart"}
-          </button>
+            {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
+          </ButtonComponent>
         )}
-      </div>
-    </div>
-  );
+      </Flex>
+    </Flex>
+  )
 }

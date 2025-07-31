@@ -1,43 +1,31 @@
-import { css } from "~/styled-system/css";
-import { DashboardSignOutButton } from "../signout/DashboardSignOutButton";
-import { container } from "~/styled-system/patterns";
+import { css } from '~/styled-system/css'
+import { DashboardSignOutButton } from '../signout/DashboardSignOutButton'
+import { container } from '~/styled-system/patterns'
+import { Container, Flex } from '~/styled-system/jsx'
 
-export default function DashboardHeader() {
+export default function DashboardHeader({ user }: { user: string }) {
   return (
     <header
       className={css({
-        bg: "white",
-        px: "6",
-        py: "4",
-        shadow: "sm",
+        bg: 'white',
+        py: 'padding.block.lg',
+        shadow: 'sm',
       })}
     >
-      <div className={container({ maxW: "7xl" })}>
-        <div
-          className={css({
-            display: "flex",
-            justifyContent: "left",
-            alignItems: "center",
-            width: "100%",
-            gap: "4",
-          })}
-        >
+      <Container>
+        <Flex justify="between" align="center" gap="gap.inline.sm">
           <h1
             className={css({
-              fontSize: ["lg", "xl", "2xl"],
-              fontWeight: ["semibold", "bold", "bold"],
-              color: "gray.900",
-              bgGradient: "to-r",
-              gradientFrom: "blue.600",
-              gradientTo: "purple.600",
-              bgClip: "text",
+              fontSize: 'md',
+              fontWeight: 'normal',
+              color: 'black',
             })}
           >
-            Dashboard
+            {user === 'Default Test Account' ? 'Haram Nasir' : null}
           </h1>
           <DashboardSignOutButton />
-        </div>
-      </div>
+        </Flex>
+      </Container>
     </header>
-  );
+  )
 }

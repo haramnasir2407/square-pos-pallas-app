@@ -15,7 +15,7 @@ export type CartItem = {
   id: string;
   name: string;
   price: number | null;
-  imageUrl: string;
+  imageUrl: string | undefined;
   quantity: number;
   is_taxable?: boolean;
   itemTaxRate?: number;

@@ -1,19 +1,19 @@
-"use client";
+'use client'
 
-import Form from "@/components/primitives/ui/form";
-import { Input } from "@/components/primitives/ui/input";
-import { useDebounce } from "@/shared/hooks/useDebounce";
-import type { ParamsType } from "@/shared/types/catalog";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { css } from "~/styled-system/css";
+import Form from '@/components/primitives/ui/form'
+import { Input } from '@/components/primitives/ui/input'
+import { useDebounce } from '@/shared/hooks/useDebounce'
+import type { ParamsType } from '@/shared/types/catalog'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { css } from '~/styled-system/css'
 
 /**
  * Props for the SearchBar component.
  */
 interface SearchBarProps {
-  setParams: (params: ParamsType) => void;
-  prevParams: ParamsType;
+  setParams: (params: ParamsType) => void
+  prevParams: ParamsType
 }
 
 /**
@@ -21,9 +21,9 @@ interface SearchBarProps {
  * Updates params when the user types at least 3 characters.
  */
 export default function SearchBar({ setParams, prevParams }: SearchBarProps) {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('')
   // Debounced search input value
-  const debouncedSearch = useDebounce(searchInput, 500);
+  const debouncedSearch = useDebounce(searchInput, 500)
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: suppress dependency prevParams, setParams
   useEffect(() => {
@@ -31,46 +31,36 @@ export default function SearchBar({ setParams, prevParams }: SearchBarProps) {
       setParams({
         ...prevParams,
         query: {
-          ...(typeof prevParams.query === "object" && prevParams.query
-            ? prevParams.query
-            : {}),
+          ...(typeof prevParams.query === 'object' && prevParams.query ? prevParams.query : {}),
           text_query: {
             keywords: [debouncedSearch],
           },
         },
-      });
+      })
     } else {
       // If less than 3 chars, show initial product listing, remove search query
       setParams({
-        types:
-          "item, image, category, tax, discount, pricing_rule, product_set",
+        types: 'item, image, category, tax, discount, pricing_rule, product_set',
         query: {
-          ...(typeof prevParams.query === "object" && prevParams.query
-            ? prevParams.query
-            : {}),
+          ...(typeof prevParams.query === 'object' && prevParams.query ? prevParams.query : {}),
           text_query: undefined,
         },
-      });
-      setSearchInput("");
+      })
+      setSearchInput('')
     }
-  }, [debouncedSearch]);
+  }, [debouncedSearch])
 
-  const form = useForm();
+  const form = useForm()
 
   return (
     // * pallas ui form and input components
     <Form.Provider form={form} onSubmit={(e) => e.preventDefault()}>
       <Form.Item>
         <Form.Control>
-          <Input>
+          <Input shape="default" size="lg">
             <Input.Text
               className={css({
-                px: "4",
-                py: "2",
-                border: "1px solid",
-                borderColor: "gray.300",
-                borderRadius: "md",
-                fontSize: "md",
+                fontSize: 'sm',
               })}
               placeholder="Search products..."
               value={searchInput}
@@ -80,5 +70,5 @@ export default function SearchBar({ setParams, prevParams }: SearchBarProps) {
         </Form.Control>
       </Form.Item>
     </Form.Provider>
-  );
+  )
 }

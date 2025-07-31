@@ -8,7 +8,7 @@ interface ProductCardProps {
   id: string;
   name: string;
   price: number | null;
-  imageUrl: string;
+  imageUrl: string | undefined;
   state?: string;
   quantity?: string | number;
   is_taxable?: boolean | undefined;

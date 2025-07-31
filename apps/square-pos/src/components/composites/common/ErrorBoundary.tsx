@@ -7,5 +7,5 @@ export default function ErrorBoundary({
 }: {
   children: React.ReactNode;
 }) {
-  return <REB fallback={<div>Something went wrong.</div>}>{children}</REB>;
+  return <REB fallback={<div>Something went wrong. Can not load products.</div>}>{children}</REB>;
 }
