@@ -35,11 +35,12 @@ import {
   summaryContainerStyle,
   totalTextStyle,
   warningTextStyle,
-} from './CartDrawer.styles'
+} from './styles/CartDrawer.styles'
 import { FaShoppingCart } from 'react-icons/fa'
 import { Box } from '~/styled-system/jsx'
 import { Label } from '@/components/primitives/ui/label'
 import { Button } from '@/components/primitives/ui/button'
+import { Badge } from '@/components/primitives/ui/badge'
 
 /**
  * Drawer component for displaying and managing the shopping cart.
@@ -92,8 +93,10 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
         className={drawerTriggerStyle}
         aria-label={`Open cart with ${items.length} items`}
       >
-        <FaShoppingCart size={25} fill="gray.100" />
-        <span className={cartCountStyle}>({items.length})</span>
+        <FaShoppingCart size={28} fill="gray.100" />
+        <Badge size="sm" variant="default" className={cartCountStyle}>
+          {items.length}
+        </Badge>
       </Drawer.Trigger>
 
       <Drawer.Content className={drawerContentStyle}>
@@ -184,95 +187,97 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
             )}
 
             <Box className={summaryContainerStyle}>
-              <Box className={summaryBoxStyle}>
-                {/* Order-level discount/tax controls */}
-                <Label htmlFor="order-discount" className={labelStyle}>
-                  Order Discount:
-                </Label>
-                <CustomSelect
-                  id="order-discount"
-                  value={selectedOrderDiscount?.name || ''}
-                  onChange={(value) => {
-                    const discount = ORDER_LEVEL_DISCOUNTS.find((d) => d.name === value) || null
-                    handleOrderLevelChange({
-                      type: 'discount',
-                      value: discount as SelectedOrderDiscount,
-                      setSelectedOrderDiscount,
-                      setSelectedOrderTax,
-                      items,
-                      removeItemDiscount,
-                      toggleItemTax,
-                      setItemTaxRate,
-                    })
-                  }}
-                  disabled={isItemLevelActive}
-                  options={[
-                    { value: '', label: 'Select Discount' },
-                    ...ORDER_LEVEL_DISCOUNTS.map((discount) => ({
-                      value: discount.name,
-                      label: `${discount.name} (${discount.percentage}%)`,
-                    })),
-                  ]}
-                  placeholder="Select Discount"
-                  size="sm"
-                  className={customSelectStyle}
-                />
-                <Label htmlFor="order-tax" className={labelStyle}>
-                  Order Tax:
-                </Label>
-                <CustomSelect
-                  id="order-tax"
-                  value={selectedOrderTax?.name || ''}
-                  onChange={(value) => {
-                    const tax = ORDER_LEVEL_TAXES.find((t) => t.name === value) || null
-                    handleOrderLevelChange({
-                      type: 'tax',
-                      value: tax,
-                      setSelectedOrderDiscount,
-                      setSelectedOrderTax,
-                      items,
-                      removeItemDiscount,
-                      toggleItemTax,
-                      setItemTaxRate,
-                    })
-                  }}
-                  disabled={isItemLevelActive}
-                  options={[
-                    { value: '', label: 'Select Tax' },
-                    ...ORDER_LEVEL_TAXES.map((tax) => ({
-                      value: tax.name,
-                      label: `${tax.name} (${tax.percentage}%)`,
-                    })),
-                  ]}
-                  placeholder="Select Tax"
-                  size="sm"
-                />
-                {isItemLevelActive && (
-                  <span className={warningTextStyle}>
-                    (Disable item-level discounts/taxes to use order-level)
-                  </span>
-                )}
-                {/* Show order-level discount/tax if active */}
-                {isOrderLevelActive && (
-                  <Box className={orderLevelInfoStyle}>
-                    {selectedOrderDiscount && (
-                      <Box>
-                        <b>Order Discount:</b> {selectedOrderDiscount.name} (-
-                        {selectedOrderDiscount.percentage}%)
-                      </Box>
-                    )}
-                    {selectedOrderTax && (
-                      <Box>
-                        <b>Order Tax:</b> {selectedOrderTax.name} (+
-                        {selectedOrderTax.percentage}%)
-                      </Box>
-                    )}
+              {items.length > 0 && (
+                <Box className={summaryBoxStyle}>
+                  {/* Order-level discount/tax controls */}
+                  <Label htmlFor="order-discount" className={labelStyle}>
+                    Order Discount:
+                  </Label>
+                  <CustomSelect
+                    id="order-discount"
+                    value={selectedOrderDiscount?.name || ''}
+                    onChange={(value) => {
+                      const discount = ORDER_LEVEL_DISCOUNTS.find((d) => d.name === value) || null
+                      handleOrderLevelChange({
+                        type: 'discount',
+                        value: discount as SelectedOrderDiscount,
+                        setSelectedOrderDiscount,
+                        setSelectedOrderTax,
+                        items,
+                        removeItemDiscount,
+                        toggleItemTax,
+                        setItemTaxRate,
+                      })
+                    }}
+                    disabled={isItemLevelActive}
+                    options={[
+                      { value: '', label: 'Select Discount' },
+                      ...ORDER_LEVEL_DISCOUNTS.map((discount) => ({
+                        value: discount.name,
+                        label: `${discount.name} (${discount.percentage}%)`,
+                      })),
+                    ]}
+                    placeholder="Select Discount"
+                    size="sm"
+                    className={customSelectStyle}
+                  />
+                  <Label htmlFor="order-tax" className={labelStyle}>
+                    Order Tax:
+                  </Label>
+                  <CustomSelect
+                    id="order-tax"
+                    value={selectedOrderTax?.name || ''}
+                    onChange={(value) => {
+                      const tax = ORDER_LEVEL_TAXES.find((t) => t.name === value) || null
+                      handleOrderLevelChange({
+                        type: 'tax',
+                        value: tax,
+                        setSelectedOrderDiscount,
+                        setSelectedOrderTax,
+                        items,
+                        removeItemDiscount,
+                        toggleItemTax,
+                        setItemTaxRate,
+                      })
+                    }}
+                    disabled={isItemLevelActive}
+                    options={[
+                      { value: '', label: 'Select Tax' },
+                      ...ORDER_LEVEL_TAXES.map((tax) => ({
+                        value: tax.name,
+                        label: `${tax.name} (${tax.percentage}%)`,
+                      })),
+                    ]}
+                    placeholder="Select Tax"
+                    size="sm"
+                  />
+                  {isItemLevelActive && (
+                    <span className={warningTextStyle}>
+                      (Disable item-level discounts/taxes to use order-level)
+                    </span>
+                  )}
+                  {/* Show order-level discount/tax if active */}
+                  {isOrderLevelActive && (
+                    <Box className={orderLevelInfoStyle}>
+                      {selectedOrderDiscount && (
+                        <Box>
+                          <b>Order Discount:</b> {selectedOrderDiscount.name} (-
+                          {selectedOrderDiscount.percentage}%)
+                        </Box>
+                      )}
+                      {selectedOrderTax && (
+                        <Box>
+                          <b>Order Tax:</b> {selectedOrderTax.name} (+
+                          {selectedOrderTax.percentage}%)
+                        </Box>
+                      )}
+                    </Box>
+                  )}
+                  <Box className={totalTextStyle}>
+                    Total: ${(drawerOrderSummary.total / 100).toFixed(2)}
                   </Box>
-                )}
-                <Box className={totalTextStyle}>
-                  Total: ${(drawerOrderSummary.total / 100).toFixed(2)}
                 </Box>
-              </Box>
+              )}
               <Button
                 variant="outlined"
                 size="lg"

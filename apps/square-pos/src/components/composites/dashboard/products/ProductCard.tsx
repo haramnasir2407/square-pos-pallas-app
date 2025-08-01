@@ -8,16 +8,16 @@ import { GoPlus } from 'react-icons/go'
 import { css } from '~/styled-system/css'
 import { Flex } from '~/styled-system/jsx'
 import {
+  addToCartButton,
+  cardContainer,
+  priceText,
   productImage,
   productName,
-  priceText,
-  stateTag,
   qtyText,
   quantityButton,
   removeButton,
-  addToCartButton,
-  cardContainer,
-} from './ProductCard.styles'
+  stateTag,
+} from './styles/ProductCard.styles'
 
 /**
  * Card component for displaying product information and cart controls.

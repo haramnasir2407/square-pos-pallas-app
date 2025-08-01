@@ -5,8 +5,35 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import CustomSelect from '@/components/primitives/derived/CustomSelect'
+import { Button } from '@/components/primitives/ui/button'
+import { Checkbox } from '@/components/primitives/ui/checkbox'
+import { Label } from '@/components/primitives/ui/label'
 import type { Discount } from '@/shared/store/useCartStore'
-import { css } from '~/styled-system/css'
+import { FaTrash } from 'react-icons/fa6'
+import { Box, Flex } from '~/styled-system/jsx'
+import { flex } from '~/styled-system/patterns'
+import {
+  cardContainer,
+  discountCheckbox,
+  discountLabel,
+  discountSelect,
+  image,
+  itemInfo,
+  itemName,
+  itemPrice,
+  itemStock,
+  moreOptionsButton,
+  optionsContainer,
+  qtyButton,
+  qtyButtonDisabled,
+  qtyRow,
+  qtyValue,
+  removeButton,
+  taxCheckbox,
+  taxLabel,
+  taxRow,
+  taxSelect,
+} from './styles/CartItemCard.styles'
 
 export default function CartItemCard({
   item,
@@ -25,152 +52,67 @@ export default function CartItemCard({
   const [showOptions, setShowOptions] = useState(false)
 
   return (
-    <div
-      className={css({
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '2',
-        bg: 'white',
-        boxShadow: 'sm',
-        borderRadius: 'lg',
-        p: '4',
-        mb: '4',
-      })}
-    >
-      <div
-        className={css({
-          display: 'flex',
-          alignItems: 'center',
-          gap: '4',
-        })}
-      >
-        <Image
-          src={item.imageUrl}
-          alt={item.name}
-          width={48}
-          height={48}
-          className={css({ borderRadius: 'md' })}
-        />
-        <div className={css({ flex: 1 })}>
-          <div className={css({ fontWeight: 'semibold', fontSize: 'sm' })}>{item.name}</div>
-          <div className={css({ color: 'gray.600', fontSize: 'xs' })}>
-            ${item.price ? (item.price / 100).toFixed(2) : 'N/A'}
-          </div>
-          <div className={css({ color: 'gray.400', fontSize: 'xs' })}>
-            Qty in stock: {inventory?.quantity ?? '-'}
-          </div>
-        </div>
-        <button
-          type="button"
-          className={css({
-            color: 'red.500',
-            fontSize: 'lg',
-            ml: '2',
-            bg: 'none',
-            border: 'none',
-            cursor: 'pointer',
-          })}
+    <Flex direction="column" gap="2" bg="white" p="4" mb="4" className={cardContainer}>
+      <Flex align="center" gap="4">
+        <Image src={item.imageUrl} alt={item.name} width={48} height={48} className={image} />
+        <Box className={itemInfo}>
+          <Box className={itemName}>{item.name}</Box>
+          <Box className={itemPrice}>${item.price ? (item.price / 100).toFixed(2) : 'N/A'}</Box>
+          <Box className={itemStock}>Qty in stock: {inventory?.quantity ?? '-'}</Box>
+        </Box>
+        <Button
+          variant="default"
+          size="sm"
+          className={removeButton}
           onClick={onRemove}
           aria-label="Remove item"
         >
-          &times;
-        </button>
-      </div>
-      <div
-        className={css({
-          display: 'flex',
-          alignItems: 'center',
-          gap: '2',
-          mt: '2',
-        })}
-      >
-        <button
-          type="button"
-          className={css({
-            px: '2',
-            py: '0.5',
-            bg: 'gray.200',
-            borderRadius: 'md',
-            fontWeight: '400',
-            fontSize: 'sm',
-            cursor: 'pointer',
-          })}
+          <FaTrash fill="gray.50" />
+        </Button>
+      </Flex>
+      <Box className={qtyRow}>
+        <Button
+          variant="default"
+          size="sm"
+          className={qtyButton}
           onClick={() => onQtyChange(item.quantity - 1)}
           disabled={item.quantity <= 1}
         >
           -
-        </button>
-        <span className={css({ px: '2', fontWeight: '400' })}>{item.quantity}</span>
-        <button
-          type="button"
-          className={css({
-            px: '2',
-            py: '0.5',
-            bg: atMaxQty ? 'gray.100' : 'gray.200',
-            borderRadius: 'md',
-            color: atMaxQty ? 'gray.400' : undefined,
-            cursor: atMaxQty ? 'not-allowed' : 'pointer',
-            fontWeight: '400',
-            fontSize: 'sm',
-          })}
+        </Button>
+        <span className={qtyValue}>{item.quantity}</span>
+        <Button
+          variant="default"
+          size="sm"
+          className={atMaxQty ? qtyButtonDisabled : qtyButton}
           onClick={() => onQtyChange(item.quantity + 1)}
           disabled={atMaxQty}
         >
           +
-        </button>
-        <button
-          type="button"
-          className={css({
-            ml: 'auto',
-            fontSize: 'xs',
-            color: 'blue.500',
-            bg: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            textDecoration: 'underline',
-          })}
+        </Button>
+        <Button
+          variant="default"
+          size="sm"
+          className={moreOptionsButton}
           onClick={() => setShowOptions((v) => !v)}
         >
           {showOptions ? 'Hide options' : 'More options'}
-        </button>
-      </div>
+        </Button>
+      </Box>
       {showOptions && (
-        <div
-          className={css({
-            mt: '3',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2',
-            bg: 'gray.50',
-            borderRadius: 'md',
-            p: '3',
-          })}
-        >
+        <Flex direction="column" gap="2" className={optionsContainer}>
           {/* Tax */}
           {taxes.length > 0 && (
-            <div
-              className={css({
-                display: 'flex',
-                alignItems: 'center',
-                gap: '2',
-              })}
-            >
-              <label
-                className={css({
-                  fontSize: 'xs',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '1',
-                })}
-              >
-                <input
-                  className={css({ mr: '1' })}
-                  type="checkbox"
+            <Flex className={taxRow}>
+              <Label className={taxLabel}>
+                <Checkbox
+                  size="sm"
+                  className={taxCheckbox}
                   checked={!!item.is_taxable && item.itemTaxRate !== undefined}
-                  onChange={(e) => onTaxToggle(e.target.checked)}
+                  onCheckedChange={(checked) => onTaxToggle(checked as boolean)}
                 />
                 Apply Tax
-              </label>
+              </Label>
               <CustomSelect
                 id="tax"
                 value={item.itemTaxRate?.toString() ?? ''}
@@ -184,35 +126,22 @@ export default function CartItemCard({
                 ]}
                 placeholder="Select Tax"
                 size="sm"
-                className={css({ minW: '32' })}
+                className={taxSelect}
               />
-            </div>
+            </Flex>
           )}
           {/* Discount */}
           {discounts.length > 0 && (
-            <div
-              className={css({
-                display: 'flex',
-                alignItems: 'center',
-                gap: '2',
-              })}
-            >
-              <label
-                className={css({
-                  fontSize: 'xs',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '1',
-                })}
-              >
-                <input
-                  className={css({ mr: '1' })}
-                  type="checkbox"
+            <Flex align="center" gap="2">
+              <Label className={discountLabel}>
+                <Checkbox
+                  size="sm"
+                  className={discountCheckbox}
                   checked={!!item.itemDiscount}
-                  onChange={(e) => onDiscountToggle(e.target.checked)}
+                  onCheckedChange={(checked) => onDiscountToggle(checked as boolean)}
                 />
                 Apply Discount
-              </label>
+              </Label>
               <CustomSelect
                 id="discount"
                 value={selectedDiscount?.discount_name || ''}
@@ -229,12 +158,12 @@ export default function CartItemCard({
                 ]}
                 placeholder="Select Discount"
                 size="sm"
-                className={css({ minW: '32' })}
+                className={discountSelect}
               />
-            </div>
+            </Flex>
           )}
-        </div>
+        </Flex>
       )}
-    </div>
+    </Flex>
   )
 }

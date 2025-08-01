@@ -3,14 +3,13 @@ import { flex } from '~/styled-system/patterns'
 
 export const drawerTriggerStyle = flex({
   position: 'fixed',
-  top: '3',
-  right: '2',
+  top: '4',
+  right: '10',
   zIndex: 50,
   cursor: 'pointer',
-  px: 'padding.inline.md',
+  px: 'padding.inline.lg',
   py: 'padding.block.sm',
   borderRadius: 'md',
-  fontWeight: 'bold',
   alignItems: 'center',
   justifyContent: 'center',
   gap: 'gap.inline.xs',
@@ -45,6 +44,7 @@ export const emptyCartTextStyle = css({ color: 'gray.500' })
 export const drawerBodyStyle = css({ flex: 1, overflowY: 'auto' })
 
 export const summaryContainerStyle = css({
+  mt: 'auto',
   pt: '4',
   borderTop: 'none',
   display: 'flex',
@@ -107,4 +107,10 @@ export const checkoutButtonStyle = css({
   fontSize: 'md',
 })
 
-export const cartCountStyle = css({ fontSize: 'sm', fontWeight: 'medium', color: 'gray.500' })
+export const cartCountStyle = css({
+  color: 'gray.500',
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  transform: 'translate(50%, -50%)',
+})

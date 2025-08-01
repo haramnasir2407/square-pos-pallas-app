@@ -1,9 +1,10 @@
 'use client'
 
+import { ButtonComponent } from '@/components/primitives/derived/Button'
+import { Checkbox } from '@/components/primitives/ui/checkbox'
+import Drawer from '@/components/primitives/ui/drawer'
+import { Label } from '@/components/primitives/ui/label'
 import categoryObjects from '@/shared/constants/categories.json'
-import { useState } from 'react'
-import { FaFilter } from 'react-icons/fa'
-import { css } from '~/styled-system/css'
 import type { CategoryObject } from '@/shared/types/catalog'
 import {
   buildCategoryFilterParams,
@@ -11,11 +12,18 @@ import {
   isCategorySelected,
   toggleCategory,
 } from '@/shared/utils/filter/filterUtils'
-import { flex } from '~/styled-system/patterns'
-import Drawer from '@/components/primitives/ui/drawer'
-import { Label } from '@/components/primitives/ui/label'
-import { Checkbox } from '@/components/primitives/ui/checkbox'
-import { ButtonComponent } from '@/components/primitives/derived/Button'
+import { useState } from 'react'
+import { FaFilter } from 'react-icons/fa'
+import {
+  body,
+  checkbox,
+  close,
+  content,
+  footer,
+  label,
+  title,
+  trigger,
+} from './styles/FilterDrawer.styles'
 
 /**
  * Button component to open the filter drawer and apply category filters.
@@ -62,75 +70,31 @@ export default function FilterDrawer({ setParams, prevParams }: FilterButtonProp
 
   return (
     <Drawer.Root open={open} onOpenChange={setOpen} side="left">
-      <Drawer.Trigger
-        className={flex({
-          borderRadius: 'md',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          py: 'padding.block.md',
-          px: 'padding.inline.md',
-          gap: 'gap.inline.sm',
-          color: 'black',
-          fontWeight: 'normal',
-          cursor: 'pointer',
-          boxShadow: 'sm',
-          bg: 'gray.50',
-        })}
-      >
+      <Drawer.Trigger className={trigger}>
         <FaFilter style={{ fontSize: 15 }} />
         <span>Filter</span>
       </Drawer.Trigger>
 
-      <Drawer.Content
-        className={flex({
-          justify: 'center',
-          w: '20vw',
-          direction: 'column',
-          py: '8',
-          px: '6',
-        })}
-      >
-        <Drawer.Close
-          className={css({
-            alignSelf: 'flex-end',
-            mb: '4',
-            color: 'gray.600',
-            fontSize: 'xl',
-            cursor: 'pointer',
-          })}
-        >
-          &times;
-        </Drawer.Close>
+      <Drawer.Content className={content}>
+        <Drawer.Close className={close}>&times;</Drawer.Close>
 
-        <Drawer.Title className={css({ fontWeight: 'bold', fontSize: 'xl' })}>
-          Filter by Category
-        </Drawer.Title>
+        <Drawer.Title className={title}>Filter by Category</Drawer.Title>
 
-        <Drawer.Body
-          className={flex({ direction: 'column', gap: 'gap.inline.sm', overflowY: 'auto' })}
-        >
+        <Drawer.Body className={body}>
           {categoryObjects.map((category) => (
-            <Label
-              key={category.id}
-              className={flex({
-                fontSize: 'md',
-                alignItems: 'center',
-                gap: 'gap.component.sm',
-                cursor: 'pointer',
-              })}
-            >
+            <Label key={category.id} className={label}>
               <Checkbox
                 size="sm"
                 checked={isCategorySelected(category, selected)}
                 onCheckedChange={() => handleToggle(category)}
-                className={css({ cursor: 'pointer' })}
+                className={checkbox}
               />
               {category.name}
             </Label>
           ))}
         </Drawer.Body>
 
-        <Drawer.Footer className={flex({ direction: 'column', gap: 'gap.inline.sm' })}>
+        <Drawer.Footer className={footer}>
           <ButtonComponent
             bg="gray.700"
             color="white"

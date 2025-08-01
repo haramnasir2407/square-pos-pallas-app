@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-
 import { IoChevronDown, IoChevronUp } from 'react-icons/io5'
 import { css, cx } from '~/styled-system/css'
 

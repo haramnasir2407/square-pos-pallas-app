@@ -3,7 +3,7 @@
 import ErrorBoundary from '@/components/composites/common/ErrorBoundary'
 import DashboardHeader from '@/components/composites/dashboard/header/DashboardHeader'
 import ProductSection from '@/components/composites/dashboard/products/ProductSection'
-import ProductSectionSkeleton from '@/components/composites/dashboard/products/ProductSectionSkeleton'
+import ProductSectionSkeleton from '@/components/composites/dashboard/products/skeletons/ProductSectionSkeleton'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import { auth } from '~/auth'

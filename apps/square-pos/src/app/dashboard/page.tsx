@@ -1,5 +1,4 @@
 import { DashboardContainer } from '@/containers/DashboardContainer'
-
 /**
  * Dashboard page for authenticated users.
  * Fetches products and inventory server-side, and renders the product section.
