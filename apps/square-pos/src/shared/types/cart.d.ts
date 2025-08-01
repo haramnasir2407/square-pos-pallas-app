@@ -2,19 +2,19 @@
  * Props for CartItemCard
  */
 interface CartItemCardProps {
-  item: CartItem;
-  inventory: { state: string; quantity: string };
-  atMaxQty: boolean;
-  selectedDiscount: Discount;
-  selectedTax: TaxRate;
-  discounts: Discount[];
-  taxes: TaxRate[];
-  onQtyChange: (qty: number) => void;
-  onRemove: () => void;
-  onDiscountToggle: (checked: boolean) => void;
-  onDiscountSelect: (discount: Discount) => void;
-  onTaxToggle: (checked: boolean) => void;
-  onTaxSelect: (value: string) => void;
+  item: CartItem
+  inventory: { state: string; quantity: string } | null
+  atMaxQty: boolean
+  selectedDiscount: Discount
+  selectedTax: TaxRate
+  discounts: Discount[]
+  taxes: TaxRate[]
+  onQtyChange: (qty: number) => void
+  onRemove: () => void
+  onDiscountToggle: (checked: boolean) => void
+  onDiscountSelect: (discount: Discount) => void
+  onTaxToggle: (checked: boolean) => void
+  onTaxSelect: (value: string) => void
 }
 
 /**
@@ -26,9 +26,9 @@ interface CartItemCardProps {
  */
 
 interface CartDrawerProps {
-  accessToken?: string;
-  cartInventoryInfo: Record<string, { state: string; quantity: string }>;
-  itemVariationIds: string[];
+  accessToken?: string
+  cartInventoryInfo: Record<string, { state: string; quantity: string }>
+  itemVariationIds: string[]
 }
 
 /**
@@ -38,21 +38,21 @@ interface CartDrawerProps {
  */
 
 type SelectedDiscount = {
-  discount_name: string;
-  discount_value: string | number | null;
-};
+  discount_name: string
+  discount_value: string | number | null
+}
 
 type SelectedTax = {
-  itemTaxRate?: number;
-  enabled?: boolean;
-};
+  itemTaxRate?: number
+  enabled?: boolean
+}
 
 type SelectedOrderDiscount = {
-  name: string;
-  percentage: string;
-};
+  name: string
+  percentage: string
+}
 
 type SelectedOrderTax = {
-  name: string;
-  percentage: string;
-};
+  name: string
+  percentage: string
+}

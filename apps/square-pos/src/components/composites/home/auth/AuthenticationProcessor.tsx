@@ -1,63 +1,59 @@
-import { css } from "~/styled-system/css";
+import { Spinner } from '@/components/primitives/ui/spinner'
+import { Spinnaker } from 'next/font/google'
+import { css } from '~/styled-system/css'
+import { Box, Flex } from '~/styled-system/jsx'
 
 export default function AuthenticationProcessor() {
   return (
-    <div
+    <Flex
+      minH="100vh"
+      align="center"
+      justify="center"
       className={css({
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(to bottom right, #eff6ff, #e0e7ff)",
+        background: 'linear-gradient(to bottom right, #eff6ff, #e0e7ff)',
       })}
     >
-      <div
+      <Flex
+        align="center"
+        justify="center"
+        direction="column"
+        gap="gap.component.lg"
         className={css({
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          gap: "24px",
+          textAlign: 'center',
         })}
       >
-        <div
+        <Box
           className={css({
-            position: "relative",
+            position: 'relative',
           })}
         >
-          <div
-            className={css({
-              animation: "spin 1s linear infinite",
-              borderRadius: "50%",
-              height: "80px",
-              width: "80px",
-              border: "4px solid #3b82f6",
-              borderTopColor: "transparent",
-              margin: "0 auto",
-            })}
-          >
-            
-          </div>
-        </div>
-        <div>
+          <Spinner
+            size="lg"
+            variant="default"
+            color="primary"
+            className={css({ margin: '0 auto' })}
+          />
+        </Box>
+        <Box>
           <p
             className={css({
-              fontSize: "20px",
-              fontWeight: "600",
-              color: "#1f2937",
-              marginBottom: "8px",
+              fontSize: 'lg',
+              fontWeight: 'bold',
+              color: '#1f2937',
+              marginBottom: 'gap.block.xs',
             })}
           >
             Processing Authentication
           </p>
           <p
             className={css({
-              color: "#6b7280",
+              color: '#6b7280',
             })}
           >
             Please wait while we complete your sign-in...
           </p>
-        </div>
-      </div>
-    </div>
-  );
+        </Box>
+      </Flex>
+    </Flex>
+  )
 }

@@ -1,7 +1,7 @@
-import type { CartItem } from "@/shared/store/useCartStore";
-import { createOrderData } from "@/shared/utils/cart/cartDrawerUtils";
-import { useEffect, useState } from "react";
-import { css } from "~/styled-system/css/css.mjs";
+import type { CartItem } from '@/shared/store/useCartStore'
+import { createOrderData } from '@/shared/utils/cart/cartDrawerUtils'
+import { useEffect, useState } from 'react'
+import { css } from '~/styled-system/css/css.mjs'
 
 /**
  * Props for the OrderConfirmation component.
@@ -12,12 +12,12 @@ import { css } from "~/styled-system/css/css.mjs";
  * @property onClose - Callback to close the confirmation dialog
  */
 type OrderConfirmationProps = {
-  items: CartItem[];
-  accessToken: string;
-  orderDiscounts?: OrderDiscount[];
-  orderTaxes?: OrderTax[];
-  onClose: () => void;
-};
+  items: CartItem[]
+  accessToken: string
+  orderDiscounts?: OrderDiscount[]
+  orderTaxes?: OrderTax[]
+  onClose: () => void
+}
 
 /**
  * Handles order creation and displays the result (success or error) with a summary.
@@ -30,9 +30,9 @@ export const OrderConfirmation = ({
   orderTaxes,
   onClose,
 }: OrderConfirmationProps) => {
-  const [isProcessing, setIsProcessing] = useState(true);
-  const [orderResult, setOrderResult] = useState<OrderResult | null>(null);
-  const [error, setError] = useState<Error | null>(null);
+  const [isProcessing, setIsProcessing] = useState(true)
+  const [orderResult, setOrderResult] = useState<OrderResult | null>(null)
+  const [error, setError] = useState<Error | null>(null)
 
   useEffect(() => {
     /**
@@ -41,45 +41,45 @@ export const OrderConfirmation = ({
      */
     const createOrder = async () => {
       try {
-        setIsProcessing(true);
-        setError(null);
+        setIsProcessing(true)
+        setError(null)
 
         // * create order data
         const orderData = createOrderData({
           items,
           orderDiscounts,
           orderTaxes,
-        });
+        })
 
         // * make API call to square orders to create order
-        const response = await fetch("/api/orders/create-order", {
-          method: "POST",
+        const response = await fetch('/api/orders/create-order', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             orderData,
             accessToken,
           }),
-        });
+        })
 
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Failed to create order");
+          const errorData = await response.json()
+          throw new Error(errorData.error || 'Failed to create order')
         }
 
-        const result = await response.json();
-        setOrderResult(result); // * contains the order object that is created
+        const result = await response.json()
+        setOrderResult(result) // * contains the order object that is created
       } catch (err) {
-        console.error("Error creating order:", err);
-        setError(err instanceof Error ? err : new Error("An error occurred"));
+        console.error('Error creating order:', err)
+        setError(err instanceof Error ? err : new Error('An error occurred'))
       } finally {
-        setIsProcessing(false);
+        setIsProcessing(false)
       }
-    };
+    }
 
-    createOrder();
-  }, [items, accessToken, orderDiscounts, orderTaxes]);
+    createOrder()
+  }, [items, accessToken, orderDiscounts, orderTaxes])
 
   // * retrieving order data from the orders api response
   // console.log(orderResult);
@@ -90,7 +90,7 @@ export const OrderConfirmation = ({
    * @returns Formatted string in dollars
    */
   const formatMoney = (amount: number | undefined) =>
-    typeof amount === "number" ? `$${(amount / 100).toFixed(2)}` : "N/A";
+    typeof amount === 'number' ? `$${(amount / 100).toFixed(2)}` : 'N/A'
 
   /**
    * Gets the tax name by UID from the order result.
@@ -98,44 +98,35 @@ export const OrderConfirmation = ({
    * @returns Tax name or fallback
    */
   const getTaxName = (uid: string) =>
-    orderResult?.order?.taxes?.find((t) => t.uid === uid)?.name || "Tax";
+    orderResult?.order?.taxes?.find((t) => t.uid === uid)?.name || 'Tax'
   /**
    * Gets the discount name by UID from the order result.
    * @param uid - Discount UID
    * @returns Discount name or fallback
    */
   const getDiscountName = (uid: string) =>
-    orderResult?.order?.discounts?.find((d) => d.uid === uid)?.name ||
-    "Discount";
+    orderResult?.order?.discounts?.find((d) => d.uid === uid)?.name || 'Discount'
 
   if (isProcessing) {
     // * Loading state UI
     return (
       <div
         className={css({
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          bg: "white",
-          p: "8",
-          borderRadius: "lg",
-          boxShadow: "xl",
-          zIndex: 200,
-          textAlign: "center",
+          bg: 'white',
+          p: '8',
+          borderRadius: 'lg',
+          boxShadow: 'xl',
+
+          textAlign: 'center',
         })}
       >
-        <div className={css({ color: "blue.600", fontSize: "2xl", mb: "4" })}>
-          ⏳
-        </div>
-        <h2 className={css({ fontSize: "xl", fontWeight: "bold", mb: "2" })}>
+        <div className={css({ color: 'blue.600', fontSize: '2xl', mb: '4' })}>⏳</div>
+        <h2 className={css({ fontSize: 'xl', fontWeight: 'bold', mb: '2' })}>
           Processing Order...
         </h2>
-        <p className={css({ color: "gray.600" })}>
-          Please wait while we create your order.
-        </p>
+        <p className={css({ color: 'gray.600' })}>Please wait while we create your order.</p>
       </div>
-    );
+    )
   }
 
   if (error) {
@@ -143,127 +134,102 @@ export const OrderConfirmation = ({
     return (
       <div
         className={css({
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          bg: "white",
-          p: "8",
-          borderRadius: "lg",
-          boxShadow: "xl",
-          zIndex: 200,
-          textAlign: "center",
+          bg: 'white',
+          p: '8',
+          borderRadius: 'lg',
+          boxShadow: 'xl',
+          textAlign: 'center',
         })}
       >
-        <div className={css({ color: "red.600", fontSize: "2xl", mb: "4" })}>
-          ✗
-        </div>
-        <h2 className={css({ fontSize: "xl", fontWeight: "bold", mb: "2" })}>
-          Order Failed
-        </h2>
-        <p className={css({ color: "gray.600", mb: "4" })}>{error.message}</p>
+        <div className={css({ color: 'red.600', fontSize: '2xl', mb: '4' })}>✗</div>
+        <h2 className={css({ fontSize: 'xl', fontWeight: 'bold', mb: '2' })}>Order Failed</h2>
+        <p className={css({ color: 'gray.600', mb: '4' })}>{error.message}</p>
         <button
           type="button"
           onClick={onClose}
           className={css({
-            px: "4",
-            py: "2",
-            bg: "gray.600",
-            color: "white",
-            borderRadius: "md",
-            _hover: { bg: "gray.700" },
+            px: '4',
+            py: '2',
+            bg: 'gray.600',
+            color: 'white',
+            borderRadius: 'md',
+            _hover: { bg: 'gray.700' },
           })}
         >
           Close
         </button>
       </div>
-    );
+    )
   }
 
   return (
     !isProcessing && (
       <div
         className={css({
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          bg: "white",
-          p: "8",
-          borderRadius: "lg",
-          boxShadow: "xl",
-          zIndex: 200,
-          textAlign: "center",
-          maxW: "2xl",
-          maxH: "90vh",
-          overflowY: "auto",
+          bg: 'white',
+          p: '8',
+          borderRadius: 'lg',
+          boxShadow: 'xl',
+
+          textAlign: 'center',
+          maxW: '2xl',
+          maxH: '90vh',
+          overflowY: 'auto',
         })}
       >
-        <div className={css({ color: "green.600", fontSize: "2xl", mb: "4" })}>
-          ✓
-        </div>
-        <h2 className={css({ fontSize: "xl", fontWeight: "bold", mb: "4" })}>
-          Order Successful!
-        </h2>
+        <div className={css({ color: 'green.600', fontSize: '2xl', mb: '4' })}>✓</div>
+        <h2 className={css({ fontSize: 'xl', fontWeight: 'bold', mb: '4' })}>Order Successful!</h2>
 
         {/* Order Summary */}
-        <div className={css({ textAlign: "left", mb: "6" })}>
+        <div className={css({ textAlign: 'left', mb: '6' })}>
           <h3
             className={css({
-              fontSize: "lg",
-              fontWeight: "bold",
-              mb: "3",
-              color: "gray.800",
+              fontSize: 'lg',
+              fontWeight: 'bold',
+              mb: '3',
+              color: 'gray.800',
             })}
           >
             Order Summary
           </h3>
 
           {/* Items List with old/new values, applied discounts/taxes */}
-          <div className={css({ mb: "4" })}>
+          <div className={css({ mb: '4' })}>
             <h4
               className={css({
-                fontSize: "md",
-                fontWeight: "semibold",
-                mb: "2",
-                color: "gray.700",
+                fontSize: 'md',
+                fontWeight: 'semibold',
+                mb: '2',
+                color: 'gray.700',
               })}
             >
               Items ({orderResult?.order?.line_items?.length || 0})
             </h4>
-            <div className={css({ spaceY: "2" })}>
+            <div className={css({ spaceY: '2' })}>
               {orderResult?.order?.line_items?.map((item, index: number) => (
                 <div
                   key={index}
                   className={css({
-                    display: "flex",
-                    flexDirection: "column",
-                    py: "2",
-                    px: "3",
-                    bg: "gray.50",
-                    borderRadius: "md",
-                    mb: "2",
+                    display: 'flex',
+                    flexDirection: 'column',
+                    py: '2',
+                    px: '3',
+                    bg: 'gray.50',
+                    borderRadius: 'md',
+                    mb: '2',
                   })}
                 >
-                  <div
-                    className={css({ fontWeight: "medium", fontSize: "sm" })}
-                  >
-                    {item.name}
-                  </div>
-                  <div className={css({ color: "gray.600", fontSize: "xs" })}>
-                    Qty: {item.quantity} ×{" "}
-                    {formatMoney(item.base_price_money?.amount)}
+                  <div className={css({ fontWeight: 'medium', fontSize: 'sm' })}>{item.name}</div>
+                  <div className={css({ color: 'gray.600', fontSize: 'xs' })}>
+                    Qty: {item.quantity} × {formatMoney(item.base_price_money?.amount)}
                   </div>
                   {/* Old value (before discounts/taxes) */}
-                  <div className={css({ color: "gray.500", fontSize: "xs" })}>
-                    <b>Original:</b>{" "}
-                    {formatMoney(item.gross_sales_money?.amount)}
+                  <div className={css({ color: 'gray.500', fontSize: 'xs' })}>
+                    <b>Original:</b> {formatMoney(item.gross_sales_money?.amount)}
                   </div>
                   {/* Applied Discounts */}
                   {item.applied_discounts?.length > 0 && (
-                    <div
-                      className={css({ color: "green.600", fontSize: "xs" })}
-                    >
+                    <div className={css({ color: 'green.600', fontSize: 'xs' })}>
                       <b>Discounts:</b>
                       <ul style={{ margin: 0, paddingLeft: 16 }}>
                         {item.applied_discounts.map((d) => (
@@ -277,13 +243,12 @@ export const OrderConfirmation = ({
                   )}
                   {/* Applied Taxes */}
                   {item.applied_taxes?.length > 0 && (
-                    <div className={css({ color: "blue.600", fontSize: "xs" })}>
+                    <div className={css({ color: 'blue.600', fontSize: 'xs' })}>
                       <b>Taxes:</b>
                       <ul style={{ margin: 0, paddingLeft: 16 }}>
                         {item.applied_taxes.map((t) => (
                           <li key={t.uid}>
-                            {getTaxName(t.tax_uid)}: +
-                            {formatMoney(t.applied_money?.amount)}
+                            {getTaxName(t.tax_uid)}: +{formatMoney(t.applied_money?.amount)}
                           </li>
                         ))}
                       </ul>
@@ -292,9 +257,9 @@ export const OrderConfirmation = ({
                   {/* New value (after discounts/taxes) */}
                   <div
                     className={css({
-                      color: "gray.800",
-                      fontSize: "sm",
-                      fontWeight: "bold",
+                      color: 'gray.800',
+                      fontSize: 'sm',
+                      fontWeight: 'bold',
                     })}
                   >
                     <b>Final:</b> {formatMoney(item.total_money?.amount)}
@@ -305,36 +270,27 @@ export const OrderConfirmation = ({
           </div>
 
           {/* Order-level summary */}
-          <div
-            className={css({ mt: "4", borderTop: "1px solid #eee", pt: "3" })}
-          >
-            <div
-              className={css({ color: "green.700", fontSize: "sm", mb: "1" })}
-            >
-              <b>Total Discount:</b>{" "}
-              {formatMoney(orderResult?.order?.total_discount_money?.amount)}
+          <div className={css({ mt: '4', borderTop: '1px solid #eee', pt: '3' })}>
+            <div className={css({ color: 'green.700', fontSize: 'sm', mb: '1' })}>
+              <b>Total Discount:</b> {formatMoney(orderResult?.order?.total_discount_money?.amount)}
             </div>
-            <div
-              className={css({ color: "blue.700", fontSize: "sm", mb: "1" })}
-            >
-              <b>Total Tax:</b>{" "}
-              {formatMoney(orderResult?.order?.total_tax_money?.amount)}
+            <div className={css({ color: 'blue.700', fontSize: 'sm', mb: '1' })}>
+              <b>Total Tax:</b> {formatMoney(orderResult?.order?.total_tax_money?.amount)}
             </div>
             <div
               className={css({
-                color: "gray.900",
-                fontSize: "md",
-                fontWeight: "bold",
+                color: 'gray.900',
+                fontSize: 'md',
+                fontWeight: 'bold',
               })}
             >
-              <b>Order Total:</b>{" "}
-              {formatMoney(orderResult?.order?.total_money?.amount)}
+              <b>Order Total:</b> {formatMoney(orderResult?.order?.total_money?.amount)}
             </div>
           </div>
         </div>
 
         {orderResult?.order?.id && (
-          <p className={css({ color: "gray.500", fontSize: "sm", mb: "4" })}>
+          <p className={css({ color: 'gray.500', fontSize: 'sm', mb: '4' })}>
             Order ID: {orderResult.order.id}
           </p>
         )}
@@ -343,18 +299,18 @@ export const OrderConfirmation = ({
           type="button"
           onClick={onClose}
           className={css({
-            px: "6",
-            py: "3",
-            bg: "green.600",
-            color: "white",
-            borderRadius: "md",
-            fontWeight: "bold",
-            _hover: { bg: "green.700" },
+            px: '6',
+            py: '3',
+            bg: 'green.600',
+            color: 'white',
+            borderRadius: 'md',
+            fontWeight: 'bold',
+            _hover: { bg: 'green.700' },
           })}
         >
           Continue Shopping
         </button>
       </div>
     )
-  );
-};
+  )
+}

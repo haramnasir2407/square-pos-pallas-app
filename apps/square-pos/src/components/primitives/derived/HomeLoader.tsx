@@ -1,47 +1,42 @@
-import { css } from "~/styled-system/css";
+import { css } from '~/styled-system/css'
+import { Spinner } from '../ui/spinner'
+import { Flex } from '~/styled-system/jsx'
 
 export default function HomeLoader() {
   return (
-    <div
+    <Flex
+      minH="100vh"
+      align="center"
+      justify="center"
       className={css({
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(to bottom right, #eff6ff, #e0e7ff)",
+        background: 'linear-gradient(to bottom right, #eff6ff, #e0e7ff)',
       })}
     >
-      <div
+      <Flex
+        align="center"
+        justify="center"
+        direction="column"
+        gap="gap.block.sm"
         className={css({
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
+          textAlign: 'center',
         })}
       >
-        <div
-          className={css({
-            animation: "spin 1s linear infinite",
-            borderRadius: "50%",
-            height: "64px",
-            width: "64px",
-            border: "4px solid #3b82f6",
-            borderTopColor: "transparent",
-            margin: "0 auto",
-          })}
-        >
-          
-        </div>
+        <Spinner
+          size="lg"
+          variant="default"
+          color="primary"
+          className={css({ margin: '0 auto' })}
+        />
         <p
           className={css({
-            fontSize: "18px",
-            fontWeight: "500",
-            color: "#374151",
+            fontSize: 'md',
+            fontWeight: 'medium',
+            color: 'gray.700',
           })}
         >
           Loading...
         </p>
-      </div>
-    </div>
-  );
+      </Flex>
+    </Flex>
+  )
 }

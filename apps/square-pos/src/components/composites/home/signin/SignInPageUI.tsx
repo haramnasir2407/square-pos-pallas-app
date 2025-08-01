@@ -1,13 +1,16 @@
 import Authenticated from '@/components/composites/home/auth/Authenticated'
 import AuthenticationProcessor from '@/components/composites/home/auth/AuthenticationProcessor'
-import SignInButton from '@/components/composites/home/signin/SignInButton'
+
 import SignInText from '@/components/composites/home/signin/SignInText'
 import ErrorComponent from '@/components/primitives/derived/ErrorComponent'
 import HomeLoader from '@/components/primitives/derived/HomeLoader'
 import type { SignInPageUIProps } from '@/shared/types/catalog'
-import { css } from '../../../../../styled-system/css'
-import { Box, Flex } from '~/styled-system/jsx'
 import Link from 'next/link'
+import { Box, Flex } from '~/styled-system/jsx'
+import { css } from '../../../../../styled-system/css'
+import { ButtonComponent } from '@/components/primitives/derived/Button'
+import { startSquareOAuth } from '@/shared/utils/auth/startOAuth'
+import { token } from '~/styled-system/tokens'
 
 export default function SignInPageUI({
   session,
@@ -49,7 +52,19 @@ export default function SignInPageUI({
 
           {error && <ErrorComponent error={error} />}
 
-          <SignInButton />
+          {/* Sign in button */}
+          <ButtonComponent
+            bg={`linear-gradient(to right, ${token('colors.blue.50')}, ${token('colors.purple.50')})`}
+            hover={{
+              bg: `linear-gradient(to right, ${token('colors.blue.100')}, ${token('colors.purple.100')})`,
+              transform: 'scale(1.02)',
+            }}
+            color="white"
+            cursor="pointer"
+            onClick={startSquareOAuth}
+          >
+            Sign in with Square
+          </ButtonComponent>
 
           <Box
             className={css({
@@ -67,7 +82,7 @@ export default function SignInPageUI({
               <Link
                 href="/terms"
                 className={css({
-                  color: { base: '#2563eb', _hover: '#1d4ed8' },
+                  color: { base: token('colors.blue.50'), _hover: token('colors.blue.100') },
                   fontWeight: 'medium',
                 })}
               >
@@ -77,7 +92,7 @@ export default function SignInPageUI({
               <Link
                 href="/policy"
                 className={css({
-                  color: { base: '#2563eb', _hover: '#1d4ed8' },
+                  color: { base: token('colors.blue.50'), _hover: token('colors.blue.100') },
                   fontWeight: 'medium',
                 })}
               >

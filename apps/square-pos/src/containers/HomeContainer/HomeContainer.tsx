@@ -1,5 +1,4 @@
 import Authenticated from "@/components/composites/home/auth/Authenticated";
-import SignInButton from "@/components/composites/home/signin/SignInButton";
 import SignInButtonTest from "@/components/composites/home/signin/SignInButtonTest";
 import SignInText from "@/components/composites/home/signin/SignInText";
 import HomeLoader from "@/components/primitives/derived/HomeLoader";

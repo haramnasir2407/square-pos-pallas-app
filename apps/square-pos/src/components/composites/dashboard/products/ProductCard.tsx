@@ -1,5 +1,4 @@
 'use client'
-import { ButtonComponent } from '@/components/primitives/derived/Button'
 import { Button } from '@/components/primitives/ui/button'
 import { useCartStore } from '@/shared/store/useCartStore'
 import type { ProductCardProps } from '@/shared/types/catalog'
@@ -8,6 +7,17 @@ import { FiMinus } from 'react-icons/fi'
 import { GoPlus } from 'react-icons/go'
 import { css } from '~/styled-system/css'
 import { Flex } from '~/styled-system/jsx'
+import {
+  productImage,
+  productName,
+  priceText,
+  stateTag,
+  qtyText,
+  quantityButton,
+  removeButton,
+  addToCartButton,
+  cardContainer,
+} from './ProductCard.styles'
 
 /**
  * Card component for displaying product information and cart controls.
@@ -24,37 +34,19 @@ export default function ProductCard({
   discounts,
   taxes,
 }: ProductCardProps) {
-  // Use zustand store instead of CartContext
+  // * Use zustand store
   const items = useCartStore((state) => state.items)
   const addItem = useCartStore((state) => state.addItem)
   const removeItem = useCartStore((state) => state.removeItem)
   const updateQuantity = useCartStore((state) => state.updateQuantity)
 
-  // Find the cart item by id (zustand uses array)
-  const cartItem = items.find((item) => item.id === id)
-
-  /**
-   * The available inventory quantity for the product.
-   */
-  const inventoryQty = typeof quantity === 'string' ? Number(quantity) : (quantity ?? 0)
-  /**
-   * Whether the product is out of stock.
-   */
+  const cartItem = items.find((item) => item.id === id) // Find the cart item by id (zustand uses array)
+  const inventoryQty = typeof quantity === 'string' ? Number(quantity) : (quantity ?? 0) // available inventory quantity
   const isOutOfStock = !inventoryQty || inventoryQty <= 0
-  /**
-   * Whether the cart already has the maximum allowed quantity for this product.
-   */
   const atMaxQty = cartItem && cartItem.quantity >= inventoryQty
 
   return (
-    <Flex
-      direction="column"
-      p="4"
-      className={css({
-        height: '100%',
-        borderRadius: 'lg',
-      })}
-    >
+    <Flex direction="column" p="4" className={cardContainer}>
       <Image
         priority={true}
         src={imageUrl ?? ''}
@@ -62,38 +54,18 @@ export default function ProductCard({
         width={180}
         height={180}
         style={{ objectFit: 'cover', maxHeight: '100%' }}
-        className={css({ borderRadius: 'md', mb: '4' })}
+        className={productImage}
       />
 
-      <h3 className={css({ fontSize: 'sm', fontWeight: 'semibold' })}>{name}</h3>
+      <h3 className={productName}>{name}</h3>
 
-      <p className={css({ color: 'gray.600', fontSize: 'sm' })}>
-        {price !== null ? `$${(price / 100).toFixed(2)}` : 'Price not available'}{' '}
+      <p className={priceText}>
+        {price !== null ? `$${(price / 100).toFixed(2)}` : 'Price not available'}
       </p>
 
       <Flex align="center" mt="2" gap="gap.component.sm">
-        <span
-          className={css({
-            px: '2',
-            py: '1',
-            borderRadius: 'full',
-            fontSize: 'xs',
-            fontWeight: 'bold',
-            bg: state === 'IN_STOCK' ? 'green.100' : 'red.100',
-            color: state === 'IN_STOCK' ? 'green.700' : 'red.700',
-          })}
-        >
-          {state ?? 'Unknown'}
-        </span>
-        <span
-          className={css({
-            fontSize: 'sm',
-            color: 'gray.700',
-            ml: '2',
-          })}
-        >
-          Qty: {quantity ?? '-'}
-        </span>
+        <span className={stateTag(state ?? 'Unknown')}>{state ?? 'Unknown'}</span>
+        <span className={qtyText}>Qty: {quantity ?? '-'}</span>
       </Flex>
       <Flex align="center" mt="layout.section.sm">
         {cartItem ? (
@@ -101,13 +73,7 @@ export default function ProductCard({
             <Button
               variant="text"
               size="md"
-              className={css({
-                color: 'black',
-                px: '2',
-                py: '1',
-                bg: 'gray.200',
-                borderRadius: 'md',
-              })}
+              className={quantityButton}
               onClick={() => updateQuantity(id, cartItem.quantity - 1)}
               disabled={cartItem.quantity <= 1}
             >
@@ -117,13 +83,7 @@ export default function ProductCard({
             <Button
               variant="text"
               size="md"
-              className={css({
-                color: 'black',
-                px: '2',
-                py: '1',
-                bg: 'gray.200',
-                borderRadius: 'md',
-              })}
+              className={quantityButton}
               onClick={() => updateQuantity(id, cartItem.quantity + 1)}
               disabled={atMaxQty}
             >
@@ -132,18 +92,19 @@ export default function ProductCard({
             <Button
               variant="text"
               size="md"
-              className={css({ ml: '1', color: 'red.500', fontSize: 'sm', bg: 'gray.50' })}
+              className={removeButton}
               onClick={() => removeItem(id)}
             >
               Remove
             </Button>
           </Flex>
         ) : (
-          <ButtonComponent
-            bg={isOutOfStock ? 'gray.200' : 'gray.800'}
-            color={isOutOfStock ? 'gray.500' : 'white'}
-            hover={{ bg: 'gray.700' }}
-            cursor="pointer"
+          <Button
+            variant="default"
+            size="lg"
+            width="full"
+            className={addToCartButton(isOutOfStock)}
+            disabled={isOutOfStock}
             onClick={() =>
               addItem({
                 id,
@@ -157,10 +118,9 @@ export default function ProductCard({
                 taxes,
               })
             }
-            disabled={isOutOfStock}
           >
             {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
-          </ButtonComponent>
+          </Button>
         )}
       </Flex>
     </Flex>

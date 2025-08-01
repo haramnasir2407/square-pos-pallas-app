@@ -17,6 +17,29 @@ import { MdOutlineAddShoppingCart } from 'react-icons/md'
 import { css, cx } from '~/styled-system/css'
 import { OrderSummary } from '../order/OrderSummary'
 import CartItemCard from './CartItemCard'
+import Drawer from '@/components/primitives/ui/drawer'
+import {
+  cartCountStyle,
+  checkoutButtonStyle,
+  clearCartButtonStyle,
+  customSelectStyle,
+  drawerBodyStyle,
+  drawerCloseStyle,
+  drawerContentStyle,
+  drawerTitleStyle,
+  drawerTriggerStyle,
+  emptyCartTextStyle,
+  labelStyle,
+  orderLevelInfoStyle,
+  summaryBoxStyle,
+  summaryContainerStyle,
+  totalTextStyle,
+  warningTextStyle,
+} from './CartDrawer.styles'
+import { FaShoppingCart } from 'react-icons/fa'
+import { Box } from '~/styled-system/jsx'
+import { Label } from '@/components/primitives/ui/label'
+import { Button } from '@/components/primitives/ui/button'
 
 /**
  * Drawer component for displaying and managing the shopping cart.
@@ -64,75 +87,32 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
   })
 
   return (
-    <>
-      <button
-        type="button"
-        className={css({
-          position: 'fixed',
-          top: '3',
-          right: '6',
-          zIndex: 50,
-          bg: 'blue.600',
-          color: 'white',
-          px: '4',
-          py: '2',
-          borderRadius: 'md',
-          fontWeight: 'bold',
-          _hover: { bg: 'blue.700' },
-          display: 'flex',
-          alignItems: 'center',
-          gap: '2',
-        })}
-        onClick={() => setOpen(true)}
+    <Drawer.Root open={open} onOpenChange={setOpen} side="right">
+      <Drawer.Trigger
+        className={drawerTriggerStyle}
         aria-label={`Open cart with ${items.length} items`}
       >
-        <MdOutlineAddShoppingCart size={22} />
-        <span>({items.length})</span>
-      </button>
-      <div
-        className={cx(
-          css({
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            height: '100vh',
-            width: '96',
-            bg: 'white',
-            boxShadow: 'lg',
-            zIndex: 100,
-            transform: open ? 'translateX(0)' : 'translateX(100%)',
-            transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            display: 'flex',
-            flexDirection: 'column',
-            p: '6',
-          }),
-        )}
-        style={{ transform: open ? 'translateX(0)' : 'translateX(100%)' }}
-      >
-        <button
-          type="button"
-          className={css({
-            alignSelf: 'flex-end',
-            mb: '4',
-            color: 'gray.600',
-            fontSize: 'xl',
-            cursor: 'pointer',
-          })}
+        <FaShoppingCart size={25} fill="gray.100" />
+        <span className={cartCountStyle}>({items.length})</span>
+      </Drawer.Trigger>
+
+      <Drawer.Content className={drawerContentStyle}>
+        <Drawer.Close
+          className={drawerCloseStyle}
           onClick={() => {
             setOpen(false)
-            setShowCheckout(false)
           }}
         >
           &times;
-        </button>
+        </Drawer.Close>
 
         {!showCheckout ? (
           <>
-            <h2 className={css({ fontSize: '2xl', fontWeight: 'bold', mb: '4' })}>Shopping Cart</h2>
+            <Drawer.Title className={drawerTitleStyle}>Shopping Cart</Drawer.Title>
             {items.length === 0 ? (
-              <p className={css({ color: 'gray.500' })}>Your cart is empty.</p>
+              <p className={emptyCartTextStyle}>Your cart is empty.</p>
             ) : (
-              <div className={css({ flex: 1, overflowY: 'auto' })}>
+              <Drawer.Body className={drawerBodyStyle}>
                 {items.map((item, idx) => {
                   const inventory = cartInventoryInfo[item.id]
                   const quantity = inventory?.quantity ?? '-'
@@ -145,7 +125,7 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                     <CartItemCard
                       key={item.id}
                       item={item}
-                      inventory={inventory}
+                      inventory={inventory ?? null}
                       atMaxQty={atMaxQty}
                       selectedDiscount={selectedDiscounts[item.id]}
                       selectedTax={{
@@ -200,42 +180,15 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                     />
                   )
                 })}
-              </div>
+              </Drawer.Body>
             )}
 
-            <div
-              className={css({
-                mt: 'auto',
-                pt: '4',
-                borderTop: 'none',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '2',
-              })}
-            >
-              <div
-                className={css({
-                  bg: 'white',
-                  boxShadow: 'sm',
-                  borderRadius: 'lg',
-                  p: '4',
-                  mb: '2',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '2',
-                })}
-              >
+            <Box className={summaryContainerStyle}>
+              <Box className={summaryBoxStyle}>
                 {/* Order-level discount/tax controls */}
-                <label
-                  htmlFor="order-discount"
-                  className={css({
-                    fontSize: 'sm',
-                    fontWeight: 'bold',
-                    mr: '2',
-                  })}
-                >
+                <Label htmlFor="order-discount" className={labelStyle}>
                   Order Discount:
-                </label>
+                </Label>
                 <CustomSelect
                   id="order-discount"
                   value={selectedOrderDiscount?.name || ''}
@@ -262,18 +215,11 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                   ]}
                   placeholder="Select Discount"
                   size="sm"
-                  className={css({ mr: '2' })}
+                  className={customSelectStyle}
                 />
-                <label
-                  htmlFor="order-tax"
-                  className={css({
-                    fontSize: 'sm',
-                    fontWeight: 'bold',
-                    mr: '2',
-                  })}
-                >
+                <Label htmlFor="order-tax" className={labelStyle}>
                   Order Tax:
-                </label>
+                </Label>
                 <CustomSelect
                   id="order-tax"
                   value={selectedOrderTax?.name || ''}
@@ -302,87 +248,52 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                   size="sm"
                 />
                 {isItemLevelActive && (
-                  <span
-                    className={css({
-                      color: 'red.500',
-                      fontSize: 'xs',
-                      ml: '2',
-                    })}
-                  >
+                  <span className={warningTextStyle}>
                     (Disable item-level discounts/taxes to use order-level)
                   </span>
                 )}
                 {/* Show order-level discount/tax if active */}
                 {isOrderLevelActive && (
-                  <div
-                    className={css({
-                      fontSize: 'xs',
-                      color: 'gray.700',
-                      mb: '1',
-                    })}
-                  >
+                  <Box className={orderLevelInfoStyle}>
                     {selectedOrderDiscount && (
-                      <div>
+                      <Box>
                         <b>Order Discount:</b> {selectedOrderDiscount.name} (-
                         {selectedOrderDiscount.percentage}%)
-                      </div>
+                      </Box>
                     )}
                     {selectedOrderTax && (
-                      <div>
+                      <Box>
                         <b>Order Tax:</b> {selectedOrderTax.name} (+
                         {selectedOrderTax.percentage}%)
-                      </div>
+                      </Box>
                     )}
-                  </div>
+                  </Box>
                 )}
-                <div
-                  className={css({
-                    fontWeight: 'bold',
-                    fontSize: 'lg',
-                    mb: '1',
-                  })}
-                >
+                <Box className={totalTextStyle}>
                   Total: ${(drawerOrderSummary.total / 100).toFixed(2)}
-                </div>
-              </div>
-              <button
-                type="button"
-                className={css({
-                  w: 'full',
-                  bg: 'gray.200',
-                  color: 'black',
-                  py: '2',
-                  borderRadius: 'md',
-                  fontWeight: 'semibold',
-                  fontSize: 'sm',
-                  _hover: { bg: 'gray.300' },
-                })}
+                </Box>
+              </Box>
+              <Button
+                variant="outlined"
+                size="lg"
+                className={clearCartButtonStyle}
                 disabled={items.length === 0}
                 onClick={() => {
                   clearCart()
-                  setShowCheckout(false)
                 }}
               >
                 Clear Cart
-              </button>
-              <button
-                type="button"
-                className={css({
-                  w: 'full',
-                  bg: 'green.600',
-                  color: 'white',
-                  py: '3',
-                  borderRadius: 'md',
-                  fontWeight: 'bold',
-                  fontSize: 'md',
-                  _hover: { bg: 'green.700' },
-                })}
+              </Button>
+              <Button
+                variant="primary"
+                size="lg"
+                className={checkoutButtonStyle}
                 disabled={items.length === 0}
                 onClick={() => setShowCheckout(true)}
               >
                 Proceed to Checkout
-              </button>
-            </div>
+              </Button>
+            </Box>
           </>
         ) : (
           <OrderSummary
@@ -394,33 +305,7 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
             setOpen={setOpen}
           />
         )}
-      </div>
-
-      {open && (
-        // * creates the background overlay
-        <div
-          className={css({
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            background: 'rgba(0,0,0,0.2)',
-            zIndex: 99,
-          })}
-          onClick={() => setOpen(false)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              setOpen(false)
-            }
-          }}
-          onKeyUp={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              setOpen(false)
-            }
-          }}
-        />
-      )}
-    </>
+      </Drawer.Content>
+    </Drawer.Root>
   )
 }

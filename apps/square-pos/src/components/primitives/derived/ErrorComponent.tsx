@@ -1,29 +1,28 @@
-import type { ErrorProps } from "@/shared/types/error";
-import { css } from "~/styled-system/css";
-import { flex } from "~/styled-system/patterns";
+import { css } from '~/styled-system/css'
+import { flex } from '~/styled-system/patterns'
 
 export default function ErrorComponent({ error }: ErrorProps) {
   return (
     <div
       className={css({
-        marginBottom: "24px",
-        padding: "16px",
-        backgroundColor: "#fef2f2",
-        border: "1px solid #fecaca",
-        borderRadius: "8px",
+        marginBottom: '24px',
+        padding: '16px',
+        backgroundColor: '#fef2f2',
+        border: '1px solid #fecaca',
+        borderRadius: '8px',
       })}
     >
       <div
         className={flex({
-          alignItems: "center",
+          alignItems: 'center',
         })}
       >
         <svg
           className={css({
-            height: "20px",
-            width: "20px",
-            color: "#f87171",
-            marginRight: "8px",
+            height: '20px',
+            width: '20px',
+            color: '#f87171',
+            marginRight: '8px',
           })}
           fill="none"
           stroke="currentColor"
@@ -39,13 +38,13 @@ export default function ErrorComponent({ error }: ErrorProps) {
         </svg>
         <p
           className={css({
-            color: "#b91c1c",
-            fontWeight: "500",
+            color: '#b91c1c',
+            fontWeight: '500',
           })}
         >
           {error}
         </p>
       </div>
     </div>
-  );
+  )
 }

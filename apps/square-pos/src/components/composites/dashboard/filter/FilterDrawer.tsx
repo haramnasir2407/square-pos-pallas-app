@@ -15,8 +15,6 @@ import { flex } from '~/styled-system/patterns'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'
 import { Checkbox } from '@/components/primitives/ui/checkbox'
-import { Button } from '@/components/primitives/ui/button'
-import { IoMdClose } from 'react-icons/io'
 import { ButtonComponent } from '@/components/primitives/derived/Button'
 
 /**
@@ -93,16 +91,17 @@ export default function FilterDrawer({ setParams, prevParams }: FilterButtonProp
         })}
       >
         <Drawer.Close
-          className={flex({
+          className={css({
             alignSelf: 'flex-end',
-            fontSize: '2xl',
-            bg: 'none',
-            border: 'none',
+            mb: '4',
+            color: 'gray.600',
+            fontSize: 'xl',
             cursor: 'pointer',
           })}
         >
-          <IoMdClose />
+          &times;
         </Drawer.Close>
+
         <Drawer.Title className={css({ fontWeight: 'bold', fontSize: 'xl' })}>
           Filter by Category
         </Drawer.Title>
@@ -133,9 +132,9 @@ export default function FilterDrawer({ setParams, prevParams }: FilterButtonProp
 
         <Drawer.Footer className={flex({ direction: 'column', gap: 'gap.inline.sm' })}>
           <ButtonComponent
-            bg="gray.800"
+            bg="gray.700"
             color="white"
-            hover={{ bg: 'gray.700' }}
+            hover={{ bg: 'gray.600' }}
             cursor="pointer"
             onClick={handleApply}
             disabled={selected.length === 0}

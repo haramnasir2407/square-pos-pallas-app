@@ -1,7 +1,7 @@
 import { css } from '~/styled-system/css'
 import { DashboardSignOutButton } from '../signout/DashboardSignOutButton'
-import { container } from '~/styled-system/patterns'
 import { Container, Flex } from '~/styled-system/jsx'
+import { Badge } from '@/components/primitives/ui/badge'
 
 export default function DashboardHeader({ user }: { user: string }) {
   return (
@@ -14,15 +14,12 @@ export default function DashboardHeader({ user }: { user: string }) {
     >
       <Container>
         <Flex justify="between" align="center" gap="gap.inline.sm">
-          <h1
-            className={css({
-              fontSize: 'md',
-              fontWeight: 'normal',
-              color: 'black',
-            })}
-          >
-            {user === 'Default Test Account' ? 'Haram Nasir' : null}
-          </h1>
+          {user === 'Default Test Account' ? (
+            <Badge variant="default" size="md">
+              Haram Nasir
+            </Badge>
+          ) : null}
+
           <DashboardSignOutButton />
         </Flex>
       </Container>

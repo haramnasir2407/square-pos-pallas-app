@@ -1,28 +1,30 @@
-"use client";
+'use client'
 
-import { signOut } from "next-auth/react";
-import { css } from "~/styled-system/css";
+import { Button } from '@/components/primitives/ui/button'
+import { signOut } from 'next-auth/react'
+import { css } from '~/styled-system/css'
 
 export function HomeSignOutButton() {
   return (
-    <button
-      type="button"
+    <Button
+      variant="outlined"
+      size="lg"
       onClick={() => signOut()}
       className={css({
-        width: "100%",
-        backgroundColor: "white",
-        color: "#374151",
-        padding: "12px 16px",
-        borderRadius: "8px",
-        fontWeight: "500",
-        border: "1px solid #d1d5db",
+        width: '100%',
+        bg: 'white',
+        color: 'gray.900',
+        padding: '12px 16px',
+        fontWeight: 'normal',
+        textAlign: 'center',
+        cursor: 'pointer',
         _hover: {
-          backgroundColor: "#f9fafb",
+          transform: 'scale(1.02)',
         },
-        transition: "all 0.2s",
+        transition: 'all 0.2s',
       })}
     >
       Sign Out
-    </button>
-  );
+    </Button>
+  )
 }

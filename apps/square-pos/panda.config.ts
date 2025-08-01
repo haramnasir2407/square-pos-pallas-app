@@ -59,6 +59,24 @@ export default defineConfig({
             800: { value: '#1f2937' },
             900: { value: '#111827' },
           },
+          white: {
+            50: { value: '#eff6ff' },
+            100: { value: '#e0e7ff' },
+            200: { value: '#f3e8ff' },
+          },
+          blue: {
+            50: { value: '#2563eb' },
+            100: { value: '#1d4ed8' },
+          },
+          purple: {
+            50: { value: '#4f46e5' },
+            100: { value: '#4338ca' },
+          },
+          // green: {
+          //   50: { value: '#10b981' },
+          //   100: { value: '#059669' },
+          //   200: { value: '#047857' },
+          // },
         },
         fonts: {
           heading: {
@@ -67,10 +85,6 @@ export default defineConfig({
           body: {
             value: 'var(--font-inter)',
           },
-          // mono: {
-          //   value:
-          //     'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-          // },
         },
       },
       semanticTokens: {

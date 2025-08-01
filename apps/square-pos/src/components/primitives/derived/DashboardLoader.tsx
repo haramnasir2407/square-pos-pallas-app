@@ -1,46 +1,34 @@
-import { css } from "~/styled-system/css";
+import { css } from '~/styled-system/css'
+import { Flex } from '~/styled-system/jsx'
+import { Spinner } from '../ui/spinner'
 
 export default function DashboardLoader() {
   return (
-    <div
-      className={css({
-        minHeight: "30vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      })}
-    >
-      <div
+    <Flex minH="30vh" align="center" justify="center">
+      <Flex
+        align="center"
+        direction="column"
+        gap="layout.section.md"
         className={css({
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
+          textAlign: 'center',
         })}
       >
-        <div
-          className={css({
-            animation: "spin 1s linear infinite",
-            borderRadius: "50%",
-            height: "64px",
-            width: "64px",
-            border: "4px solid rgb(39, 39, 39)",
-            borderTopColor: "transparent",
-            margin: "0 auto",
-          })}
-        >
-          
-        </div>
+        <Spinner
+          size="lg"
+          variant="default"
+          color="default"
+          className={css({ margin: '0 auto', border: '4px solid rgb(39, 39, 39)' })}
+        />
         <p
           className={css({
-            fontSize: "18px",
-            fontWeight: "500",
-            color: "#374151",
+            fontSize: 'xl',
+            fontWeight: 'medium',
+            color: '#374151',
           })}
         >
           Loading...
         </p>
-      </div>
-    </div>
-  );
+      </Flex>
+    </Flex>
+  )
 }

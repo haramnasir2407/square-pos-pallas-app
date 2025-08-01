@@ -15,12 +15,12 @@ export const ButtonComponent = ({
   disabled?: boolean
   bg?: string
   color?: string
-  hover?: { bg: string }
+  hover?: { bg: string; transform?: string }
   cursor?: string
 }) => {
   return (
     <Button
-      variant="primary"
+      variant="default"
       size="lg"
       width="full"
       className={css({
@@ -31,8 +31,12 @@ export const ButtonComponent = ({
         fontWeight: 'medium',
         fontSize: 'md',
         width: '100%',
-        _hover: disabled ? undefined : hover,
+        _hover: {
+          bg: hover?.bg,
+          transform: hover?.transform,
+        },
         cursor: disabled ? 'not-allowed' : cursor,
+        transition: 'all 0.2s',
       })}
       disabled={disabled}
       onClick={onClick}

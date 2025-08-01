@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
-import Image from "next/image";
+import Image from 'next/image'
 
-import CustomSelect from "@/components/primitives/derived/CustomSelect";
-import type { Discount } from "@/shared/store/useCartStore";
-import { css } from "~/styled-system/css";
+import CustomSelect from '@/components/primitives/derived/CustomSelect'
+import type { Discount } from '@/shared/store/useCartStore'
+import { css } from '~/styled-system/css'
 
 export default function CartItemCard({
   item,
@@ -22,26 +22,26 @@ export default function CartItemCard({
   onTaxToggle,
   onTaxSelect,
 }: CartItemCardProps) {
-  const [showOptions, setShowOptions] = useState(false);
+  const [showOptions, setShowOptions] = useState(false)
 
   return (
     <div
       className={css({
-        display: "flex",
-        flexDirection: "column",
-        gap: "2",
-        bg: "white",
-        boxShadow: "sm",
-        borderRadius: "lg",
-        p: "4",
-        mb: "4",
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2',
+        bg: 'white',
+        boxShadow: 'sm',
+        borderRadius: 'lg',
+        p: '4',
+        mb: '4',
       })}
     >
       <div
         className={css({
-          display: "flex",
-          alignItems: "center",
-          gap: "4",
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4',
         })}
       >
         <Image
@@ -49,28 +49,26 @@ export default function CartItemCard({
           alt={item.name}
           width={48}
           height={48}
-          className={css({ borderRadius: "md" })}
+          className={css({ borderRadius: 'md' })}
         />
         <div className={css({ flex: 1 })}>
-          <div className={css({ fontWeight: "semibold", fontSize: "sm" })}>
-            {item.name}
+          <div className={css({ fontWeight: 'semibold', fontSize: 'sm' })}>{item.name}</div>
+          <div className={css({ color: 'gray.600', fontSize: 'xs' })}>
+            ${item.price ? (item.price / 100).toFixed(2) : 'N/A'}
           </div>
-          <div className={css({ color: "gray.600", fontSize: "xs" })}>
-            ${item.price ? (item.price / 100).toFixed(2) : "N/A"}
-          </div>
-          <div className={css({ color: "gray.400", fontSize: "xs" })}>
-            Qty in stock: {inventory?.quantity ?? "-"}
+          <div className={css({ color: 'gray.400', fontSize: 'xs' })}>
+            Qty in stock: {inventory?.quantity ?? '-'}
           </div>
         </div>
         <button
           type="button"
           className={css({
-            color: "red.500",
-            fontSize: "lg",
-            ml: "2",
-            bg: "none",
-            border: "none",
-            cursor: "pointer",
+            color: 'red.500',
+            fontSize: 'lg',
+            ml: '2',
+            bg: 'none',
+            border: 'none',
+            cursor: 'pointer',
           })}
           onClick={onRemove}
           aria-label="Remove item"
@@ -80,42 +78,40 @@ export default function CartItemCard({
       </div>
       <div
         className={css({
-          display: "flex",
-          alignItems: "center",
-          gap: "2",
-          mt: "2",
+          display: 'flex',
+          alignItems: 'center',
+          gap: '2',
+          mt: '2',
         })}
       >
         <button
           type="button"
           className={css({
-            px: "2",
-            py: "0.5",
-            bg: "gray.200",
-            borderRadius: "md",
-            fontWeight: "400",
-            fontSize: "sm",
-            cursor: "pointer",
+            px: '2',
+            py: '0.5',
+            bg: 'gray.200',
+            borderRadius: 'md',
+            fontWeight: '400',
+            fontSize: 'sm',
+            cursor: 'pointer',
           })}
           onClick={() => onQtyChange(item.quantity - 1)}
           disabled={item.quantity <= 1}
         >
           -
         </button>
-        <span className={css({ px: "2", fontWeight: "400" })}>
-          {item.quantity}
-        </span>
+        <span className={css({ px: '2', fontWeight: '400' })}>{item.quantity}</span>
         <button
           type="button"
           className={css({
-            px: "2",
-            py: "0.5",
-            bg: atMaxQty ? "gray.100" : "gray.200",
-            borderRadius: "md",
-            color: atMaxQty ? "gray.400" : undefined,
-            cursor: atMaxQty ? "not-allowed" : "pointer",
-            fontWeight: "400",
-            fontSize: "sm",
+            px: '2',
+            py: '0.5',
+            bg: atMaxQty ? 'gray.100' : 'gray.200',
+            borderRadius: 'md',
+            color: atMaxQty ? 'gray.400' : undefined,
+            cursor: atMaxQty ? 'not-allowed' : 'pointer',
+            fontWeight: '400',
+            fontSize: 'sm',
           })}
           onClick={() => onQtyChange(item.quantity + 1)}
           disabled={atMaxQty}
@@ -125,50 +121,50 @@ export default function CartItemCard({
         <button
           type="button"
           className={css({
-            ml: "auto",
-            fontSize: "xs",
-            color: "blue.500",
-            bg: "none",
-            border: "none",
-            cursor: "pointer",
-            textDecoration: "underline",
+            ml: 'auto',
+            fontSize: 'xs',
+            color: 'blue.500',
+            bg: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            textDecoration: 'underline',
           })}
           onClick={() => setShowOptions((v) => !v)}
         >
-          {showOptions ? "Hide options" : "More options"}
+          {showOptions ? 'Hide options' : 'More options'}
         </button>
       </div>
       {showOptions && (
         <div
           className={css({
-            mt: "3",
-            display: "flex",
-            flexDirection: "column",
-            gap: "2",
-            bg: "gray.50",
-            borderRadius: "md",
-            p: "3",
+            mt: '3',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2',
+            bg: 'gray.50',
+            borderRadius: 'md',
+            p: '3',
           })}
         >
           {/* Tax */}
           {taxes.length > 0 && (
             <div
               className={css({
-                display: "flex",
-                alignItems: "center",
-                gap: "2",
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2',
               })}
             >
               <label
                 className={css({
-                  fontSize: "xs",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1",
+                  fontSize: 'xs',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1',
                 })}
               >
                 <input
-                  className={css({ mr: "1" })}
+                  className={css({ mr: '1' })}
                   type="checkbox"
                   checked={!!item.is_taxable && item.itemTaxRate !== undefined}
                   onChange={(e) => onTaxToggle(e.target.checked)}
@@ -177,18 +173,18 @@ export default function CartItemCard({
               </label>
               <CustomSelect
                 id="tax"
-                value={item.itemTaxRate?.toString() ?? ""}
+                value={item.itemTaxRate?.toString() ?? ''}
                 onChange={onTaxSelect}
                 options={[
-                  { value: "", label: "Select Tax" },
+                  { value: '', label: 'Select Tax' },
                   ...taxes.map((tax) => ({
-                    value: tax.percentage?.toString() ?? "",
+                    value: tax.percentage?.toString() ?? '',
                     label: `${tax.name} (${tax.percentage}%)`,
                   })),
                 ]}
                 placeholder="Select Tax"
                 size="sm"
-                className={css({ minW: "32" })}
+                className={css({ minW: '32' })}
               />
             </div>
           )}
@@ -196,21 +192,21 @@ export default function CartItemCard({
           {discounts.length > 0 && (
             <div
               className={css({
-                display: "flex",
-                alignItems: "center",
-                gap: "2",
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2',
               })}
             >
               <label
                 className={css({
-                  fontSize: "xs",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1",
+                  fontSize: 'xs',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1',
                 })}
               >
                 <input
-                  className={css({ mr: "1" })}
+                  className={css({ mr: '1' })}
                   type="checkbox"
                   checked={!!item.itemDiscount}
                   onChange={(e) => onDiscountToggle(e.target.checked)}
@@ -219,15 +215,13 @@ export default function CartItemCard({
               </label>
               <CustomSelect
                 id="discount"
-                value={selectedDiscount?.discount_name || ""}
+                value={selectedDiscount?.discount_name || ''}
                 onChange={(value) => {
-                  const discount = discounts.find(
-                    (d) => d.discount_name === value
-                  );
-                  onDiscountSelect(discount as Discount);
+                  const discount = discounts.find((d) => d.discount_name === value)
+                  onDiscountSelect(discount as Discount)
                 }}
                 options={[
-                  { value: "", label: "Select Discount" },
+                  { value: '', label: 'Select Discount' },
                   ...discounts.map((discount) => ({
                     value: discount.discount_name,
                     label: `${discount.discount_name}`,
@@ -235,12 +229,12 @@ export default function CartItemCard({
                 ]}
                 placeholder="Select Discount"
                 size="sm"
-                className={css({ minW: "32" })}
+                className={css({ minW: '32' })}
               />
             </div>
           )}
         </div>
       )}
     </div>
-  );
+  )
 }

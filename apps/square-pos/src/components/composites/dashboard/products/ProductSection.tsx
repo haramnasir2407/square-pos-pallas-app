@@ -7,10 +7,10 @@ import { css } from '~/styled-system/css'
 import CartDrawer from '../cart/CartDrawer'
 
 import { hasValidQuery } from '@/shared/hooks/useProductList'
-import SearchBar from '../search/SearchBar'
-import ProductCard from './ProductCard'
 import { Box, Grid, HStack } from '~/styled-system/jsx'
 import FilterDrawer from '../filter/FilterDrawer'
+import SearchBar from '../search/SearchBar'
+import ProductCard from './ProductCard'
 
 /**
  * Section component for displaying a grid of products with filtering, search, and cart drawer.
