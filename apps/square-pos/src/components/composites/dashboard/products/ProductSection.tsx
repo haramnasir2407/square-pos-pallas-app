@@ -24,6 +24,9 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
     setParams,
     dataIsPending,
     error,
+    discountsError,
+    pricingRulesError,
+    productSetsError,
     items,
     taxes_data,
     cartInventoryInfo,
@@ -104,7 +107,7 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
 
           return (
             <Box
-              bg="gray.50"
+              bg="gray.100"
               key={item.id}
               className={css({
                 borderRadius: 'md',

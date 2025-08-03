@@ -1,6 +1,7 @@
 import { css } from '~/styled-system/css'
-import { Spinner } from '../ui/spinner'
 import { Flex } from '~/styled-system/jsx'
+import { Spinner } from '../ui/spinner'
+import { Paragraph } from '../ui/typography'
 
 export default function HomeLoader() {
   return (
@@ -16,7 +17,7 @@ export default function HomeLoader() {
         align="center"
         justify="center"
         direction="column"
-        gap="gap.block.sm"
+        gap="gap.component.md"
         className={css({
           textAlign: 'center',
         })}
@@ -27,15 +28,16 @@ export default function HomeLoader() {
           color="primary"
           className={css({ margin: '0 auto' })}
         />
-        <p
+        <Paragraph
+          size="large"
+          color="secondary"
           className={css({
-            fontSize: 'md',
             fontWeight: 'medium',
             color: 'gray.700',
           })}
         >
           Loading...
-        </p>
+        </Paragraph>
       </Flex>
     </Flex>
   )

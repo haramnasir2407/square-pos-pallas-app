@@ -1,16 +1,23 @@
 import Authenticated from '@/components/composites/home/auth/Authenticated'
 import AuthenticationProcessor from '@/components/composites/home/auth/AuthenticationProcessor'
-
 import SignInText from '@/components/composites/home/signin/SignInText'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 import ErrorComponent from '@/components/primitives/derived/ErrorComponent'
 import HomeLoader from '@/components/primitives/derived/HomeLoader'
+import { Paragraph } from '@/components/primitives/ui/typography'
 import type { SignInPageUIProps } from '@/shared/types/catalog'
+import { startSquareOAuth } from '@/shared/utils/auth/startOAuth'
 import Link from 'next/link'
 import { Box, Flex } from '~/styled-system/jsx'
-import { css } from '../../../../../styled-system/css'
-import { ButtonComponent } from '@/components/primitives/derived/Button'
-import { startSquareOAuth } from '@/shared/utils/auth/startOAuth'
-import { token } from '~/styled-system/tokens'
+import {
+  containerStyle,
+  linkStyle,
+  signInButtonBg,
+  signInButtonHoverBg,
+  signInButtonText,
+  signInPageBg,
+  termsMargin,
+} from './styles/styles'
 
 export default function SignInPageUI({
   session,
@@ -39,66 +46,35 @@ export default function SignInPageUI({
         minH="100vh"
         bg="linear-gradient(to bottom right, #eff6ff, #e0e7ff, #f3e8ff)"
       >
-        <Box
-          className={css({
-            bg: 'white',
-            rounded: 'xl',
-            shadow: 'md',
-            p: 'layout.default.sm',
-            maxW: '450px',
-          })}
-        >
+        <Box className={containerStyle}>
           <SignInText />
 
           {error && <ErrorComponent error={error} />}
 
           {/* Sign in button */}
-          <ButtonComponent
-            bg={`linear-gradient(to right, ${token('colors.blue.50')}, ${token('colors.purple.50')})`}
-            hover={{
-              bg: `linear-gradient(to right, ${token('colors.blue.100')}, ${token('colors.purple.100')})`,
-              transform: 'scale(1.02)',
-            }}
-            color="white"
-            cursor="pointer"
+          <ButtonVariant
+            variant="default"
             onClick={startSquareOAuth}
+            bg={signInButtonBg}
+            hover={{
+              bg: signInButtonHoverBg,
+            }}
+            className={signInButtonText}
           >
             Sign in with Square
-          </ButtonComponent>
+          </ButtonVariant>
 
-          <Box
-            className={css({
-              mt: 'layout.section.sm',
-              textAlign: 'center',
-            })}
-          >
-            <p
-              className={css({
-                fontSize: 'sm',
-                color: 'text.tertiary',
-              })}
-            >
-              By signing in, you agree to our{' '}
-              <Link
-                href="/terms"
-                className={css({
-                  color: { base: token('colors.blue.50'), _hover: token('colors.blue.100') },
-                  fontWeight: 'medium',
-                })}
-              >
+          <Box className={termsMargin}>
+            <Paragraph size="compact" color="tertiary" textAlign="center">
+              By signing in, you agree to our&nbsp;
+              <Link href="/terms" className={linkStyle}>
                 Terms of Service
-              </Link>{' '}
-              and{' '}
-              <Link
-                href="/policy"
-                className={css({
-                  color: { base: token('colors.blue.50'), _hover: token('colors.blue.100') },
-                  fontWeight: 'medium',
-                })}
-              >
+              </Link>
+              &nbsp;and&nbsp;
+              <Link href="/policy" className={linkStyle}>
                 Privacy Policy
               </Link>
-            </p>
+            </Paragraph>
           </Box>
         </Box>
       </Flex>

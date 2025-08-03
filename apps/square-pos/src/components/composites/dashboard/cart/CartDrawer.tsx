@@ -41,6 +41,7 @@ import { Box } from '~/styled-system/jsx'
 import { Label } from '@/components/primitives/ui/label'
 import { Button } from '@/components/primitives/ui/button'
 import { Badge } from '@/components/primitives/ui/badge'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 
 /**
  * Drawer component for displaying and managing the shopping cart.
@@ -93,7 +94,7 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
         className={drawerTriggerStyle}
         aria-label={`Open cart with ${items.length} items`}
       >
-        <FaShoppingCart size={28} fill="gray.100" />
+        <FaShoppingCart size={30} fill="gray.100" />
         <Badge size="sm" variant="default" className={cartCountStyle}>
           {items.length}
         </Badge>
@@ -289,15 +290,14 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
               >
                 Clear Cart
               </Button>
-              <Button
+              <ButtonVariant
                 variant="primary"
-                size="lg"
                 className={checkoutButtonStyle}
                 disabled={items.length === 0}
                 onClick={() => setShowCheckout(true)}
               >
                 Proceed to Checkout
-              </Button>
+              </ButtonVariant>
             </Box>
           </>
         ) : (

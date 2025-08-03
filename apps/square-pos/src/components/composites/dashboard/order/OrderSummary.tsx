@@ -1,4 +1,3 @@
-import { Button } from '@/components/primitives/ui/button'
 import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
 import { calculateOrderApi } from '@/shared/services/orderService'
 import {
@@ -14,7 +13,6 @@ import { Box, Flex } from '~/styled-system/jsx'
 import { OrderConfirmation } from './OrderConfirmation'
 import { OrderSummaryContent } from './OrderSummaryContent'
 import {
-  confirmButton,
   errorContainer,
   errorIcon,
   errorText,
@@ -26,6 +24,7 @@ import {
   loadingTitle,
   summaryContainer,
 } from './styles/OrderSummary.styles'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 /**
  * Displays a summary of the current order, including items, discounts, taxes, and totals.
  * Handles order calculation, error/loading states, and order confirmation.
@@ -109,7 +108,7 @@ export const OrderSummary = ({
         onClose={() => {
           clearCart()
           setShowCheckout(false)
-          setOpen(false) 
+          setOpen(false)
         }}
       />
     )
@@ -126,12 +125,12 @@ export const OrderSummary = ({
           getDiscountName={(uid) => getDiscountName(orderPreview, uid)}
         />
         <Flex direction="column" gap="gap.component.sm" mt="auto">
-          <Button variant="outlined" onClick={onGoBack} className={goBackButton}>
+          <ButtonVariant variant="outlined" onClick={onGoBack} className={goBackButton}>
             <RiArrowGoBackFill /> Go back
-          </Button>
-          <Button variant="default" size="lg" onClick={handlePlaceOrder} className={confirmButton}>
+          </ButtonVariant>
+          <ButtonVariant variant="primary" onClick={handlePlaceOrder}>
             Confirm and place order
-          </Button>
+          </ButtonVariant>
         </Flex>
       </Box>
     )

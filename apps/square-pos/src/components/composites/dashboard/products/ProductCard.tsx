@@ -1,4 +1,6 @@
 'use client'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { Badge } from '@/components/primitives/ui/badge'
 import { Button } from '@/components/primitives/ui/button'
 import { useCartStore } from '@/shared/store/useCartStore'
 import type { ProductCardProps } from '@/shared/types/catalog'
@@ -64,7 +66,9 @@ export default function ProductCard({
       </p>
 
       <Flex align="center" mt="2" gap="gap.component.sm">
-        <span className={stateTag(state ?? 'Unknown')}>{state ?? 'Unknown'}</span>
+        <Badge size="md" className={stateTag(state ?? 'Unknown')}>
+          {state ?? 'Unknown'}
+        </Badge>
         <span className={qtyText}>Qty: {quantity ?? '-'}</span>
       </Flex>
       <Flex align="center" mt="layout.section.sm">
@@ -99,10 +103,8 @@ export default function ProductCard({
             </Button>
           </Flex>
         ) : (
-          <Button
-            variant="default"
-            size="lg"
-            width="full"
+          <ButtonVariant
+            variant="primary"
             className={addToCartButton(isOutOfStock)}
             disabled={isOutOfStock}
             onClick={() =>
@@ -120,7 +122,7 @@ export default function ProductCard({
             }
           >
             {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
-          </Button>
+          </ButtonVariant>
         )}
       </Flex>
     </Flex>

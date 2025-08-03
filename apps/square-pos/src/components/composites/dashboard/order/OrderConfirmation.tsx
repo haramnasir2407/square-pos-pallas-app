@@ -1,6 +1,4 @@
-import { Button } from '@/components/primitives/ui/button'
 import { createOrderApi } from '@/shared/services/orderService'
-import type { CartItem } from '@/shared/store/useCartStore'
 import {
   createOrderData,
   formatMoney,
@@ -10,9 +8,8 @@ import {
 import { useEffect, useState } from 'react'
 import { BsHourglassSplit } from 'react-icons/bs'
 import { Box, Flex } from '~/styled-system/jsx'
+import { OrderSummaryContent } from './OrderSummaryContent'
 import {
-  continueButton,
-  errorCloseButton,
   errorContainer,
   errorIcon,
   errorText,
@@ -26,7 +23,7 @@ import {
   successIcon,
   successTitle,
 } from './styles/OrderConfirmation.styles'
-import { OrderSummaryContent } from './OrderSummaryContent'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 
 /**
  * Handles order creation and displays the result (success or error) with a summary.
@@ -89,9 +86,9 @@ export const OrderConfirmation = ({
         <Box className={errorIcon}>✗</Box>
         <h2 className={errorTitle}>Order Failed</h2>
         <p className={errorText}>{error.message}</p>
-        <Button variant="default" onClick={onClose} className={errorCloseButton}>
+        <ButtonVariant variant="outlined" onClick={onClose}>
           Close
-        </Button>
+        </ButtonVariant>
       </Box>
     )
   }
@@ -109,9 +106,9 @@ export const OrderConfirmation = ({
           getDiscountName={(uid) => getDiscountName(orderResult, uid)}
         />
         {orderResult?.order?.id && <p className={orderIdText}>Order ID: {orderResult.order.id}</p>}
-        <Button variant="default" size="lg" onClick={onClose} className={continueButton}>
+        <ButtonVariant variant="primary" onClick={onClose}>
           Continue Shopping
-        </Button>
+        </ButtonVariant>
       </Box>
     )
   )

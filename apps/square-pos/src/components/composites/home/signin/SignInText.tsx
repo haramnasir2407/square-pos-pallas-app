@@ -1,4 +1,5 @@
 import LockIcon from '@/components/composites/home/signin/LockIcon'
+import { Heading, Paragraph } from '@/components/primitives/ui/typography'
 import { css } from '~/styled-system/css'
 import { Box } from '~/styled-system/jsx'
 
@@ -11,23 +12,19 @@ export default function SignInText() {
       })}
     >
       <LockIcon />
-      <h1
+      <Heading
         className={css({
-          fontSize: '30px',
+          fontSize: '3xl',
           fontWeight: 'bold',
-          color: '#111827',
+          color: 'black',
           marginBottom: '8px',
         })}
       >
         Welcome Back
-      </h1>
-      <p
-        className={css({
-          color: 'text.secondary',
-        })}
-      >
+      </Heading>
+      <Paragraph color="tertiary" textAlign="center" size="base">
         Sign in to your Square account to continue
-      </p>
+      </Paragraph>
     </Box>
   )
 }

@@ -21,14 +21,7 @@ export const errorContainer = css({
 export const errorIcon = css({ color: 'red.600', fontSize: '2xl', mb: '4' })
 export const errorTitle = css({ fontSize: 'xl', fontWeight: 'bold', mb: '2' })
 export const errorText = css({ color: 'gray.600', mb: '4' })
-export const errorCloseButton = css({
-  px: '4',
-  py: '2',
-  bg: 'gray.600',
-  color: 'white',
-  borderRadius: 'md',
-  _hover: { bg: 'gray.700' },
-})
+
 
 export const successContainer = css({
   bg: 'white',
@@ -42,13 +35,3 @@ export const successContainer = css({
 export const successIcon = css({ color: 'green.600', fontSize: '2xl', mb: '4' })
 export const successTitle = css({ fontSize: 'xl', fontWeight: 'bold', mb: '4' })
 export const orderIdText = css({ color: 'gray.500', fontSize: 'sm', mb: '4' })
-export const continueButton = css({
-  w: 'full',
-  px: '6',
-  py: '3',
-  bg: 'green.600',
-  color: 'white',
-  borderRadius: 'md',
-  fontWeight: 'bold',
-  _hover: { bg: 'green.700' },
-})

@@ -1,6 +1,6 @@
 'use client'
 
-import { ButtonComponent } from '@/components/primitives/derived/Button'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 import { Checkbox } from '@/components/primitives/ui/checkbox'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'
@@ -25,43 +25,31 @@ import {
   trigger,
 } from './styles/FilterDrawer.styles'
 
-/**
- * Button component to open the filter drawer and apply category filters.
- */
+// Button component to open the filter drawer and apply category filters.
 export default function FilterDrawer({ setParams, prevParams }: FilterButtonProps) {
   const [open, setOpen] = useState(false)
 
-  /**
-   * Applies the selected categories as filters using the utility function.
-   * @param {CategoryObj[]} selected - Selected categories.
-   */
+  // Applies the selected categories as filters using the utility function.
   const onApply = (selected: CategoryObject[]) => {
     setParams(buildCategoryFilterParams(selected, prevParams))
   }
 
   const [selected, setSelected] = useState<CategoryObject[]>([])
 
-  /**
-   * Toggles a category in the selected list.
-   * @param {CategoryObj} category - The category to toggle.
-   */
+  // Toggles a category in the selected list
   const handleToggle = (category: CategoryObject) => {
     setSelected((prev) => toggleCategory(category, prev))
   }
 
   const onClose = () => setOpen(false)
 
-  /**
-   * Applies the selected categories and closes the drawer.
-   */
+  // Applies the selected categories and closes the drawer.
   const handleApply = () => {
     onApply(selected)
     onClose()
   }
 
-  /**
-   * Clears all selected categories, applies no filter, and closes the drawer.
-   */
+  // Clears all selected categories, applies no filter, and closes the drawer.
   const handleClear = () => {
     setSelected(clearSelectedCategories())
     onApply([]) // * call the API with no filter query
@@ -95,26 +83,24 @@ export default function FilterDrawer({ setParams, prevParams }: FilterButtonProp
         </Drawer.Body>
 
         <Drawer.Footer className={footer}>
-          <ButtonComponent
+          <ButtonVariant
+            variant="primary"
             bg="gray.700"
-            color="white"
             hover={{ bg: 'gray.600' }}
-            cursor="pointer"
             onClick={handleApply}
             disabled={selected.length === 0}
           >
             Apply Filter
-          </ButtonComponent>
-          <ButtonComponent
+          </ButtonVariant>
+          <ButtonVariant
+            variant="outlined"
             bg="gray.200"
-            color="black"
             hover={{ bg: 'gray.300' }}
-            cursor="pointer"
             onClick={handleClear}
             disabled={selected.length === 0}
           >
             Clear Filter
-          </ButtonComponent>
+          </ButtonVariant>
         </Drawer.Footer>
       </Drawer.Content>
     </Drawer.Root>

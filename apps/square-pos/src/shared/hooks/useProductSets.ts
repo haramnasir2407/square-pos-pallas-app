@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export function useProductSets(accessToken: string): UseProductSetsReturn {
   const [productSets, setProductSets] = useState<ProductSet[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     if (!accessToken) {
@@ -38,7 +38,7 @@ export function useProductSets(accessToken: string): UseProductSetsReturn {
       } catch (err) {
         const error = err instanceof Error ? err : new Error(String(err));
         console.error("Failed to fetch product sets:", error);
-        setError(error.message || "Failed to fetch product sets");
+        setError(error);
       } finally {
         setIsLoading(false);
       }

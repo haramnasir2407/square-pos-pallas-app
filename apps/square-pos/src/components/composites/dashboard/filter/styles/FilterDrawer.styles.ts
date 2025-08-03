@@ -12,7 +12,7 @@ export const trigger = flex({
   fontWeight: 'normal',
   cursor: 'pointer',
   boxShadow: 'sm',
-  bg: 'gray.50',
+  bg: 'gray.100',
 })
 
 export const content = flex({

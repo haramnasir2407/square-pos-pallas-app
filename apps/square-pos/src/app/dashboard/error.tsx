@@ -5,7 +5,6 @@ import { flex } from '~/styled-system/patterns'
 import { MdErrorOutline } from 'react-icons/md'
 
 // Error boundaries must be Client Components
-
 export default function Error({
   error,
   reset,

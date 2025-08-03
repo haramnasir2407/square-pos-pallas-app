@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export function usePricingRules(accessToken: string): UsePricingRulesReturn {
   const [pricingRules, setPricingRules] = useState<PricingRule[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     if (!accessToken) {
@@ -39,9 +39,9 @@ export function usePricingRules(accessToken: string): UsePricingRulesReturn {
         const data = await response.json();
         setPricingRules(data.objects || []);
       } catch (err) {
-        const error = err instanceof Error ? err : new Error(String(err));
-        console.error("Failed to fetch pricing rules:", error);
-        setError(error.message || "Failed to fetch pricing rules");
+        const errorObj = err instanceof Error ? err : new Error(String(err));
+        console.error("Failed to fetch pricing rules:", errorObj);
+        setError(errorObj);
       } finally {
         setIsLoading(false);
       }

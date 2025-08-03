@@ -1,8 +1,11 @@
-import { ButtonComponent } from '@/components/primitives/derived/Button'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 import type { Session } from 'next-auth'
 import { css } from '~/styled-system/css'
-import { flex } from '~/styled-system/patterns'
-import { HomeSignOutButton } from '../signout/HomeSignOutButton'
+import { Box, Flex } from '~/styled-system/jsx'
+import { authSuccessIcon, authSuccessIconWrapper, authUserInitial } from './styles/styles'
+import { Heading, Paragraph } from '@/components/primitives/ui/typography'
+import { signOut } from 'next-auth/react'
+import { circle } from '~/styled-system/patterns'
 
 type sessionProps = {
   session: Session
@@ -10,53 +13,29 @@ type sessionProps = {
 
 export default function Authenticated({ session }: sessionProps) {
   return (
-    <div
-      className={css({
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'linear-gradient(to bottom right, #f0fdf4, #d1fae5)',
-        padding: '16px',
-      })}
+    <Flex
+      minH="100vh"
+      align="center"
+      justify="center"
+      bg="linear-gradient(to bottom right, #f0fdf4, #d1fae5)"
+      p="16px"
     >
-      <div
-        className={css({
-          maxWidth: '448px',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '32px',
-        })}
-      >
-        <div
+      <Flex direction="column" gap="layout.default.md" maxW="lg" w="100%">
+        <Box
           className={css({
             textAlign: 'center',
           })}
         >
-          <div
-            className={css({
-              margin: '0 auto', // horizontally centered within its parent
-              height: '64px',
-              width: '64px',
-              backgroundColor: '#dcfce7',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '16px',
-            })}
+          <Flex
+            align="center"
+            justify="center"
+            mb="gap.component.md"
+            h="64px"
+            w="64px"
+            bg="#dcfce7"
+            className={authSuccessIconWrapper}
           >
-            <svg
-              className={css({
-                height: '32px',
-                width: '32px',
-                color: '#16a34a',
-              })}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className={authSuccessIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <title>Success checkmark</title>
               <path
                 strokeLinecap="round"
@@ -65,111 +44,69 @@ export default function Authenticated({ session }: sessionProps) {
                 d="M5 13l4 4L19 7"
               />
             </svg>
-          </div>
-          <h2
+          </Flex>
+          <Heading
+            color="default"
             className={css({
-              fontSize: '30px',
-              fontWeight: '700',
-              color: '#111827',
-              marginBottom: '8px',
+              fontSize: '3xl',
+              fontWeight: 'bold',
+              mb: 'gap.component.sm',
             })}
           >
             Already Signed In
-          </h2>
-          <p
-            className={css({
-              color: '#6b7280',
-            })}
-          >
+          </Heading>
+          <Paragraph textAlign="center" color="tertiary">
             You are currently signed in as:
-          </p>
-        </div>
+          </Paragraph>
+        </Box>
 
-        <div
+        <Box
           className={css({
-            backgroundColor: 'white',
-            borderRadius: '12px',
-            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+            bgColor: 'white',
+            rounded: 'xl',
+            boxShadow: 'md',
             border: '1px solid #e5e7eb',
-            padding: '24px',
+            py: 'gap.component.md',
+            px: 'padding.inline.lg',
           })}
         >
-          <div
-            className={flex({
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '16px',
-            })}
-          >
-            <div
-              className={css({
-                height: '40px',
-                width: '40px',
-                backgroundColor: '#dbeafe',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+          <Flex align="center" gap="gap.component.sm" mb="gap.component.sm">
+            <Box
+              className={circle({
+                size: '10',
+                bg: '#dbeafe',
               })}
             >
-              <span
-                className={css({
-                  color: '#2563eb',
-                  fontWeight: '600',
-                  fontSize: '18px',
-                })}
-              >
-                {session.user?.name?.charAt(0) || 'U'}
-              </span>
-            </div>
-            <div>
-              <p
-                className={css({
-                  fontWeight: '600',
-                  color: '#111827',
-                })}
-              >
+              <span className={authUserInitial}>{session.user?.name?.charAt(0) || 'U'}</span>
+            </Box>
+            <Box>
+              <Paragraph className={css({ fontWeight: 'medium' })} color="default">
                 {session.user?.name === 'Default Test Account' ? 'Haram Nasir' : session.user?.name}
-              </p>
+              </Paragraph>
               {session.merchantId && (
-                <p
-                  className={css({
-                    fontSize: '14px',
-                    color: '#6b7280',
-                  })}
-                >
+                <Paragraph className={css({ fontWeight: 'base' })} color="tertiary">
                   Merchant ID: {session.merchantId}
-                </p>
+                </Paragraph>
               )}
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Flex>
+        </Box>
 
-        <div
-          className={css({
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '12px',
-          })}
-        >
-          <ButtonComponent
+        <Flex direction="column" gap="gap.component.sm">
+          <ButtonVariant
             onClick={() => {
               window.location.href = '/dashboard'
             }}
-            bg="linear-gradient(to right, #10b981, #059669)"
-            hover={{
-              bg: 'linear-gradient(to right, #059669, #047857)',
-              transform: 'scale(1.02)',
-            }}
-            color="white"
-            cursor="pointer"
+            variant="primary"
           >
             Go to Dashboard
-          </ButtonComponent>
+          </ButtonVariant>
 
-          <HomeSignOutButton />
-        </div>
-      </div>
-    </div>
+          <ButtonVariant variant="outlined" onClick={() => signOut()} bg="white">
+            Sign out
+          </ButtonVariant>
+        </Flex>
+      </Flex>
+    </Flex>
   )
 }

@@ -38,16 +38,9 @@ export const goBackButton = css({
   gap: '2',
   bg: 'gray.100',
   color: 'gray.800',
-  borderRadius: 'md',
-  fontWeight: 'semibold',
   _hover: { bg: 'gray.200' },
 })
 
 export const confirmButton = css({
-  w: 'full',
-  bg: 'green.600',
-  color: 'white',
-  borderRadius: 'md',
   fontWeight: 'bold',
-  _hover: { bg: 'green.700' },
 })

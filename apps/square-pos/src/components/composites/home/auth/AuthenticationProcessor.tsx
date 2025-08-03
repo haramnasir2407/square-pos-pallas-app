@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/primitives/ui/spinner'
-import { Spinnaker } from 'next/font/google'
+import { Paragraph } from '@/components/primitives/ui/typography'
 import { css } from '~/styled-system/css'
 import { Box, Flex } from '~/styled-system/jsx'
 
@@ -35,23 +35,20 @@ export default function AuthenticationProcessor() {
           />
         </Box>
         <Box>
-          <p
+          <Paragraph
+            textAlign="center"
+            size="large"
+            color="secondary"
             className={css({
-              fontSize: 'lg',
               fontWeight: 'bold',
-              color: '#1f2937',
               marginBottom: 'gap.block.xs',
             })}
           >
             Processing Authentication
-          </p>
-          <p
-            className={css({
-              color: '#6b7280',
-            })}
-          >
+          </Paragraph>
+          <Paragraph textAlign="center" size="large" color="secondary">
             Please wait while we complete your sign-in...
-          </p>
+          </Paragraph>
         </Box>
       </Flex>
     </Flex>

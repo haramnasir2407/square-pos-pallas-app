@@ -15,6 +15,16 @@ export const drawerTriggerStyle = flex({
   gap: 'gap.inline.xs',
 })
 
+export const cartCountStyle = css({
+  color: 'gray.500',
+  bg: 'gray.100',
+  position: 'absolute',
+  top: '2',
+  right: '2',
+  zIndex: 60,
+  transform: 'translate(50%, -50%)',
+})
+
 export const drawerContentStyle = css({
   height: '100vh',
   width: '30vw',
@@ -100,17 +110,8 @@ export const clearCartButtonStyle = css({
 })
 
 export const checkoutButtonStyle = css({
-  w: 'full',
   py: 'padding.block.lg',
   px: 'padding.inline.md',
   fontWeight: 'bold',
   fontSize: 'md',
-})
-
-export const cartCountStyle = css({
-  color: 'gray.500',
-  position: 'absolute',
-  top: '0',
-  right: '0',
-  transform: 'translate(50%, -50%)',
 })

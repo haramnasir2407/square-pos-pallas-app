@@ -4,6 +4,7 @@ import { css } from '~/styled-system/css'
 export const cardContainer = css({
   height: '100%',
   borderRadius: 'lg',
+  // bg: 'gray.100',
 })
 
 export const productImage = css({
@@ -23,11 +24,6 @@ export const priceText = css({
 
 export const stateTag = (state: string) =>
   css({
-    px: '2',
-    py: '1',
-    borderRadius: 'full',
-    fontSize: 'xs',
-    fontWeight: 'bold',
     bg: state === 'IN_STOCK' ? 'green.100' : 'red.100',
     color: state === 'IN_STOCK' ? 'green.700' : 'red.700',
   })

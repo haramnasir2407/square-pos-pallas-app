@@ -58,13 +58,13 @@ export function useProductSectionData({
   } = useProductList(accessToken, params);
 
   // * custom hook for fetching discounts
-  const { discounts: fetchedDiscounts } = useDiscounts(accessToken);
+  const { error: discountsError, discounts: fetchedDiscounts } = useDiscounts(accessToken);
 
   // * custom hook for fetching pricing rules
-  const { pricingRules: fetchedPricingRules } = usePricingRules(accessToken);
+  const { error: pricingRulesError, pricingRules: fetchedPricingRules } = usePricingRules(accessToken);
 
   // * custom hook for fetching product sets
-  const { productSets: fetchedProductSets } = useProductSets(accessToken);
+  const { error: productSetsError, productSets: fetchedProductSets } = useProductSets(accessToken);
 
   // * use server-side products if provided, otherwise use client-fetched data
   const productData = useMemo(() => {
@@ -161,6 +161,9 @@ export function useProductSectionData({
     setParams,
     dataIsPending,
     error,
+    discountsError,
+    pricingRulesError,
+    productSetsError,
     items,
     taxes_data,
     cartInventoryInfo,

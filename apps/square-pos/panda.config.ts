@@ -72,11 +72,6 @@ export default defineConfig({
             50: { value: '#4f46e5' },
             100: { value: '#4338ca' },
           },
-          // green: {
-          //   50: { value: '#10b981' },
-          //   100: { value: '#059669' },
-          //   200: { value: '#047857' },
-          // },
         },
         fonts: {
           heading: {
