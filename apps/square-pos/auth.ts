@@ -1,14 +1,22 @@
-import NextAuth from 'next-auth'
-import type { Account, Profile, Session, User } from 'next-auth'
+import NextAuth, {
+  type NextAuthConfig,
+  type Session,
+  type User,
+  type Account,
+  type Profile,
+  type NextAuthResult,
+} from 'next-auth'
+
 import type { AdapterUser } from 'next-auth/adapters'
 import type { JWT } from 'next-auth/jwt'
+
 // Extend Session type to include custom properties
 interface CustomSession extends Session {
   accessToken?: string
   merchantId?: string
 }
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+const authConfig: NextAuthConfig = {
   providers: [
     {
       id: 'credentials',
@@ -69,7 +77,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token
     },
     async session({ session, token }: { session: CustomSession; token: JWT }) {
-      // Send properties to the client, like an access_token from a provider.
+      // Send properties to the client, like an access_token from a provider
       session.accessToken = typeof token.accessToken === 'string' ? token.accessToken : undefined
       session.merchantId = typeof token.merchantId === 'string' ? token.merchantId : undefined
       return session
@@ -77,7 +85,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   pages: {
     signIn: '/signin',
-    // error: "/auth/error",
+    error: '/auth/error',
   },
-  //   debug: process.env.NODE_ENV === "development",
-})
+  debug: process.env.NODE_ENV === 'development',
+}
+
+const result = NextAuth(authConfig)
+export const handlers: NextAuthResult['handlers'] = result.handlers
+export const auth: NextAuthResult['auth'] = result.auth
+export const signIn: NextAuthResult['signIn'] = result.signIn
+export const signOut: NextAuthResult['signOut'] = result.signOut
