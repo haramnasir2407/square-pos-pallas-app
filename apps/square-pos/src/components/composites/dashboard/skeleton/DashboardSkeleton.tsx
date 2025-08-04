@@ -1,19 +1,19 @@
 import { Skeleton } from '@/components/primitives/ui/skeleton'
 import { css } from '~/styled-system/css'
 import { Box, Container } from '~/styled-system/jsx'
-import { center, container, flex } from '~/styled-system/patterns'
+import { center, flex } from '~/styled-system/patterns'
 import ProductSectionSkeleton from '../products/skeletons/ProductSectionSkeleton'
 
 export default function DashboardSkeleton() {
   return (
     <Box className={css({ minH: '100vh' })}>
-      <Skeleton className={css({ py: 'padding.block.lg', mb: '8' })}>
+      <Skeleton className={css({ py: 'padding.block.lg', mb: 'layout.section.md' })}>
         <Container>
           <Skeleton
             css={{
               h: '32px',
               borderRadius: 'lg',
-              mb: '2',
+              mb: 'gap.component.sm',
               width: '5%',
             }}
           />
@@ -22,7 +22,7 @@ export default function DashboardSkeleton() {
       <Box
         className={flex({
           direction: 'column',
-          mb: '2',
+          mb: 'gap.component.sm',
           alignItems: 'center',
           justifyContent: 'center',
         })}
@@ -36,14 +36,14 @@ export default function DashboardSkeleton() {
         />
         <Skeleton
           className={css({
-            mt: '2',
+            mt: 'gap.component.sm',
             w: '3xl',
             h: '10',
             borderRadius: 'md',
           })}
         />
       </Box>
-      <main className={css({ py: '8', mt: '2' })}>
+      <main className={css({ py: 'padding.block.md', mt: 'gap.component.sm' })}>
         <div className={center({ maxW: '6xl', mx: 'auto' })}>
           <ProductSectionSkeleton />
         </div>

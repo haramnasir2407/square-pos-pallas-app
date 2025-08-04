@@ -1,3 +1,4 @@
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 import { createOrderApi } from '@/shared/services/orderService'
 import {
   createOrderData,
@@ -22,8 +23,7 @@ import {
   successContainer,
   successIcon,
   successTitle,
-} from './styles/OrderConfirmation.styles'
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+} from './styles/styles'
 
 /**
  * Handles order creation and displays the result (success or error) with a summary.

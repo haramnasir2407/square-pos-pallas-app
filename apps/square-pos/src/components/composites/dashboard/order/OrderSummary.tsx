@@ -1,3 +1,4 @@
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
 import { calculateOrderApi } from '@/shared/services/orderService'
 import {
@@ -23,8 +24,7 @@ import {
   loadingText,
   loadingTitle,
   summaryContainer,
-} from './styles/OrderSummary.styles'
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+} from './styles/styles'
 /**
  * Displays a summary of the current order, including items, discounts, taxes, and totals.
  * Handles order calculation, error/loading states, and order confirmation.

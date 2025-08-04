@@ -64,7 +64,7 @@ export const optionsContainer = css({
   mt: '3',
   bg: 'gray.50',
   borderRadius: 'md',
-  p: '3',
+  p: 'padding.inline.md',
 })
 
 export const taxRow = css({
@@ -72,6 +72,8 @@ export const taxRow = css({
   alignItems: 'center',
   gap: '2',
 })
+
+
 
 export const taxLabel = css({
   fontSize: 'xs',

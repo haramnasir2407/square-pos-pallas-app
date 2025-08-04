@@ -59,7 +59,7 @@ export default function FilterDrawer({ setParams, prevParams }: FilterButtonProp
   return (
     <Drawer.Root open={open} onOpenChange={setOpen} side="left">
       <Drawer.Trigger className={trigger}>
-        <FaFilter style={{ fontSize: 15 }} />
+        <FaFilter style={{ fontSize: 'md' }} />
         <span>Filter</span>
       </Drawer.Trigger>
 

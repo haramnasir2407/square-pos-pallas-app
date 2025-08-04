@@ -17,12 +17,12 @@ export default function ErrorBoundary({
       fallback={
         <Box
           className={flex({
-            mt: '8',
+            mt: 'layout.section.md',
             w: 'full',
             justify: 'center',
             align: 'center',
             py: 'padding.block.lg',
-            mb: '8',
+            mb: 'layout.section.md',
             gap: 'gap.inline.sm',
           })}
         >

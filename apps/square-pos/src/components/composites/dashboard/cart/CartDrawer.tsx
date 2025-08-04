@@ -6,6 +6,7 @@ import { Badge } from '@/components/primitives/ui/badge'
 import { Button } from '@/components/primitives/ui/button'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'
+import Select from '@/components/primitives/ui/select'
 import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
 import { useCartStore } from '@/shared/store/useCartStore'
 import {
@@ -28,7 +29,6 @@ import {
   cartCountStyle,
   checkoutButtonStyle,
   clearCartButtonStyle,
-  customSelectStyle,
   drawerBodyStyle,
   drawerCloseStyle,
   drawerContentStyle,
@@ -42,7 +42,6 @@ import {
   totalTextStyle,
   warningTextStyle,
 } from './styles/CartDrawer.styles'
-import Select from '@/components/primitives/ui/select'
 
 /**
  * Drawer component for displaying and managing the shopping cart.

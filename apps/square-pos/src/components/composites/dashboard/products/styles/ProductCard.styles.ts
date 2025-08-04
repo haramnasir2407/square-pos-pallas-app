@@ -8,7 +8,7 @@ export const cardContainer = css({
 
 export const productImage = css({
   borderRadius: 'md',
-  mb: '4',
+  mb: 'gap.component.md',
 })
 
 export const productName = css({
@@ -30,19 +30,19 @@ export const stateTag = (state: string) =>
 export const qtyText = css({
   fontSize: 'sm',
   color: 'gray.700',
-  ml: '2',
+  ml: 'gap.inline.xs',
 })
 
 export const quantityButton = css({
   color: 'black',
-  px: '2',
-  py: '1',
+  px: 'padding.inline.xs',
+  py: 'padding.block.sm',
   bg: 'gray.200',
   borderRadius: 'md',
 })
 
 export const removeButton = css({
-  ml: '1',
+  ml: 'gap.inline.md',
   color: 'red.500',
   fontSize: 'sm',
   _hover: {

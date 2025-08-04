@@ -1,9 +1,26 @@
-import { css } from '~/styled-system/css/css.mjs'
+import { Heading } from '@/components/primitives/ui/typography'
 import { Box, Flex } from '~/styled-system/jsx'
+import {
+  containerStyle,
+  itemCardStyle,
+  itemDiscountListStyle,
+  itemDiscountStyle,
+  itemFinalStyle,
+  itemNameStyle,
+  itemOriginalStyle,
+  itemQtyStyle,
+  itemsHeadingStyle,
+  itemsListStyle,
+  itemsSectionStyle,
+  itemTaxStyle,
+  orderSummarySectionStyle,
+  orderTotalStyle,
+  titleStyle,
+  totalDiscountStyle,
+  totalTaxStyle,
+} from './styles/styles'
 
-/**
- * Props for OrderSummaryContent
- */
+// Props for OrderSummaryContent
 type OrderSummaryContentProps = {
   order: OrderPreview | OrderResult | null
   formatMoney: (amount: number | undefined) => string
@@ -15,7 +32,7 @@ type OrderSummaryContentProps = {
 
 /**
  * Pure presentational component for displaying order summary content (items, discounts, taxes, totals).
- * Used in both OrderSummary and OrderConfirmation.
+ * Used in both OrderSummary and OrderConfirmation.=
  */
 export const OrderSummaryContent = ({
   order,
@@ -25,58 +42,39 @@ export const OrderSummaryContent = ({
   title = 'Order Summary',
 }: OrderSummaryContentProps) => {
   return (
-    <Box className={css({ textAlign: 'left', mb: 6, mt: 4 })}>
-      <h3
-        className={css({
-          fontSize: 'lg',
-          fontWeight: 'bold',
-          mb: 6,
-          color: 'gray.800',
-          letterSpacing: 'tight',
-        })}
-      >
-        {title}
-      </h3>
+    <Box className={containerStyle}>
+      <Heading className={titleStyle}>{title}</Heading>
 
       {/* Items List with old/new values, applied discounts/taxes */}
-      <Box className={css({ mb: '4' })}>
-        <h4
-          className={css({
-            fontSize: 'md',
-            fontWeight: 'semibold',
-            mb: '2',
-            color: 'gray.700',
-          })}
-        >
+      <Box className={itemsSectionStyle}>
+        <Heading className={itemsHeadingStyle}>
           Items ({order?.order?.line_items?.length || 0})
-        </h4>
-        <Box className={css({ spaceY: '2' })}>
+        </Heading>
+        <Box className={itemsListStyle}>
           {order?.order?.line_items?.map((item, index) => (
             <Flex
               key={index}
               direction="column"
               gap="gap.component.sm"
-              py="2"
-              px="3"
+              py="padding.block.sm"
+              px="padding.inline.md"
               bg="gray.50"
-              mb="2"
-              className={css({
-                borderRadius: 'md',
-              })}
+              mb="gap.component.xs"
+              className={itemCardStyle}
             >
-              <Box className={css({ fontWeight: 'medium', fontSize: 'sm' })}>{item.name}</Box>
-              <Box className={css({ color: 'gray.600', fontSize: 'xs' })}>
+              <Box className={itemNameStyle}>{item.name}</Box>
+              <Box className={itemQtyStyle}>
                 Qty: {item.quantity} × {formatMoney(item.base_price_money?.amount)}
               </Box>
               {/* Old value (before discounts/taxes) */}
-              <Box className={css({ color: 'gray.500', fontSize: 'xs' })}>
+              <Box className={itemOriginalStyle}>
                 <b>Original:</b> {formatMoney(item.gross_sales_money?.amount)}
               </Box>
               {/* Applied Discounts */}
               {item.applied_discounts && item.applied_discounts.length > 0 && (
-                <Box className={css({ color: 'green.600', fontSize: 'xs' })}>
+                <Box className={itemDiscountStyle}>
                   <b>Discounts:</b>
-                  <ul style={{ margin: 0, paddingLeft: 16 }}>
+                  <ul className={itemDiscountListStyle}>
                     {item.applied_discounts.map((d) => (
                       <li key={d.uid}>
                         {getDiscountName(d.discount_uid)}: -{formatMoney(d.applied_money?.amount)}
@@ -87,9 +85,9 @@ export const OrderSummaryContent = ({
               )}
               {/* Applied Taxes */}
               {item.applied_taxes && item.applied_taxes.length > 0 && (
-                <Box className={css({ color: 'blue.600', fontSize: 'xs' })}>
+                <Box className={itemTaxStyle}>
                   <b>Taxes:</b>
-                  <ul style={{ margin: 0, paddingLeft: 16 }}>
+                  <ul className={itemDiscountListStyle}>
                     {item.applied_taxes.map((t) => (
                       <li key={t.uid}>
                         {getTaxName(t.tax_uid)}: +{formatMoney(t.applied_money?.amount)}
@@ -99,13 +97,7 @@ export const OrderSummaryContent = ({
                 </Box>
               )}
               {/* New value (after discounts/taxes) */}
-              <Box
-                className={css({
-                  color: 'gray.800',
-                  fontSize: 'sm',
-                  fontWeight: 'bold',
-                })}
-              >
+              <Box className={itemFinalStyle}>
                 <b>Final:</b> {formatMoney(item.total_money?.amount)}
               </Box>
             </Flex>
@@ -114,20 +106,14 @@ export const OrderSummaryContent = ({
       </Box>
 
       {/* Order-level summary */}
-      <Box className={css({ mt: '4', borderTop: '1px solid #eee', pt: '3' })}>
-        <Box className={css({ color: 'green.700', fontSize: 'sm', mb: '1' })}>
+      <Box className={orderSummarySectionStyle}>
+        <Box className={totalDiscountStyle}>
           <b>Total Discount:</b> {formatMoney(order?.order.total_discount_money?.amount)}
         </Box>
-        <Box className={css({ color: 'blue.700', fontSize: 'sm', mb: '1' })}>
+        <Box className={totalTaxStyle}>
           <b>Total Tax:</b> {formatMoney(order?.order.total_tax_money?.amount)}
         </Box>
-        <Box
-          className={css({
-            color: 'gray.900',
-            fontSize: 'md',
-            fontWeight: 'bold',
-          })}
-        >
+        <Box className={orderTotalStyle}>
           <b>Order Total:</b> {formatMoney(order?.order.total_money?.amount)}
         </Box>
       </Box>

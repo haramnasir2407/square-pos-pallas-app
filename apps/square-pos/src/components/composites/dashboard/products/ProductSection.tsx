@@ -24,9 +24,6 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
     setParams,
     dataIsPending,
     error,
-    discountsError,
-    pricingRulesError,
-    productSetsError,
     items,
     taxes_data,
     cartInventoryInfo,
@@ -45,7 +42,7 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
         cartInventoryInfo={cartInventoryInfo}
         itemVariationIds={variationIds}
       />
-      <HStack align="center" justify="center" gap="8" mb="layout.section.sm">
+      <HStack align="center" justify="center" gap="gap.inline.lg" mb="layout.section.sm">
         {/* filter button and search bar */}
         <FilterDrawer
           setParams={(newParams) => setParams({ ...params, ...newParams })}
@@ -60,11 +57,11 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
       {/* {Boolean(error) && <div>Error loading products</div>} */}
 
       {!dataIsPending && !error && items.length === 0 && (
-        <Box style={{ textAlign: 'center', margin: '2rem 0', color: '#888' }}>No items found</Box>
+        <Box style={{ textAlign: 'center', margin: '2rem 0', color: 'gray' }}>No items found</Box>
       )}
 
       <Grid
-        gap="4"
+        gap="gap.component.sm"
         w="full"
         className={css({
           gridTemplateColumns: ['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)'], // responsive: 1/2/3 columns
@@ -111,7 +108,7 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
               key={item.id}
               className={css({
                 borderRadius: 'md',
-                p: 'padding.block.md',
+                p: { base: 'padding.block.sm', md: 'padding.block.md' },
                 boxShadow: 'md',
               })}
             >

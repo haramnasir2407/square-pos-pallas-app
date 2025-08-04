@@ -27,12 +27,12 @@ export const cartCountStyle = css({
 
 export const drawerContentStyle = css({
   height: '100vh',
-  width: { base: '90vw', sm: '60vw', md: '30vw', lg: '30vw' },
+  width: { base: '100vw', sm: '100vw', md: '30vw' },
   bg: 'white',
   boxShadow: 'lg',
   display: 'flex',
   flexDirection: 'column',
-  p: { base: '2', sm: '4', md: '6' },
+  p: { base: 'layout.section.sm', sm: 'layout.section.sm', md: 'layout.section.sm' },
 })
 
 export const drawerCloseStyle = css({

@@ -70,4 +70,3 @@ export const authMerchantId = css({
   fontSize: '14px',
   color: '#6b7280',
 })
-

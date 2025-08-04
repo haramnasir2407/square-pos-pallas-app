@@ -8,9 +8,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { css } from '~/styled-system/css'
 
-/**
- * Props for the SearchBar component.
- */
+// Props for the SearchBar component.
 interface SearchBarProps {
   setParams: (params: ParamsType) => void
   prevParams: ParamsType

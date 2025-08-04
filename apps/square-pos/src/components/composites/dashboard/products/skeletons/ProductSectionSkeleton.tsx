@@ -6,14 +6,14 @@ import ProductGridSkeleton from './ProductGridSkeleton'
 export default function ProductSectionSkeleton() {
   return (
     <VStack>
-      <Box className={css({ w: 'full', mt: '6' })}>
+      <Box className={css({ w: 'full', mt: 'gap.component.lg' })}>
         {/* Search bar skeleton */}
         <Flex
           align="center"
           justify="center"
-          gap="8"
+          gap="layout.internal.md"
           className={css({
-            mb: '6',
+            mb: 'gap.component.lg',
             width: '100%',
           })}
         >

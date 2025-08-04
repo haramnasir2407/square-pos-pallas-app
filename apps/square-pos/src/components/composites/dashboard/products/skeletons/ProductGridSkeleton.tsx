@@ -7,7 +7,7 @@ export default function ProductGridSkeleton() {
     <Box className={css({ w: 'full', mt: '2' })}>
       {/* Product grid skeleton */}
       <Grid
-        gap="4"
+        gap="gap.component.sm"
         w="full"
         className={css({
           gridTemplateColumns: ['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)'], // responsive: 1/2/3 columns

@@ -1,22 +1,19 @@
 'use client'
 
-import { useState } from 'react'
-
-import Image from 'next/image'
-
-import CustomSelect from '@/components/primitives/derived/CustomSelect'
-import { Button } from '@/components/primitives/ui/button'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 import { Checkbox } from '@/components/primitives/ui/checkbox'
 import { Label } from '@/components/primitives/ui/label'
+import Select from '@/components/primitives/ui/select'
 import type { Discount } from '@/shared/store/useCartStore'
+import Image from 'next/image'
+import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa6'
+import { css } from '~/styled-system/css'
 import { Box, Flex } from '~/styled-system/jsx'
-import { flex } from '~/styled-system/patterns'
 import {
   cardContainer,
   discountCheckbox,
   discountLabel,
-  discountSelect,
   image,
   itemInfo,
   itemName,
@@ -34,9 +31,6 @@ import {
   taxRow,
   taxSelect,
 } from './styles/CartItemCard.styles'
-import Select from '@/components/primitives/ui/select'
-import { css } from '~/styled-system/css'
-import { ButtonVariant } from '@/components/primitives/derived/Button'
 
 export default function CartItemCard({
   item,
@@ -55,8 +49,14 @@ export default function CartItemCard({
   const [showOptions, setShowOptions] = useState(false)
 
   return (
-    <Flex direction="column" gap="2" bg="white" p="4" mb="4" className={cardContainer}>
-      <Flex align="center" gap="4">
+    <Flex
+      direction="column"
+      gap="gap.component.sm"
+      bg="white"
+      p="padding.inline.md"
+      mb="layout.section.sm"
+      className={cardContainer}>
+      <Flex align="center" gap="gap.component.sm">
         <Image src={item.imageUrl} alt={item.name} width={48} height={48} className={image} />
         <Box className={itemInfo}>
           <Box className={itemName}>{item.name}</Box>
@@ -103,7 +103,7 @@ export default function CartItemCard({
         </ButtonVariant>
       </Box>
       {showOptions && (
-        <Flex direction="column" gap="2" className={optionsContainer}>
+        <Flex direction="column" gap="gap.component.sm" className={optionsContainer}>
           {/* Tax */}
           {taxes.length > 0 && (
             <Flex className={taxRow}>
@@ -150,7 +150,7 @@ export default function CartItemCard({
           )}
           {/* Discount */}
           {discounts.length > 0 && (
-            <Flex align="center" gap="2">
+            <Flex className={taxRow}>
               <Label className={discountLabel}>
                 <Checkbox
                   size="sm"
@@ -168,7 +168,11 @@ export default function CartItemCard({
                   onDiscountSelect(discount as Discount)
                 }}
               >
-                <Select.Trigger className={css({ fontSize: 'xs' })}>
+                <Select.Trigger
+                  className={css({
+                    fontSize: 'xs',
+                  })}
+                >
                   <Select.Value placeholder="Select Discount" />
                 </Select.Trigger>
                 <Select.Content

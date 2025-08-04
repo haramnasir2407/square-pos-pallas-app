@@ -50,7 +50,7 @@ export default function ProductCard({
   return (
     <Flex
       direction="column"
-      p="4"
+      p={{ base: 'layout.internal.sm', lg: 'layout.internal.md' }}
       className={cardContainer}
       align={{ base: 'center', md: 'normal' }}
     >
@@ -60,7 +60,7 @@ export default function ProductCard({
         alt={name}
         width={180}
         height={180}
-        style={{ objectFit: 'cover', maxHeight: '100%' }}
+        style={{ objectFit: 'contain', maxHeight: '100%' }}
         className={productImage}
       />
 
@@ -70,15 +70,15 @@ export default function ProductCard({
         {price !== null ? `$${(price / 100).toFixed(2)}` : 'Price not available'}
       </p>
 
-      <Flex align="center" mt="2" gap="gap.component.sm">
+      <Flex align="center" mt="gap.component.sm" gap="gap.component.sm">
         <Badge size="md" className={stateTag(state ?? 'Unknown')}>
           {state ?? 'Unknown'}
         </Badge>
         <span className={qtyText}>Qty: {quantity ?? '-'}</span>
       </Flex>
-      <Flex align="center" mt="layout.section.sm">
+      <Flex align="center" mt="gap.component.md">
         {cartItem ? (
-          <Flex align="center" gap="1">
+          <Flex align="center" gap="gap.inline.xs">
             <ButtonVariant
               variant="text"
               size="icon"
@@ -88,7 +88,7 @@ export default function ProductCard({
             >
               <FiMinus size={14} />
             </ButtonVariant>
-            <span className={css({ px: '2' })}>{cartItem.quantity}</span>
+            <span className={css({ px: 'padding.inline.xs' })}>{cartItem.quantity}</span>
             <ButtonVariant
               variant="text"
               size="icon"
