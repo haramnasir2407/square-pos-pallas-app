@@ -27,12 +27,12 @@ export const cartCountStyle = css({
 
 export const drawerContentStyle = css({
   height: '100vh',
-  width: '30vw',
+  width: { base: '90vw', sm: '60vw', md: '30vw', lg: '30vw' },
   bg: 'white',
   boxShadow: 'lg',
   display: 'flex',
   flexDirection: 'column',
-  p: 6,
+  p: { base: '2', sm: '4', md: '6' },
 })
 
 export const drawerCloseStyle = css({
@@ -44,14 +44,14 @@ export const drawerCloseStyle = css({
 })
 
 export const drawerTitleStyle = css({
-  fontSize: '2xl',
+  fontSize: { base: 'lg', md: '2xl' },
   fontWeight: 'bold',
   mb: 'gap.component.sm',
 })
 
 export const emptyCartTextStyle = css({ color: 'gray.500' })
 
-export const drawerBodyStyle = css({ flex: 1, overflowY: 'auto' })
+export const drawerBodyStyle = css({ flex: 1, overflowY: 'auto', position: 'relative' })
 
 export const summaryContainerStyle = css({
   mt: 'auto',
@@ -66,7 +66,7 @@ export const summaryBoxStyle = css({
   bg: 'white',
   boxShadow: 'sm',
   borderRadius: 'lg',
-  p: '4',
+  p: { base: 2, md: 4 },
   mb: '2',
   display: 'flex',
   flexDirection: 'column',

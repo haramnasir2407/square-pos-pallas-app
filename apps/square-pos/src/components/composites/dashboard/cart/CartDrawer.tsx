@@ -1,6 +1,11 @@
 'use client'
 
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 import CustomSelect from '@/components/primitives/derived/CustomSelect'
+import { Badge } from '@/components/primitives/ui/badge'
+import { Button } from '@/components/primitives/ui/button'
+import Drawer from '@/components/primitives/ui/drawer'
+import { Label } from '@/components/primitives/ui/label'
 import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
 import { useCartStore } from '@/shared/store/useCartStore'
 import {
@@ -13,11 +18,12 @@ import {
   handleTaxToggle,
 } from '@/shared/utils/cart/cartDrawerUtils'
 import { useState } from 'react'
+import { FaShoppingCart } from 'react-icons/fa'
 import { MdOutlineAddShoppingCart } from 'react-icons/md'
 import { css, cx } from '~/styled-system/css'
+import { Box } from '~/styled-system/jsx'
 import { OrderSummary } from '../order/OrderSummary'
 import CartItemCard from './CartItemCard'
-import Drawer from '@/components/primitives/ui/drawer'
 import {
   cartCountStyle,
   checkoutButtonStyle,
@@ -36,12 +42,7 @@ import {
   totalTextStyle,
   warningTextStyle,
 } from './styles/CartDrawer.styles'
-import { FaShoppingCart } from 'react-icons/fa'
-import { Box } from '~/styled-system/jsx'
-import { Label } from '@/components/primitives/ui/label'
-import { Button } from '@/components/primitives/ui/button'
-import { Badge } from '@/components/primitives/ui/badge'
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+import Select from '@/components/primitives/ui/select'
 
 /**
  * Drawer component for displaying and managing the shopping cart.
@@ -194,10 +195,10 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                   <Label htmlFor="order-discount" className={labelStyle}>
                     Order Discount:
                   </Label>
-                  <CustomSelect
-                    id="order-discount"
+                  <Select.Root
+                    size="sm"
                     value={selectedOrderDiscount?.name || ''}
-                    onChange={(value) => {
+                    onValueChange={(value) => {
                       const discount = ORDER_LEVEL_DISCOUNTS.find((d) => d.name === value) || null
                       handleOrderLevelChange({
                         type: 'discount',
@@ -211,24 +212,47 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                       })
                     }}
                     disabled={isItemLevelActive}
-                    options={[
-                      { value: '', label: 'Select Discount' },
-                      ...ORDER_LEVEL_DISCOUNTS.map((discount) => ({
-                        value: discount.name,
-                        label: `${discount.name} (${discount.percentage}%)`,
-                      })),
-                    ]}
-                    placeholder="Select Discount"
-                    size="sm"
-                    className={customSelectStyle}
-                  />
+                  >
+                    <Select.Trigger className={css({ fontSize: 'xs' })}>
+                      <Select.Value placeholder="Select Discount" />
+                    </Select.Trigger>
+                    <Select.Content
+                      position="popper"
+                      sideOffset={5}
+                      className={css({
+                        zIndex: 1000,
+                        fontSize: 'xs',
+                      })}
+                    >
+                      <Select.Group>
+                        <Select.Label>Discounts</Select.Label>
+                        {ORDER_LEVEL_DISCOUNTS.map((discount) => (
+                          <Select.Item
+                            key={discount.name}
+                            value={discount.name}
+                            className={css({ fontSize: 'xs' })}
+                          >
+                            {discount.name} ({discount.percentage}%)
+                          </Select.Item>
+                        ))}
+                        <Select.Item
+                          key="none"
+                          value="none"
+                          className={css({ fontSize: 'xs', color: 'gray.500' })}
+                        >
+                          Remove Discount
+                        </Select.Item>
+                      </Select.Group>
+                    </Select.Content>
+                  </Select.Root>
+
                   <Label htmlFor="order-tax" className={labelStyle}>
                     Order Tax:
                   </Label>
-                  <CustomSelect
-                    id="order-tax"
+                  <Select.Root
+                    size="sm"
                     value={selectedOrderTax?.name || ''}
-                    onChange={(value) => {
+                    onValueChange={(value) => {
                       const tax = ORDER_LEVEL_TAXES.find((t) => t.name === value) || null
                       handleOrderLevelChange({
                         type: 'tax',
@@ -242,16 +266,41 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                       })
                     }}
                     disabled={isItemLevelActive}
-                    options={[
-                      { value: '', label: 'Select Tax' },
-                      ...ORDER_LEVEL_TAXES.map((tax) => ({
-                        value: tax.name,
-                        label: `${tax.name} (${tax.percentage}%)`,
-                      })),
-                    ]}
-                    placeholder="Select Tax"
-                    size="sm"
-                  />
+                  >
+                    <Select.Trigger className={css({ fontSize: 'xs' })}>
+                      <Select.Value placeholder="Select Tax" />
+                    </Select.Trigger>
+                    <Select.Content
+                      position="popper"
+                      sideOffset={5}
+                      className={css({
+                        zIndex: 1000,
+                        fontSize: 'xs',
+                      })}
+                    >
+                      <Select.Group>
+                        <Select.Label>Taxes</Select.Label>
+
+                        {ORDER_LEVEL_TAXES.map((tax) => (
+                          <Select.Item
+                            key={tax.name}
+                            value={tax.name}
+                            className={css({ fontSize: 'xs' })}
+                          >
+                            {tax.name} ({tax.percentage}%)
+                          </Select.Item>
+                        ))}
+                        <Select.Item
+                          key="none"
+                          value="none"
+                          className={css({ fontSize: 'xs', color: 'gray.500' })}
+                        >
+                          Remove Tax
+                        </Select.Item>
+                      </Select.Group>
+                    </Select.Content>
+                  </Select.Root>
+
                   {isItemLevelActive && (
                     <span className={warningTextStyle}>
                       (Disable item-level discounts/taxes to use order-level)
@@ -279,9 +328,8 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                   </Box>
                 </Box>
               )}
-              <Button
+              <ButtonVariant
                 variant="outlined"
-                size="lg"
                 className={clearCartButtonStyle}
                 disabled={items.length === 0}
                 onClick={() => {
@@ -289,7 +337,7 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                 }}
               >
                 Clear Cart
-              </Button>
+              </ButtonVariant>
               <ButtonVariant
                 variant="primary"
                 className={checkoutButtonStyle}

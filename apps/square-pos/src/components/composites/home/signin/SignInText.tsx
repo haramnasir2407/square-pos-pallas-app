@@ -14,7 +14,7 @@ export default function SignInText() {
       <LockIcon />
       <Heading
         className={css({
-          fontSize: '3xl',
+          fontSize: ['lg', '2xl', '3xl'],
           fontWeight: 'bold',
           color: 'black',
           marginBottom: '8px',
@@ -22,7 +22,7 @@ export default function SignInText() {
       >
         Welcome Back
       </Heading>
-      <Paragraph color="tertiary" textAlign="center" size="base">
+      <Paragraph color="secondary" textAlign="center" size="base">
         Sign in to your Square account to continue
       </Paragraph>
     </Box>

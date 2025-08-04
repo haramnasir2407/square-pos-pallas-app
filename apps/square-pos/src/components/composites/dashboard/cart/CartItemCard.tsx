@@ -34,6 +34,9 @@ import {
   taxRow,
   taxSelect,
 } from './styles/CartItemCard.styles'
+import Select from '@/components/primitives/ui/select'
+import { css } from '~/styled-system/css'
+import { ButtonVariant } from '@/components/primitives/derived/Button'
 
 export default function CartItemCard({
   item,
@@ -60,44 +63,44 @@ export default function CartItemCard({
           <Box className={itemPrice}>${item.price ? (item.price / 100).toFixed(2) : 'N/A'}</Box>
           <Box className={itemStock}>Qty in stock: {inventory?.quantity ?? '-'}</Box>
         </Box>
-        <Button
-          variant="default"
-          size="sm"
+        <ButtonVariant
+          variant="text"
+          size="icon"
           className={removeButton}
           onClick={onRemove}
           aria-label="Remove item"
         >
           <FaTrash fill="gray.50" />
-        </Button>
+        </ButtonVariant>
       </Flex>
       <Box className={qtyRow}>
-        <Button
-          variant="default"
-          size="sm"
+        <ButtonVariant
+          variant="text"
+          size="icon"
           className={qtyButton}
           onClick={() => onQtyChange(item.quantity - 1)}
           disabled={item.quantity <= 1}
         >
           -
-        </Button>
+        </ButtonVariant>
         <span className={qtyValue}>{item.quantity}</span>
-        <Button
-          variant="default"
-          size="sm"
+        <ButtonVariant
+          variant="text"
+          size="icon"
           className={atMaxQty ? qtyButtonDisabled : qtyButton}
           onClick={() => onQtyChange(item.quantity + 1)}
           disabled={atMaxQty}
         >
           +
-        </Button>
-        <Button
-          variant="default"
-          size="sm"
+        </ButtonVariant>
+        <ButtonVariant
+          variant="text"
+          size="icon"
           className={moreOptionsButton}
           onClick={() => setShowOptions((v) => !v)}
         >
           {showOptions ? 'Hide options' : 'More options'}
-        </Button>
+        </ButtonVariant>
       </Box>
       {showOptions && (
         <Flex direction="column" gap="2" className={optionsContainer}>
@@ -113,21 +116,36 @@ export default function CartItemCard({
                 />
                 Apply Tax
               </Label>
-              <CustomSelect
-                id="tax"
-                value={item.itemTaxRate?.toString() ?? ''}
-                onChange={onTaxSelect}
-                options={[
-                  { value: '', label: 'Select Tax' },
-                  ...taxes.map((tax) => ({
-                    value: tax.percentage?.toString() ?? '',
-                    label: `${tax.name} (${tax.percentage}%)`,
-                  })),
-                ]}
-                placeholder="Select Tax"
+              <Select.Root
                 size="sm"
-                className={taxSelect}
-              />
+                value={item.itemTaxRate?.toString() ?? ''}
+                onValueChange={onTaxSelect}
+              >
+                <Select.Trigger className={css({ fontSize: 'xs' })}>
+                  <Select.Value placeholder="Select Tax" />
+                </Select.Trigger>
+                <Select.Content
+                  position="popper"
+                  sideOffset={5}
+                  className={css({
+                    zIndex: 1000,
+                    fontSize: 'xs',
+                  })}
+                >
+                  <Select.Group>
+                    <Select.Label>Taxes</Select.Label>
+                    {taxes.map((tax) => (
+                      <Select.Item
+                        key={tax.name}
+                        value={tax.percentage?.toString() ?? ''}
+                        className={css({ fontSize: 'xs' })}
+                      >
+                        {tax.name} ({tax.percentage}%)
+                      </Select.Item>
+                    ))}
+                  </Select.Group>
+                </Select.Content>
+              </Select.Root>
             </Flex>
           )}
           {/* Discount */}
@@ -142,24 +160,39 @@ export default function CartItemCard({
                 />
                 Apply Discount
               </Label>
-              <CustomSelect
-                id="discount"
+              <Select.Root
+                size="sm"
                 value={selectedDiscount?.discount_name || ''}
-                onChange={(value) => {
+                onValueChange={(value) => {
                   const discount = discounts.find((d) => d.discount_name === value)
                   onDiscountSelect(discount as Discount)
                 }}
-                options={[
-                  { value: '', label: 'Select Discount' },
-                  ...discounts.map((discount) => ({
-                    value: discount.discount_name,
-                    label: `${discount.discount_name}`,
-                  })),
-                ]}
-                placeholder="Select Discount"
-                size="sm"
-                className={discountSelect}
-              />
+              >
+                <Select.Trigger className={css({ fontSize: 'xs' })}>
+                  <Select.Value placeholder="Select Discount" />
+                </Select.Trigger>
+                <Select.Content
+                  position="popper"
+                  sideOffset={5}
+                  className={css({
+                    zIndex: 1000,
+                    fontSize: 'xs',
+                  })}
+                >
+                  <Select.Group>
+                    <Select.Label>Discounts</Select.Label>
+                    {discounts.map((discount) => (
+                      <Select.Item
+                        key={discount.discount_name}
+                        value={discount.discount_name}
+                        className={css({ fontSize: 'xs' })}
+                      >
+                        {discount.discount_name}
+                      </Select.Item>
+                    ))}
+                  </Select.Group>
+                </Select.Content>
+              </Select.Root>
             </Flex>
           )}
         </Flex>

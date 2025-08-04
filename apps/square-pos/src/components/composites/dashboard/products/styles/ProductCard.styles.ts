@@ -4,7 +4,6 @@ import { css } from '~/styled-system/css'
 export const cardContainer = css({
   height: '100%',
   borderRadius: 'lg',
-  // bg: 'gray.100',
 })
 
 export const productImage = css({
@@ -46,12 +45,15 @@ export const removeButton = css({
   ml: '1',
   color: 'red.500',
   fontSize: 'sm',
-  bg: 'gray.50',
+  _hover: {
+    bg: 'none',
+  },
 })
 
 export const addToCartButton = (isOutOfStock: boolean) =>
   css({
-    p: 'padding.block.sm',
+    px: 'padding.inline.md',
+    py: 'padding.block.md',
     bg: isOutOfStock ? 'gray.200' : 'gray.700',
     color: isOutOfStock ? 'gray.50' : 'white',
     borderRadius: 'md',

@@ -9,24 +9,26 @@ export const ButtonVariant = ({
   hover,
   disabled,
   className,
+  size,
 }: {
   children: React.ReactNode
   onClick: () => void
-  variant?: 'default' | 'outlined' | 'primary'
+  variant?: 'default' | 'outlined' | 'primary' | 'text'
   disabled?: boolean
   bg?: string
   hover?: { bg: string; transform?: string }
   className?: string
+  size?: 'sm' | 'md' | 'lg' | 'icon'
 }) => {
   return (
     <Button
       variant={variant}
-      size="lg"
-      width="full"
+      size={size ? size : 'lg'}
       className={
         className
           ? className
           : css({
+              w: 'full',
               bg: bg,
               fontWeight: 'medium',
               fontSize: 'md',

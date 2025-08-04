@@ -9,15 +9,7 @@ import type { SignInPageUIProps } from '@/shared/types/catalog'
 import { startSquareOAuth } from '@/shared/utils/auth/startOAuth'
 import Link from 'next/link'
 import { Box, Flex } from '~/styled-system/jsx'
-import {
-  containerStyle,
-  linkStyle,
-  signInButtonBg,
-  signInButtonHoverBg,
-  signInButtonText,
-  signInPageBg,
-  termsMargin,
-} from './styles/styles'
+import { containerStyle, linkStyle, signInButton, termsMargin } from './styles/styles'
 
 export default function SignInPageUI({
   session,
@@ -52,15 +44,7 @@ export default function SignInPageUI({
           {error && <ErrorComponent error={error} />}
 
           {/* Sign in button */}
-          <ButtonVariant
-            variant="default"
-            onClick={startSquareOAuth}
-            bg={signInButtonBg}
-            hover={{
-              bg: signInButtonHoverBg,
-            }}
-            className={signInButtonText}
-          >
+          <ButtonVariant variant="default" onClick={startSquareOAuth} className={signInButton}>
             Sign in with Square
           </ButtonVariant>
 

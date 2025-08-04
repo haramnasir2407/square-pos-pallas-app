@@ -20,7 +20,12 @@ export default function Authenticated({ session }: sessionProps) {
       bg="linear-gradient(to bottom right, #f0fdf4, #d1fae5)"
       p="16px"
     >
-      <Flex direction="column" gap="layout.default.md" maxW="lg" w="100%">
+      <Flex
+        direction="column"
+        gap="layout.default.md"
+        maxW={{ base: '90vw', sm: '60vw', md: '30vw' }}
+        w="100%"
+      >
         <Box
           className={css({
             textAlign: 'center',

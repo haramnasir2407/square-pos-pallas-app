@@ -2,6 +2,7 @@
 
 import type { CartItem } from '@/shared/store/useCartStore'
 import type { Dispatch, SetStateAction } from 'react'
+const BOGO_DISCOUNT = 100
 
 /**
  * Creates the order data object for submission to the backend API.
@@ -340,6 +341,15 @@ export function handleTaxSelect({
 export function calculateItemDiscountValue(item: CartItem, itemSubtotal: number): number {
   const value = item.itemDiscount?.discount_value
   if (!value) return 0
+
+  // BOGO: 100% off for every second item
+  if (value === `${BOGO_DISCOUNT}%` || value === BOGO_DISCOUNT) {
+    if (item.quantity >= 2) {
+      const freeItems = Math.floor(item.quantity / 2)
+      return freeItems * (item.price ?? 0)
+    }
+    return 0
+  }
   // Percentage discount
   if (typeof value === 'string' && value.includes('%')) {
     const percent = Number.parseFloat(value)

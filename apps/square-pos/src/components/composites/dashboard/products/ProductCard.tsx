@@ -48,7 +48,12 @@ export default function ProductCard({
   const atMaxQty = cartItem && cartItem.quantity >= inventoryQty
 
   return (
-    <Flex direction="column" p="4" className={cardContainer}>
+    <Flex
+      direction="column"
+      p="4"
+      className={cardContainer}
+      align={{ base: 'center', md: 'normal' }}
+    >
       <Image
         priority={true}
         src={imageUrl ?? ''}
@@ -74,33 +79,33 @@ export default function ProductCard({
       <Flex align="center" mt="layout.section.sm">
         {cartItem ? (
           <Flex align="center" gap="1">
-            <Button
+            <ButtonVariant
               variant="text"
-              size="md"
+              size="icon"
               className={quantityButton}
               onClick={() => updateQuantity(id, cartItem.quantity - 1)}
               disabled={cartItem.quantity <= 1}
             >
               <FiMinus size={14} />
-            </Button>
+            </ButtonVariant>
             <span className={css({ px: '2' })}>{cartItem.quantity}</span>
-            <Button
+            <ButtonVariant
               variant="text"
-              size="md"
+              size="icon"
               className={quantityButton}
               onClick={() => updateQuantity(id, cartItem.quantity + 1)}
               disabled={atMaxQty}
             >
               <GoPlus size={14} />
-            </Button>
-            <Button
+            </ButtonVariant>
+            <ButtonVariant
               variant="text"
-              size="md"
+              size="icon"
               className={removeButton}
               onClick={() => removeItem(id)}
             >
               Remove
-            </Button>
+            </ButtonVariant>
           </Flex>
         ) : (
           <ButtonVariant

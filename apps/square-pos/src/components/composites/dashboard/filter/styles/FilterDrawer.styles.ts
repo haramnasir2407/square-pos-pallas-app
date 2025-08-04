@@ -17,10 +17,10 @@ export const trigger = flex({
 
 export const content = flex({
   justify: 'center',
-  w: '20vw',
+  w: { base: '90vw', sm: '60vw', md: '30vw', lg: '20vw' },
   direction: 'column',
-  py: '8',
-  px: '6',
+  py: { base: '4', md: '8' },
+  px: { base: '2', md: '6' },
 })
 
 export const close = css({
@@ -33,7 +33,11 @@ export const close = css({
 
 export const title = css({ fontWeight: 'bold', fontSize: 'xl' })
 
-export const body = flex({ direction: 'column', gap: 'gap.inline.sm', overflowY: 'auto' })
+export const body = flex({
+  direction: 'column',
+  gap: { base: '2', md: 'gap.inline.sm' },
+  overflowY: 'auto',
+})
 
 export const label = flex({
   fontSize: 'md',
@@ -44,4 +48,4 @@ export const label = flex({
 
 export const checkbox = css({ cursor: 'pointer' })
 
-export const footer = flex({ direction: 'column', gap: 'gap.inline.sm' })
+export const footer = flex({ direction: 'column', gap: { base: '2', md: 'gap.inline.sm' } })
