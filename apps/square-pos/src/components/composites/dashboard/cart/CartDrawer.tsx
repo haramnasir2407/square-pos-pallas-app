@@ -368,6 +368,7 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
             onGoBack={() => setShowCheckout(false)}
             clearCart={clearCart}
             setShowCheckout={setShowCheckout}
+            showCheckout={showCheckout}
             setShowConfirmation={setShowConfirmation}
             showConfirmation={showConfirmation}
             setOpen={setOpen}

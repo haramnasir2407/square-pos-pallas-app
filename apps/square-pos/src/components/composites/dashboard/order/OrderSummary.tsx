@@ -37,6 +37,7 @@ export const OrderSummary = ({
   setShowCheckout,
   setOpen,
   setShowConfirmation,
+  showCheckout,
   showConfirmation,
 }: OrderSummaryProps) => {
   const [orderPreview, setOrderPreview] = useState<OrderPreview | null>(null)
@@ -49,10 +50,10 @@ export const OrderSummary = ({
 
   // * client component calling server logic
   useEffect(() => {
+    // if (showCheckout) return
     const calculateOrder = async () => {
       try {
         setError(null)
-
         // * calculate order
         const orderData = calculateOrderData({
           items,
