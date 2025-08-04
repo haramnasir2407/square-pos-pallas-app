@@ -1,8 +1,6 @@
 import { css } from '~/styled-system/css'
 import { token } from '~/styled-system/tokens'
 
-export const signInPageBg = 'linear-gradient(to bottom right, #eff6ff, #e0e7ff, #f3e8ff)'
-
 export const containerStyle = css({
   bg: 'white',
   rounded: 'xl',
@@ -14,9 +12,9 @@ export const containerStyle = css({
 
 export const signInButton = css({
   color: 'white',
-  bg: 'linear-gradient(to right, #3b82f6, #4f46e5)',
+  bg: 'blue.500',
   _hover: {
-    bg: 'linear-gradient(to right, #2563eb, #4f46e5)',
+    bg: 'blue.600',
     transform: 'scale(1.02)',
   },
   fontWeight: 'medium',

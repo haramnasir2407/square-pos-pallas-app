@@ -31,6 +31,8 @@ import {
   taxRow,
   taxSelect,
 } from './styles/CartItemCard.styles'
+import { FiMinus } from 'react-icons/fi'
+import { GoPlus } from 'react-icons/go'
 
 export default function CartItemCard({
   item,
@@ -55,7 +57,8 @@ export default function CartItemCard({
       bg="white"
       p="padding.inline.md"
       mb="layout.section.sm"
-      className={cardContainer}>
+      className={cardContainer}
+    >
       <Flex align="center" gap="gap.component.sm">
         <Image src={item.imageUrl} alt={item.name} width={48} height={48} className={image} />
         <Box className={itemInfo}>
@@ -81,7 +84,7 @@ export default function CartItemCard({
           onClick={() => onQtyChange(item.quantity - 1)}
           disabled={item.quantity <= 1}
         >
-          -
+          <FiMinus size={14} />
         </ButtonVariant>
         <span className={qtyValue}>{item.quantity}</span>
         <ButtonVariant
@@ -91,7 +94,7 @@ export default function CartItemCard({
           onClick={() => onQtyChange(item.quantity + 1)}
           disabled={atMaxQty}
         >
-          +
+          <GoPlus size={14} />
         </ButtonVariant>
         <ButtonVariant
           variant="text"

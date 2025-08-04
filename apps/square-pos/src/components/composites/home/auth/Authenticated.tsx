@@ -1,11 +1,11 @@
 import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { Heading, Paragraph } from '@/components/primitives/ui/typography'
 import type { Session } from 'next-auth'
+import { signOut } from 'next-auth/react'
 import { css } from '~/styled-system/css'
 import { Box, Flex } from '~/styled-system/jsx'
-import { authSuccessIcon, authSuccessIconWrapper, authUserInitial } from './styles/styles'
-import { Heading, Paragraph } from '@/components/primitives/ui/typography'
-import { signOut } from 'next-auth/react'
 import { circle } from '~/styled-system/patterns'
+import { authSuccessIcon, authSuccessIconWrapper, authUserInitial } from './styles/styles'
 
 type sessionProps = {
   session: Session
@@ -17,8 +17,7 @@ export default function Authenticated({ session }: sessionProps) {
       minH="100vh"
       align="center"
       justify="center"
-      bg="linear-gradient(to bottom right, #f0fdf4, #d1fae5)"
-      p="16px"
+      bg="gray.200"
     >
       <Flex
         direction="column"
@@ -37,7 +36,7 @@ export default function Authenticated({ session }: sessionProps) {
             mb="gap.component.md"
             h="64px"
             w="64px"
-            bg="#dcfce7"
+            bg="gray.300"
             className={authSuccessIconWrapper}
           >
             <svg className={authSuccessIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +69,7 @@ export default function Authenticated({ session }: sessionProps) {
             bgColor: 'white',
             rounded: 'xl',
             boxShadow: 'md',
-            border: '1px solid #e5e7eb',
+            border: '1px solid white',
             py: 'gap.component.md',
             px: 'padding.inline.lg',
           })}
@@ -79,7 +78,7 @@ export default function Authenticated({ session }: sessionProps) {
             <Box
               className={circle({
                 size: '10',
-                bg: '#dbeafe',
+                bg: 'gray.100',
               })}
             >
               <span className={authUserInitial}>{session.user?.name?.charAt(0) || 'U'}</span>

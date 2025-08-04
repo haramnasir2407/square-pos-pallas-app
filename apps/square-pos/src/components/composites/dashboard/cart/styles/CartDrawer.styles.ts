@@ -3,8 +3,8 @@ import { flex } from '~/styled-system/patterns'
 
 export const drawerTriggerStyle = flex({
   position: 'fixed',
-  top: '4',
-  right: '10',
+  top: { base: '2', sm: '2', md: '4' },
+  right: { base: '5', sm: '5', md: '10' },
   zIndex: 50,
   cursor: 'pointer',
   px: 'padding.inline.lg',

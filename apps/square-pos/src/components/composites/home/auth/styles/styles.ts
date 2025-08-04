@@ -16,14 +16,14 @@ export const authSuccessIconWrapper = css({
 export const authSuccessIcon = css({
   height: '32px',
   width: '32px',
-  color: '#16a34a',
+  color: 'gray.600',
 })
 
 // Heading
 export const authHeading = css({
   fontSize: '30px',
   fontWeight: '700',
-  color: '#111827',
+  color: 'gray.800',
   marginBottom: '8px',
 })
 

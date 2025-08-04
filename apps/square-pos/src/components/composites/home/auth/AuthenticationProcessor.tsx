@@ -10,7 +10,7 @@ export default function AuthenticationProcessor() {
       align="center"
       justify="center"
       className={css({
-        background: 'linear-gradient(to bottom right, #eff6ff, #e0e7ff)',
+        background: 'gray.200',
       })}
     >
       <Flex

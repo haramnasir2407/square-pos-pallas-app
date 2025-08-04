@@ -32,12 +32,7 @@ export default function SignInPageUI({
 
   return (
     !isProcessing && (
-      <Flex
-        align="center"
-        justify="center"
-        minH="100vh"
-        bg="linear-gradient(to bottom right, #eff6ff, #e0e7ff, #f3e8ff)"
-      >
+      <Flex align="center" justify="center" minH="100vh" bg="gray.200">
         <Box className={containerStyle}>
           <SignInText />
 

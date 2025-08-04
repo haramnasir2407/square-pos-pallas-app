@@ -7,7 +7,7 @@ export default function LockIcon() {
       align="center"
       justify="center"
       mb="layout.section.sm"
-      bg="linear-gradient(to bottom right, #3b82f6, #4f46e5)"
+      bg="blue.500"
       className={css({
         margin: '0 auto',
         height: '64px',

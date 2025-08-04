@@ -81,6 +81,14 @@ export default defineConfig({
             value: 'var(--font-inter)',
           },
         },
+        gradients: {
+          'green-diagonal': {
+            value: 'linear-gradient(to bottom right, #f0fdf4, #d1fae5)',
+          },
+          'blue-purple': {
+            value: 'linear-gradient(to right, #2563eb, #4f46e5)',
+          },
+        },
       },
       semanticTokens: {
         colors: {
