@@ -3,6 +3,7 @@ import { Button } from '@/components/primitives/ui/button'
 import { Box } from '~/styled-system/jsx'
 import { flex } from '~/styled-system/patterns'
 import { MdErrorOutline } from 'react-icons/md'
+import { Heading } from '@/components/primitives/ui/typography'
 
 // Error boundaries must be Client Components
 export default function Error({
@@ -21,9 +22,11 @@ export default function Error({
         gap: 'gap.inline.lg',
       })}
     >
-      <h2 className={flex({ alignItems: 'center', gap: 'gap.inline.sm', fontWeight: 'semibold' })}>
+      <Heading
+        className={flex({ alignItems: 'center', gap: 'gap.inline.sm', fontWeight: 'semibold' })}
+      >
         <MdErrorOutline fill="red" size={20} /> Something went wrong! {error.message}{' '}
-      </h2>
+      </Heading>
       <Button variant="outlined" onClick={() => reset()}>
         Try again
       </Button>

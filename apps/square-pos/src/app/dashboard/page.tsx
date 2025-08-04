@@ -1,4 +1,4 @@
-import { DashboardContainer } from '@/containers/DashboardContainer'
+import { DashboardContainer } from '@/containers/dashboard'
 /**
  * Dashboard page for authenticated users.
  * Fetches products and inventory server-side, and renders the product section.

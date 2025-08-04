@@ -2,8 +2,9 @@
  * Props for the FilterButton component.
  */
 interface FilterButtonProps {
-  setParams: (params: ParamsType) => void;
-  prevParams: ParamsType;
+  setParams: (params: ParamsType) => void
+  prevParams: ParamsType
+  categoryObjects: CategoryObject[]
 }
 
 /**
@@ -14,8 +15,8 @@ interface FilterButtonProps {
  * @property {CategoryObj[]} categoryObjects - List of available category objects.
  */
 interface FilterDrawerProps {
-  open: boolean;
-  onClose: () => void;
-  onApply: (selectedCategories: CategoryObject[]) => void;
-  categoryObjects: CategoryObject[];
+  open: boolean
+  onClose: () => void
+  onApply: (selectedCategories: CategoryObject[]) => void
+  categoryObjects: CategoryObject[]
 }

@@ -12,7 +12,6 @@ import { Flex } from '~/styled-system/jsx'
 import {
   addToCartButton,
   cardContainer,
-  priceText,
   productImage,
   productName,
   qtyText,
@@ -20,6 +19,7 @@ import {
   removeButton,
   stateTag,
 } from './styles/ProductCard.styles'
+import { Heading, Paragraph } from '@/components/primitives/ui/typography'
 
 /**
  * Card component for displaying product information and cart controls.
@@ -64,11 +64,11 @@ export default function ProductCard({
         className={productImage}
       />
 
-      <h3 className={productName}>{name}</h3>
+      <Heading className={productName}>{name}</Heading>
 
-      <p className={priceText}>
+      <Paragraph size="base" color="tertiary">
         {price !== null ? `$${(price / 100).toFixed(2)}` : 'Price not available'}
-      </p>
+      </Paragraph>
 
       <Flex align="center" mt="gap.component.sm" gap="gap.component.sm">
         <Badge size="md" className={stateTag(state ?? 'Unknown')}>

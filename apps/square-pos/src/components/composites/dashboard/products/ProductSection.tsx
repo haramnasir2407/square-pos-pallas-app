@@ -31,6 +31,7 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
     imageMap,
     variationIds,
     discountApplications,
+    categoryObjects
   } = useProductSectionData({ accessToken, products, inventory })
 
   // * Render the main product section layout
@@ -45,6 +46,7 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
       <HStack align="center" justify="center" gap="gap.inline.lg" mb="layout.section.sm">
         {/* filter button and search bar */}
         <FilterDrawer
+          categoryObjects={categoryObjects}
           setParams={(newParams) => setParams({ ...params, ...newParams })}
           prevParams={params}
         />

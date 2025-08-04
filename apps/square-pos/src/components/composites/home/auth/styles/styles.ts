@@ -16,7 +16,7 @@ export const authSuccessIconWrapper = css({
 export const authSuccessIcon = css({
   height: '32px',
   width: '32px',
-  color: 'gray.600',
+  color: 'blue.100',
 })
 
 // Heading

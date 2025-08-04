@@ -1,4 +1,4 @@
-import { API_CONFIG } from "@/shared/constants/api";
+import { API_CONFIG } from '@/shared/constants/api'
 
 /**
  * Shared fetch utility for API requests with consistent headers and error handling
@@ -10,15 +10,15 @@ import { API_CONFIG } from "@/shared/constants/api";
 export async function apiFetch<T>(
   url: string,
   options: RequestInit = {},
-  accessToken?: string
+  accessToken?: string,
 ): Promise<T> {
   const defaultHeaders: Record<string, string> = {
-    "Content-Type": "application/json",
-    "Square-Version": `${API_CONFIG.SQUARE_VERSION}`,
-  };
+    'Content-Type': 'application/json',
+    'Square-Version': `${API_CONFIG.SQUARE_VERSION}`,
+  }
 
   if (accessToken) {
-    defaultHeaders["Authorization"] = `Bearer ${accessToken}`;
+    defaultHeaders['Authorization'] = `Bearer ${accessToken}`
   }
 
   const fetchOptions: RequestInit = {
@@ -27,13 +27,13 @@ export async function apiFetch<T>(
       ...defaultHeaders,
       ...(options.headers || {}),
     },
-  };
-
-  const response = await fetch(url, fetchOptions);
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  return response.json();
+  const response = await fetch(url, fetchOptions)
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+
+  return response.json()
 }

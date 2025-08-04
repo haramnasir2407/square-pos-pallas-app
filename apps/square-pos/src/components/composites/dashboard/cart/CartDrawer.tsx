@@ -59,15 +59,11 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
   const [open, setOpen] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)
-  console.log('showCheckout:', showCheckout)
-  console.log('showConfirmation:', showConfirmation)
 
   // * store selected discount per item
   const [selectedDiscounts, setSelectedDiscounts] = useState<Record<string, SelectedDiscount>>({})
-
   // * store selected taxes per item
   const [selectedTaxes, setSelectedTaxes] = useState<Record<string, SelectedTax>>({})
-
   // * store selected order-level discount/tax
   const [selectedOrderDiscount, setSelectedOrderDiscount] = useState<SelectedOrderDiscount | null>(
     null,

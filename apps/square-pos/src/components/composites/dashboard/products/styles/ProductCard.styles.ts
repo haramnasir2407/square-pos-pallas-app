@@ -16,10 +16,6 @@ export const productName = css({
   fontWeight: 'semibold',
 })
 
-export const priceText = css({
-  color: 'gray.600',
-  fontSize: 'sm',
-})
 
 export const stateTag = (state: string) =>
   css({

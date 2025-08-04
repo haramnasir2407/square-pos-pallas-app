@@ -1,38 +1,31 @@
-// * this container contains the business logic and the UI
+// apps/square-pos/src/containers/DashboardContainer/DashboardContainerUI.tsx
 
 import ErrorBoundary from '@/components/composites/common/ErrorBoundary'
 import DashboardHeader from '@/components/composites/dashboard/header/DashboardHeader'
 import ProductSection from '@/components/composites/dashboard/products/ProductSection'
 import ProductSectionSkeleton from '@/components/composites/dashboard/products/skeletons/ProductSectionSkeleton'
-import { redirect } from 'next/navigation'
+import { Heading } from '@/components/primitives/ui/typography'
+import type { DashboardDataReturn } from '@/shared/services/dashboardDataService'
 import { Suspense } from 'react'
-import { auth } from '~/auth'
 import { css } from '~/styled-system/css'
-import { Box, Center, Container, Stack, VStack } from '~/styled-system/jsx'
-import useDashboardData from './useDashboardData'
+import { Box, Center, Container, VStack } from '~/styled-system/jsx'
 
-/**
- * DashboardContainer is an async server component that handles all data fetching
- * and renders the dashboard UI for authenticated users. Redirects to home if not authenticated.
- */
+interface DashboardContainerUIProps {
+  userName: string
+  accessToken: string
+  products: DashboardDataReturn['products']
+  inventory: DashboardDataReturn['inventoryData']
+}
 
-/* @compile */
-export default async function DashboardContainer() {
-  // * Check the session
-  const session = await auth()
-  if (!session) {
-    redirect('/signin')
-    return null
-  }
-
-  // * custom hook that fetches data server side
-  const { products, inventoryData } = await useDashboardData({
-    accessToken: session.accessToken ?? '',
-  })
-
+export default function DashboardContainerUI({
+  userName,
+  accessToken,
+  products,
+  inventory,
+}: DashboardContainerUIProps) {
   return (
     <Box minH="100vh">
-      <DashboardHeader user={session.user?.name ?? ''} />
+      <DashboardHeader user={userName} />
 
       <main
         className={css({
@@ -44,7 +37,7 @@ export default async function DashboardContainer() {
           <Center className={css({ maxW: '6xl', mx: 'auto' })}>
             <VStack gap="4" align="center" justify="center">
               <Box className={css({ textAlign: 'center' })}>
-                <h2
+                <Heading
                   className={css({
                     fontSize: '2xl',
                     fontWeight: 'bold',
@@ -52,9 +45,8 @@ export default async function DashboardContainer() {
                     mb: 'layout.section.sm',
                   })}
                 >
-                  Welcome back,{' '}
-                  {session.user?.name === 'Default Test Account' ? 'Haram Nasir' : null}!
-                </h2>
+                  Welcome back, {userName === 'Default Test Account' ? 'Haram Nasir' : null}!
+                </Heading>
                 <p
                   className={css({
                     fontSize: 'md',
@@ -69,13 +61,12 @@ export default async function DashboardContainer() {
               </Box>
 
               {/* Product Section */}
-              {/*  dynamic content on run time  */}
               <ErrorBoundary>
                 <Suspense fallback={<ProductSectionSkeleton />}>
                   <ProductSection
-                    accessToken={session.accessToken ?? ''}
+                    accessToken={accessToken}
                     products={products}
-                    inventory={inventoryData}
+                    inventory={inventory}
                   />
                 </Suspense>
               </ErrorBoundary>

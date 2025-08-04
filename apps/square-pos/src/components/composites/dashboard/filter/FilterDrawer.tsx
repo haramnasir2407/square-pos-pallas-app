@@ -4,7 +4,7 @@ import { ButtonVariant } from '@/components/primitives/derived/Button'
 import { Checkbox } from '@/components/primitives/ui/checkbox'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'
-import categoryObjects from '@/shared/constants/categories.json'
+// import categoryObjects from '@/shared/constants/categories.json'
 import type { CategoryObject } from '@/shared/types/catalog'
 import {
   buildCategoryFilterParams,
@@ -26,7 +26,11 @@ import {
 } from './styles/FilterDrawer.styles'
 
 // Button component to open the filter drawer and apply category filters.
-export default function FilterDrawer({ setParams, prevParams }: FilterButtonProps) {
+export default function FilterDrawer({
+  setParams,
+  prevParams,
+  categoryObjects,
+}: FilterButtonProps) {
   const [open, setOpen] = useState(false)
 
   // Applies the selected categories as filters using the utility function.
@@ -65,9 +69,7 @@ export default function FilterDrawer({ setParams, prevParams }: FilterButtonProp
 
       <Drawer.Content className={content}>
         <Drawer.Close className={close}>&times;</Drawer.Close>
-
         <Drawer.Title className={title}>Filter by Category</Drawer.Title>
-
         <Drawer.Body className={body}>
           {categoryObjects.map((category) => (
             <Label key={category.id} className={label}>
