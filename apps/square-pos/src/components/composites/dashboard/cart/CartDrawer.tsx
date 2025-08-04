@@ -1,9 +1,7 @@
 'use client'
 
 import { ButtonVariant } from '@/components/primitives/derived/Button'
-import CustomSelect from '@/components/primitives/derived/CustomSelect'
 import { Badge } from '@/components/primitives/ui/badge'
-import { Button } from '@/components/primitives/ui/button'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'
 import Select from '@/components/primitives/ui/select'
@@ -20,8 +18,7 @@ import {
 } from '@/shared/utils/cart/cartDrawerUtils'
 import { useState } from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
-import { MdOutlineAddShoppingCart } from 'react-icons/md'
-import { css, cx } from '~/styled-system/css'
+import { css } from '~/styled-system/css'
 import { Box } from '~/styled-system/jsx'
 import { OrderSummary } from '../order/OrderSummary'
 import CartItemCard from './CartItemCard'
@@ -61,6 +58,9 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
 
   const [open, setOpen] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
+  const [showConfirmation, setShowConfirmation] = useState(false)
+  console.log('showCheckout:', showCheckout)
+  console.log('showConfirmation:', showConfirmation)
 
   // * store selected discount per item
   const [selectedDiscounts, setSelectedDiscounts] = useState<Record<string, SelectedDiscount>>({})
@@ -89,11 +89,19 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
   })
 
   return (
-    <Drawer.Root open={open} onOpenChange={setOpen} side="right">
-      <Drawer.Trigger
-        className={drawerTriggerStyle}
-        aria-label={`Open cart with ${items.length} items`}
-      >
+    <Drawer.Root
+      open={open}
+      onOpenChange={(isOpen) => {
+        setOpen(isOpen)
+        if (!isOpen && showConfirmation) {
+          clearCart()
+          setShowConfirmation(false)
+          setShowCheckout(false)
+        }
+      }}
+      side="right"
+    >
+      <Drawer.Trigger className={drawerTriggerStyle}>
         <FaShoppingCart size={30} fill="gray.100" />
         <Badge size="sm" variant="default" className={cartCountStyle}>
           {items.length}
@@ -105,6 +113,12 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
           className={drawerCloseStyle}
           onClick={() => {
             setOpen(false)
+            if (showConfirmation) {
+              clearCart()
+              setShowConfirmation(false)
+              setShowCheckout(false)
+              setOpen(false)
+            }
           }}
         >
           &times;
@@ -354,6 +368,8 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
             onGoBack={() => setShowCheckout(false)}
             clearCart={clearCart}
             setShowCheckout={setShowCheckout}
+            setShowConfirmation={setShowConfirmation}
+            showConfirmation={showConfirmation}
             setOpen={setOpen}
           />
         )}

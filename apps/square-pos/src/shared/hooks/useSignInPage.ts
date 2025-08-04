@@ -25,6 +25,7 @@ export default function useSignInPageLogic() {
 
   const hasOAuthCode = searchParams.get('code')
 
+  console.log('isProcessing:', isProcessing)
   return {
     session,
     status,

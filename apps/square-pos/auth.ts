@@ -87,7 +87,7 @@ const authConfig: NextAuthConfig = {
     signIn: '/signin',
     error: '/auth/error',
   },
-  debug: process.env.NODE_ENV === 'development',
+  // debug: process.env.NODE_ENV === 'development',
 }
 
 const result = NextAuth(authConfig)

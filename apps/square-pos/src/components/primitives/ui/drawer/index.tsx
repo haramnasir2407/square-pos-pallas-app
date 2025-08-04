@@ -34,6 +34,7 @@ const CustomContent = React.forwardRef<
   <Portal>
     <Overlay />
     <DrawerPrimitive.Content ref={ref} {...props}>
+      <DrawerPrimitive.Title>{props.title}</DrawerPrimitive.Title>
       {children}
     </DrawerPrimitive.Content>
   </Portal>

@@ -31,6 +31,8 @@ interface OrderSummaryProps {
   onGoBack: () => void
   clearCart: () => void
   setShowCheckout: (open: boolean) => void
+  setShowConfirmation: (open: boolean) => void
+  showConfirmation: boolean
   setOpen: (open: boolean) => void
 }
 

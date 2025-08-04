@@ -36,11 +36,12 @@ export const OrderSummary = ({
   clearCart,
   setShowCheckout,
   setOpen,
+  setShowConfirmation,
+  showConfirmation,
 }: OrderSummaryProps) => {
   const [orderPreview, setOrderPreview] = useState<OrderPreview | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
-  const [showConfirmation, setShowConfirmation] = useState(false)
 
   const handlePlaceOrder = () => {
     setShowConfirmation(true)
@@ -108,6 +109,7 @@ export const OrderSummary = ({
         onClose={() => {
           clearCart()
           setShowCheckout(false)
+          setShowConfirmation(false)
           setOpen(false)
         }}
       />
