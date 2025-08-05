@@ -5,8 +5,7 @@ const handleOAuthCallback = async ({
   setIsProcessing,
 }: HandleOAuthCallbackProps) => {
   try {
-    console.log('Processing OAuth callback with code:', code)
-
+    // console.log('Processing OAuth callback with code:', code)
     const response = await fetch(`/api/auth/square/callback?code=${code}`)
     const data = await response.json()
 
@@ -25,8 +24,7 @@ const handleOAuthCallback = async ({
       if (result?.error) {
         setError(`Session creation failed: ${result.error}`)
       } else {
-        // Redirect to dashboard or home
-        console.log('Redirecting to dashboard')
+        // console.log('Redirecting to dashboard')
         window.location.href = '/dashboard'
       }
     } else {
@@ -40,8 +38,8 @@ const handleOAuthCallback = async ({
       }`,
     )
   } finally {
-    console.info('Setting isProcessing to false')
-    console.log('isProcessing:', setIsProcessing)
+    // console.info('Setting isProcessing to false')
+    // console.log('isProcessing:', setIsProcessing)
   }
 }
 

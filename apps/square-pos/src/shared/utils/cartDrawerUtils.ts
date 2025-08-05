@@ -148,46 +148,18 @@ export function handleOrderLevelChange({
   setSelectedOrderDiscount,
   setSelectedOrderTax,
   items,
-  removeItemDiscount,
-  toggleItemTax,
-  setItemTaxRate,
 }: {
   type: 'discount' | 'tax'
   value: SelectedOrderDiscount | SelectedOrderTax | null
   setSelectedOrderDiscount: Dispatch<SetStateAction<SelectedOrderDiscount | null>>
   setSelectedOrderTax: Dispatch<SetStateAction<SelectedOrderTax | null>>
   items: CartItem[]
-  removeItemDiscount: (id: string) => void
-  toggleItemTax: (id: string, enabled: boolean) => void
-  setItemTaxRate: (id: string, rate: { name: string; percentage: number }) => void
 }) {
   if (type === 'discount') {
     setSelectedOrderDiscount(value as SelectedOrderDiscount | null)
   } else {
     setSelectedOrderTax(value as SelectedOrderTax | null)
   }
-  items.forEach((item) => {
-    removeItemDiscount(item.id)
-    toggleItemTax(item.id, false)
-    if (typeof item.itemTaxRate === 'number') {
-      setItemTaxRate(item.id, {
-        name: item.name,
-        percentage: 0,
-      })
-    }
-  })
-}
-
-// Utility: Clears order-level discount/tax if any item-level discount/tax is selected.
-export function handleItemLevelChange({
-  setSelectedOrderDiscount,
-  setSelectedOrderTax,
-}: {
-  setSelectedOrderDiscount: Dispatch<SetStateAction<SelectedOrderDiscount | null>>
-  setSelectedOrderTax: Dispatch<SetStateAction<SelectedOrderTax | null>>
-}) {
-  setSelectedOrderDiscount(null)
-  setSelectedOrderTax(null)
 }
 
 // Utility: Calculates the order summary for the drawer, considering order-level discounts/taxes if selected.
@@ -241,19 +213,17 @@ export function getDrawerOrderSummary({
 export function handleDiscountToggle({
   item,
   checked,
-  handleItemLevelChange,
   selectedDiscounts,
   applyItemDiscount,
   removeItemDiscount,
 }: {
   item: CartItem
   checked: boolean
-  handleItemLevelChange: () => void
+
   selectedDiscounts: Record<string, SelectedDiscount>
   applyItemDiscount: (id: string, discount: SelectedDiscount) => void
   removeItemDiscount: (id: string) => void
 }) {
-  handleItemLevelChange()
   if (checked && selectedDiscounts[item.id]) {
     applyItemDiscount(item.id, selectedDiscounts[item.id] as SelectedDiscount)
   } else {
@@ -291,15 +261,12 @@ export function handleDiscountSelect({
 export function handleTaxToggle({
   item,
   checked,
-  handleItemLevelChange,
   toggleItemTax,
 }: {
   item: CartItem
   checked: boolean
-  handleItemLevelChange: () => void
   toggleItemTax: (id: string, enabled: boolean) => void
 }) {
-  handleItemLevelChange()
   toggleItemTax(item.id, checked)
 }
 

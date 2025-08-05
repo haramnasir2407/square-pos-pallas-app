@@ -1,4 +1,3 @@
-// hooks/useOrderSummary.ts
 import { useEffect, useState } from 'react'
 import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
 import { calculateOrderApi } from '@/shared/services/orderService'

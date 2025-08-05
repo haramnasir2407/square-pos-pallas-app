@@ -5,13 +5,13 @@ import { Badge } from '@/components/primitives/ui/badge'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'
 import Select from '@/components/primitives/ui/select'
+import { OrderSummaryContainer } from '@/containers/order/OrderSummaryContainer'
 import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
 import { useCartStore } from '@/shared/store/useCartStore'
 import {
   getDrawerOrderSummary,
   handleDiscountSelect,
   handleDiscountToggle,
-  handleItemLevelChange,
   handleOrderLevelChange,
   handleTaxSelect,
   handleTaxToggle,
@@ -20,7 +20,6 @@ import { useState } from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 import { css } from '~/styled-system/css'
 import { Box } from '~/styled-system/jsx'
-import { OrderSummary } from '../order/OrderSummary'
 import CartItemCard from './CartItemCard'
 import {
   cartCountStyle,
@@ -37,9 +36,7 @@ import {
   summaryBoxStyle,
   summaryContainerStyle,
   totalTextStyle,
-  warningTextStyle,
 } from './styles/CartDrawer.styles'
-import { OrderSummaryContainer } from '@/containers/order/OrderSummaryContainer'
 
 /**
  * Drawer component for displaying and managing the shopping cart.
@@ -71,14 +68,8 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
   )
   const [selectedOrderTax, setSelectedOrderTax] = useState<SelectedOrderTax | null>(null)
 
-  // * exclusivity logic: if order-level is selected, disable item-level, and vice versa
-  const isOrderLevelActive = !!selectedOrderDiscount || !!selectedOrderTax
-  const isItemLevelActive = items.some(
-    (item) => item.itemDiscount || (item.is_taxable && item.itemTaxRate !== undefined),
-  )
-
   const drawerOrderSummary = getDrawerOrderSummary({
-    isOrderLevelActive,
+    isOrderLevelActive: !!selectedOrderDiscount || !!selectedOrderTax,
     items,
     selectedOrderDiscount,
     selectedOrderTax,
@@ -155,11 +146,6 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                         handleDiscountToggle({
                           item,
                           checked,
-                          handleItemLevelChange: () =>
-                            handleItemLevelChange({
-                              setSelectedOrderDiscount,
-                              setSelectedOrderTax,
-                            }),
                           selectedDiscounts,
                           applyItemDiscount,
                           removeItemDiscount,
@@ -176,11 +162,6 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                         handleTaxToggle({
                           item,
                           checked,
-                          handleItemLevelChange: () =>
-                            handleItemLevelChange({
-                              setSelectedOrderDiscount,
-                              setSelectedOrderTax,
-                            }),
                           toggleItemTax,
                         })
                       }
@@ -216,12 +197,8 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                         setSelectedOrderDiscount,
                         setSelectedOrderTax,
                         items,
-                        removeItemDiscount,
-                        toggleItemTax,
-                        setItemTaxRate,
                       })
                     }}
-                    disabled={isItemLevelActive}
                   >
                     <Select.Trigger className={css({ fontSize: 'xs' })}>
                       <Select.Value placeholder="Select Discount" />
@@ -270,12 +247,8 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                         setSelectedOrderDiscount,
                         setSelectedOrderTax,
                         items,
-                        removeItemDiscount,
-                        toggleItemTax,
-                        setItemTaxRate,
                       })
                     }}
-                    disabled={isItemLevelActive}
                   >
                     <Select.Trigger className={css({ fontSize: 'xs' })}>
                       <Select.Value placeholder="Select Tax" />
@@ -311,13 +284,8 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                     </Select.Content>
                   </Select.Root>
 
-                  {isItemLevelActive && (
-                    <span className={warningTextStyle}>
-                      (Disable item-level discounts/taxes to use order-level)
-                    </span>
-                  )}
                   {/* Show order-level discount/tax if active */}
-                  {isOrderLevelActive && (
+                  {!!selectedOrderDiscount || !!selectedOrderTax ? (
                     <Box className={orderLevelInfoStyle}>
                       {selectedOrderDiscount && (
                         <Box>
@@ -332,7 +300,7 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
                         </Box>
                       )}
                     </Box>
-                  )}
+                  ) : null}
                   <Box className={totalTextStyle}>
                     Total: ${(drawerOrderSummary.total / 100).toFixed(2)}
                   </Box>
