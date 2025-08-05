@@ -1,6 +1,7 @@
-import { Button } from '../ui/button'
 import { Box, Flex } from '~/styled-system/jsx'
+import { Button } from '../ui/button'
 import { Paragraph } from '../ui/typography'
+import { ButtonVariant } from './Button'
 import { errorBox, errorButton, errorIcon } from './styles/styles'
 
 export default function ErrorComponent({ error }: ErrorProps) {
@@ -18,7 +19,7 @@ export default function ErrorComponent({ error }: ErrorProps) {
         </svg>
         <Paragraph color="error" size="base">
           {error}&nbsp;
-          <Button
+          <ButtonVariant
             variant="text"
             size="sm"
             className={errorButton}
@@ -27,7 +28,7 @@ export default function ErrorComponent({ error }: ErrorProps) {
             }}
           >
             Try again
-          </Button>
+          </ButtonVariant>
         </Paragraph>
       </Flex>
     </Box>

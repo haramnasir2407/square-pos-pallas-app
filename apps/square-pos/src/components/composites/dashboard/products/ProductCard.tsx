@@ -2,6 +2,7 @@
 import { ButtonVariant } from '@/components/primitives/derived/Button'
 import { Badge } from '@/components/primitives/ui/badge'
 import { Button } from '@/components/primitives/ui/button'
+import { Heading, Paragraph } from '@/components/primitives/ui/typography'
 import { useCartStore } from '@/shared/store/useCartStore'
 import type { ProductCardProps } from '@/shared/types/catalog'
 import Image from 'next/image'
@@ -19,7 +20,6 @@ import {
   removeButton,
   stateTag,
 } from './styles/ProductCard.styles'
-import { Heading, Paragraph } from '@/components/primitives/ui/typography'
 
 /**
  * Card component for displaying product information and cart controls.

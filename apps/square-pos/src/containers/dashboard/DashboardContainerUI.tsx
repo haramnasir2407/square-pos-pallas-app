@@ -35,7 +35,7 @@ export default function DashboardContainerUI({
       >
         <Container>
           <Center className={css({ maxW: '6xl', mx: 'auto' })}>
-            <VStack gap="4" align="center" justify="center">
+            <VStack align="center" justify="center">
               <Box className={css({ textAlign: 'center' })}>
                 <Heading
                   className={css({
