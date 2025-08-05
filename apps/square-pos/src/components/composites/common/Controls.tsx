@@ -1,8 +1,8 @@
 'use client'
-import { ButtonVariant } from '@/components/primitives/derived/Button'
-import { Flex } from '~/styled-system/jsx'
+import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { FiMinus } from 'react-icons/fi'
 import { GoPlus } from 'react-icons/go'
+import { Flex } from '~/styled-system/jsx'
 
 interface ControlsProps {
   quantity: number

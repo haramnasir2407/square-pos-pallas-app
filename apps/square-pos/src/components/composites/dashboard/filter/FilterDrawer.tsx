@@ -1,4 +1,4 @@
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { Checkbox } from '@/components/primitives/ui/checkbox'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'

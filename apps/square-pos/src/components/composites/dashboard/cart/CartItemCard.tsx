@@ -1,6 +1,6 @@
 'use client'
 
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { Checkbox } from '@/components/primitives/ui/checkbox'
 import { Label } from '@/components/primitives/ui/label'
 import Select from '@/components/primitives/ui/select'

@@ -1,4 +1,4 @@
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { Heading, Paragraph } from '@/components/primitives/ui/typography'
 import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'

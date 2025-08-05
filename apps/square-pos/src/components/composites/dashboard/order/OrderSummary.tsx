@@ -1,19 +1,9 @@
-import { ButtonVariant } from '@/components/primitives/derived/Button'
-import { OrderConfirmationContainer } from '@/containers/order/OrderConfirmationContainer'
-import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
-import { calculateOrderApi } from '@/shared/services/orderService'
-import {
-  calculateOrderData,
-  formatMoney,
-  getDiscountName,
-  getTaxName,
-} from '@/shared/utils/cartDrawerUtils'
-import { useEffect, useState } from 'react'
+import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
+import { formatMoney, getDiscountName, getTaxName } from '@/shared/utils/cartDrawerUtils'
 import { BsHourglassSplit } from 'react-icons/bs'
 import { RiArrowGoBackFill } from 'react-icons/ri'
 import { Box, Flex } from '~/styled-system/jsx'
 import { checkoutButtonStyle } from '../cart/styles/CartDrawer.styles'
-import { OrderConfirmation } from './OrderConfirmation'
 import { OrderSummaryContent } from './OrderSummaryContent'
 import {
   errorContainer,
@@ -27,58 +17,23 @@ import {
   loadingTitle,
   summaryContainer,
 } from './styles/styles'
-/**
- * Displays a summary of the current order, including items, discounts, taxes, and totals.
- * Handles order calculation, error/loading states, and order confirmation.
- */
+
+type OrderSummaryUIProps = {
+  orderPreview: OrderPreview | null
+  isLoading: boolean
+  error: Error | null
+  onGoBack: () => void
+  onPlaceOrder: () => void
+}
+
 export const OrderSummary = ({
-  items,
-  accessToken,
+  orderPreview,
+  isLoading,
+  error,
   onGoBack,
-  clearCart,
-  setShowCheckout,
-  setOpen,
-  setShowConfirmation,
-  showCheckout,
-  showConfirmation,
-}: OrderSummaryProps) => {
-  const [orderPreview, setOrderPreview] = useState<OrderPreview | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
-
-  const handlePlaceOrder = () => {
-    setShowConfirmation(true)
-  }
-
-  // * client component calling server logic
-  useEffect(() => {
-    // if (showCheckout) return
-    const calculateOrder = async () => {
-      try {
-        setError(null)
-        // * calculate order
-        const orderData = calculateOrderData({
-          items,
-          orderDiscounts: ORDER_LEVEL_DISCOUNTS,
-          orderTaxes: ORDER_LEVEL_TAXES,
-        })
-
-        // * make API call to square orders api to calculate order
-        const result = await calculateOrderApi(orderData, accessToken)
-        setOrderPreview(result)
-      } catch (err) {
-        console.error('Error creating order:', err)
-        setError(err instanceof Error ? err : new Error('An error occurred'))
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    calculateOrder()
-  }, [items, accessToken])
-
+  onPlaceOrder,
+}: OrderSummaryUIProps) => {
   if (isLoading) {
-    // * Loading state UI
     return (
       <Flex direction="column" align="center" justify="center" className={loadingContainer}>
         <Box className={loadingIcon}>
@@ -91,7 +46,6 @@ export const OrderSummary = ({
   }
 
   if (error) {
-    // * Error state UI
     return (
       <Box className={errorContainer}>
         <Box className={errorIcon}>✗</Box>
@@ -101,47 +55,22 @@ export const OrderSummary = ({
     )
   }
 
-  if (showConfirmation) {
-    // * Show order confirmation dialog
-    return (
-      <OrderConfirmationContainer
-        items={items}
-        accessToken={accessToken}
-        orderDiscounts={ORDER_LEVEL_DISCOUNTS}
-        orderTaxes={ORDER_LEVEL_TAXES}
-        onClose={() => {
-          clearCart()
-          setShowCheckout(false)
-          setShowConfirmation(false)
-          setOpen(false)
-        }}
-      />
-    )
-  }
-
   return (
-    !isLoading && (
-      <Box className={summaryContainer}>
-        {/* Order Summary */}
-        <OrderSummaryContent
-          order={orderPreview}
-          formatMoney={formatMoney}
-          getTaxName={(uid) => getTaxName(orderPreview, uid)}
-          getDiscountName={(uid) => getDiscountName(orderPreview, uid)}
-        />
-        <Flex direction="column" gap="gap.component.sm" mt="auto">
-          <ButtonVariant variant="outlined" onClick={onGoBack} className={goBackButton}>
-            <RiArrowGoBackFill /> Go back
-          </ButtonVariant>
-          <ButtonVariant
-            variant="primary"
-            onClick={handlePlaceOrder}
-            className={checkoutButtonStyle}
-          >
-            Confirm and place order
-          </ButtonVariant>
-        </Flex>
-      </Box>
-    )
+    <Box className={summaryContainer}>
+      <OrderSummaryContent
+        order={orderPreview}
+        formatMoney={formatMoney}
+        getTaxName={(uid) => getTaxName(orderPreview, uid)}
+        getDiscountName={(uid) => getDiscountName(orderPreview, uid)}
+      />
+      <Flex direction="column" gap="gap.component.sm" mt="auto">
+        <ButtonVariant variant="outlined" onClick={onGoBack} className={goBackButton}>
+          <RiArrowGoBackFill /> Go back
+        </ButtonVariant>
+        <ButtonVariant variant="primary" onClick={onPlaceOrder} className={checkoutButtonStyle}>
+          Confirm and place order
+        </ButtonVariant>
+      </Flex>
+    </Box>
   )
 }

@@ -1,5 +1,5 @@
 import { Box, Flex } from '~/styled-system/jsx'
-import { ButtonVariant } from '../../primitives/derived/Button'
+import { ButtonVariant } from '../../primitives/derived/ButtonVariant'
 
 import { Paragraph } from '../../primitives/ui/typography'
 import { errorBox, errorButton, errorIcon } from './styles/styles'

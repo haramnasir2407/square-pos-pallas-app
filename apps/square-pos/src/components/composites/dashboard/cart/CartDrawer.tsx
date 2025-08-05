@@ -1,6 +1,6 @@
 'use client'
 
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { Badge } from '@/components/primitives/ui/badge'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'
@@ -39,6 +39,7 @@ import {
   totalTextStyle,
   warningTextStyle,
 } from './styles/CartDrawer.styles'
+import { OrderSummaryContainer } from '@/containers/order/OrderSummaryContainer'
 
 /**
  * Drawer component for displaying and managing the shopping cart.
@@ -358,7 +359,7 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
             </Box>
           </>
         ) : (
-          <OrderSummary
+          <OrderSummaryContainer
             items={items}
             accessToken={accessToken || ''}
             onGoBack={() => setShowCheckout(false)}

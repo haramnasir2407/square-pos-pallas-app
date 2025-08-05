@@ -1,5 +1,5 @@
 'use client'
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { Badge } from '@/components/primitives/ui/badge'
 import { Button } from '@/components/primitives/ui/button'
 import { Heading, Paragraph } from '@/components/primitives/ui/typography'

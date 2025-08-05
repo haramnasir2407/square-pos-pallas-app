@@ -1,4 +1,4 @@
-import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { Heading } from '@/components/primitives/ui/typography'
 import { formatMoney, getDiscountName, getTaxName } from '@/shared/utils/cartDrawerUtils'
 import { BsHourglassSplit } from 'react-icons/bs'
