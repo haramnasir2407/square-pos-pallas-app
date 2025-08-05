@@ -20,16 +20,6 @@ import {
   totalTaxStyle,
 } from './styles/styles'
 
-// Props for OrderSummaryContent
-type OrderSummaryContentProps = {
-  order: OrderPreview | OrderResult | null
-  formatMoney: (amount: number | undefined) => string
-  getTaxName: (uid: string) => string
-  getDiscountName: (uid: string) => string
-  title?: string
-  mbTitle?: string | number
-}
-
 /**
  * Pure presentational component for displaying order summary content (items, discounts, taxes, totals).
  * Used in both OrderSummary and OrderConfirmation.=

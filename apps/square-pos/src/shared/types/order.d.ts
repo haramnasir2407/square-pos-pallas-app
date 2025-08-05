@@ -53,6 +53,16 @@ interface OrderConfirmationProps {
   onClose: () => void
 }
 
+// Props for OrderSummaryContent
+interface OrderSummaryContentProps {
+  order: OrderPreview | OrderResult | null
+  formatMoney: (amount: number | undefined) => string
+  getTaxName: (uid: string) => string
+  getDiscountName: (uid: string) => string
+  title?: string
+  mbTitle?: string | number
+}
+
 type OrderResult = {
   order: {
     id?: string

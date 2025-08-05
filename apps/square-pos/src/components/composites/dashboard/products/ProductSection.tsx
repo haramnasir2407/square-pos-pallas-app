@@ -4,13 +4,12 @@ import DashboardLoader from '@/components/primitives/derived/DashboardLoader'
 import { useProductSectionData } from '@/shared/hooks/useProductSectionData'
 import type { ProductSectionProps } from '@/shared/types/catalog'
 import { css } from '~/styled-system/css'
-import CartDrawer from '../cart/CartDrawer'
-
 import { hasValidQuery } from '@/shared/hooks/useProductList'
 import { Box, Grid, HStack } from '~/styled-system/jsx'
-import FilterDrawer from '../filter/FilterDrawer'
 import SearchBar from '../search/SearchBar'
+import CartDrawer from '../cart/CartDrawer'
 import ProductCard from './ProductCard'
+import FilterDrawer from '@/containers/filter'
 
 /**
  * Section component for displaying a grid of products with filtering, search, and cart drawer.
@@ -31,7 +30,7 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
     imageMap,
     variationIds,
     discountApplications,
-    categoryObjects
+    categoryObjects,
   } = useProductSectionData({ accessToken, products, inventory })
 
   // * Render the main product section layout

@@ -20,3 +20,13 @@ interface FilterDrawerProps {
   onApply: (selectedCategories: CategoryObject[]) => void
   categoryObjects: CategoryObject[]
 }
+
+interface FilterDrawerUIProps {
+  open: boolean
+  setOpen: (open: boolean) => void
+  categoryObjects: CategoryObject[]
+  selected: CategoryObject[]
+  onToggle: (category: CategoryObject) => void
+  onApply: () => void
+  onClear: () => void
+}
