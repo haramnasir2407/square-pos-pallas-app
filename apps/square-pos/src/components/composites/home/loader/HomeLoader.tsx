@@ -1,7 +1,7 @@
 import { css } from '~/styled-system/css'
 import { Flex } from '~/styled-system/jsx'
-import { Spinner } from '../ui/spinner'
-import { Paragraph } from '../ui/typography'
+import { Spinner } from '../../../primitives/ui/spinner'
+import { Paragraph } from '../../../primitives/ui/typography'
 
 export default function HomeLoader() {
   return (

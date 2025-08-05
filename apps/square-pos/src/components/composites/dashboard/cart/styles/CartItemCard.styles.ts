@@ -73,8 +73,6 @@ export const taxRow = css({
   gap: '2',
 })
 
-
-
 export const taxLabel = css({
   fontSize: 'xs',
   display: 'flex',

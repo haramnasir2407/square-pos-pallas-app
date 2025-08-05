@@ -1,6 +1,6 @@
 'use client'
 
-import HomeLoader from '@/components/primitives/derived/HomeLoader'
+import HomeLoader from '@/components/composites/home/loader/HomeLoader'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import useSignInPage from '../../../shared/hooks/useSignInPage'

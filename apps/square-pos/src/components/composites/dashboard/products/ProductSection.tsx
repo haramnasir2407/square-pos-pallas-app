@@ -1,15 +1,15 @@
 'use client'
 
-import DashboardLoader from '@/components/primitives/derived/DashboardLoader'
+import DashboardLoader from '@/components/composites/dashboard/loader/DashboardLoader'
+import FilterDrawer from '@/containers/filter'
+import { hasValidQuery } from '@/shared/hooks/useProductList'
 import { useProductSectionData } from '@/shared/hooks/useProductSectionData'
 import type { ProductSectionProps } from '@/shared/types/catalog'
 import { css } from '~/styled-system/css'
-import { hasValidQuery } from '@/shared/hooks/useProductList'
 import { Box, Grid, HStack } from '~/styled-system/jsx'
-import SearchBar from '../search/SearchBar'
 import CartDrawer from '../cart/CartDrawer'
+import SearchBar from '../search/SearchBar'
 import ProductCard from './ProductCard'
-import FilterDrawer from '@/containers/filter'
 
 /**
  * Section component for displaying a grid of products with filtering, search, and cart drawer.
