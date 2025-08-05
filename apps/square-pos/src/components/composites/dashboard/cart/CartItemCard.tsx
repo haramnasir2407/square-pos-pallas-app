@@ -97,6 +97,7 @@ export default function CartItemCard({
           <GoPlus size={14} />
         </ButtonVariant>
 
+        {/* modal*/}
         <Box className={css({ ml: 'auto' })}>
           <Modal.Root open={open} onOpenChange={setOpen}>
             <Modal.Trigger asChild>

@@ -36,5 +36,3 @@ export default function useSignInPageLogic() {
     setIsProcessing,
   }
 }
-
-// add middleware for checking session and redirecting to dashboard
