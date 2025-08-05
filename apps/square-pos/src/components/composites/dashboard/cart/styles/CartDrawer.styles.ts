@@ -27,7 +27,7 @@ export const cartCountStyle = css({
 
 export const drawerContentStyle = css({
   height: '100vh',
-  width: { base: '100vw', sm: '100vw', md: '30vw' },
+  width: { base: '100vw', sm: '80vw', md: '30vw' },
   bg: 'white',
   boxShadow: 'lg',
   display: 'flex',
@@ -55,55 +55,54 @@ export const drawerBodyStyle = css({ flex: 1, overflowY: 'auto', position: 'rela
 
 export const summaryContainerStyle = css({
   mt: 'auto',
-  pt: '4',
+  pt: 'layout.internal.md',
   borderTop: 'none',
   display: 'flex',
   flexDirection: 'column',
-  gap: '2',
+  gap: 'gap.component.sm',
 })
 
 export const summaryBoxStyle = css({
   bg: 'white',
   boxShadow: 'sm',
   borderRadius: 'lg',
-  p: { base: 2, md: 4 },
-  mb: '2',
+  px: { base: 'padding.inline.sm', md: 'padding.inline.md' },
+  py: { base: 'padding.block.sm', md: 'padding.block.md' },
+  // mb: 'layout.internal.sm',
   display: 'flex',
   flexDirection: 'column',
-  gap: '2',
+  gap: 'gap.component.sm',
 })
 
 export const labelStyle = css({
   fontSize: 'sm',
   fontWeight: 'bold',
-  mr: '2',
+  mr: 'gap.component.sm',
 })
-
-export const customSelectStyle = css({ mr: '2' })
 
 export const warningTextStyle = css({
   color: 'red.500',
   fontSize: 'xs',
-  ml: '2',
+  ml: 'gap.component.sm',
 })
 
 export const orderLevelInfoStyle = css({
   fontSize: 'xs',
   color: 'gray.700',
-  mb: '1',
+  // mb: 'gap.component.sm',
 })
 
 export const totalTextStyle = css({
   fontWeight: 'bold',
   fontSize: 'lg',
-  mb: '1',
+  // mb: 'gap.component.sm',
 })
 
 export const clearCartButtonStyle = css({
   w: 'full',
   bg: 'gray.200',
   color: 'black',
-  py: '2',
+  py: 'padding.block.sm',
   fontWeight: 'semibold',
   fontSize: 'sm',
   _hover: { bg: 'gray.300' },

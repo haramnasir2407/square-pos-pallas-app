@@ -25,6 +25,7 @@ import {
   loadingTitle,
   summaryContainer,
 } from './styles/styles'
+import { checkoutButtonStyle } from '../cart/styles/CartDrawer.styles'
 /**
  * Displays a summary of the current order, including items, discounts, taxes, and totals.
  * Handles order calculation, error/loading states, and order confirmation.
@@ -131,7 +132,7 @@ export const OrderSummary = ({
           <ButtonVariant variant="outlined" onClick={onGoBack} className={goBackButton}>
             <RiArrowGoBackFill /> Go back
           </ButtonVariant>
-          <ButtonVariant variant="primary" onClick={handlePlaceOrder}>
+          <ButtonVariant variant="primary" onClick={handlePlaceOrder} className={checkoutButtonStyle}>
             Confirm and place order
           </ButtonVariant>
         </Flex>

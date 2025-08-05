@@ -1,4 +1,5 @@
 import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { Heading } from '@/components/primitives/ui/typography'
 import { createOrderApi } from '@/shared/services/orderService'
 import {
   createOrderData,
@@ -97,7 +98,7 @@ export const OrderConfirmation = ({
     !isProcessing && (
       <Box className={successContainer}>
         <Box className={successIcon}>✓</Box>
-        <h2 className={successTitle}>Order Successful!</h2>
+        <Heading className={successTitle}>Order Successful!</Heading>
         {/* Order Summary */}
         <OrderSummaryContent
           order={orderResult}

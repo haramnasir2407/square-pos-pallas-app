@@ -48,4 +48,4 @@ export const label = flex({
 
 export const checkbox = css({ cursor: 'pointer' })
 
-export const footer = flex({ direction: 'column', gap: { base: '2', md: 'gap.inline.sm' } })
+export const footer = flex({ direction: 'column', gap: { base: '2', md: 'gap.component.sm' } })
