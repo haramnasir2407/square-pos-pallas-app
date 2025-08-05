@@ -57,8 +57,6 @@ export function createOrderData({
     order.taxes = taxes
   }
 
-  // console.log(order);
-
   return {
     idempotency_key,
     order,

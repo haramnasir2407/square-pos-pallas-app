@@ -15,7 +15,7 @@ import {
   handleOrderLevelChange,
   handleTaxSelect,
   handleTaxToggle,
-} from '@/shared/utils/cart/cartDrawerUtils'
+} from '@/shared/utils/cartDrawerUtils'
 import { useState } from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 import { css } from '~/styled-system/css'

@@ -1,13 +1,6 @@
 import { ButtonVariant } from '@/components/primitives/derived/Button'
 import { Heading } from '@/components/primitives/ui/typography'
-import { createOrderApi } from '@/shared/services/orderService'
-import {
-  createOrderData,
-  formatMoney,
-  getDiscountName,
-  getTaxName,
-} from '@/shared/utils/cart/cartDrawerUtils'
-import { useEffect, useState } from 'react'
+import { formatMoney, getDiscountName, getTaxName } from '@/shared/utils/cartDrawerUtils'
 import { BsHourglassSplit } from 'react-icons/bs'
 import { Box, Flex } from '~/styled-system/jsx'
 import { OrderSummaryContent } from './OrderSummaryContent'
@@ -31,42 +24,11 @@ import {
  * Shows loading, error, and success states for order processing.
  */
 export const OrderConfirmation = ({
-  items,
-  accessToken,
-  orderDiscounts,
-  orderTaxes,
+  isProcessing,
+  orderResult,
+  error,
   onClose,
 }: OrderConfirmationProps) => {
-  const [isProcessing, setIsProcessing] = useState(true)
-  const [orderResult, setOrderResult] = useState<OrderResult | null>(null)
-  const [error, setError] = useState<Error | null>(null)
-
-  useEffect(() => {
-    const createOrder = async () => {
-      try {
-        setIsProcessing(true)
-        setError(null)
-
-        // * create order data
-        const orderData = createOrderData({
-          items,
-          orderDiscounts,
-          orderTaxes,
-        })
-
-        const result = await createOrderApi(orderData, accessToken)
-        setOrderResult(result) // * contains the order object that is created
-      } catch (err) {
-        console.error('Error creating order:', err)
-        setError(err instanceof Error ? err : new Error('An error occurred'))
-      } finally {
-        setIsProcessing(false)
-      }
-    }
-
-    createOrder()
-  }, [items, accessToken, orderDiscounts, orderTaxes])
-
   if (isProcessing) {
     // * Loading state UI
     return (

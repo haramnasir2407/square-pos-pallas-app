@@ -1,5 +1,5 @@
 import type { CartItem } from '../context/CartContext'
-import { buildCartInventoryInfo } from '../utils/inventory/inventoryUtils'
+import { buildCartInventoryInfo } from '../utils/inventoryUtils'
 
 /**
  * Props for the ProductCard component.
@@ -32,10 +32,26 @@ export type UseProductSectionDataProps = {
 /**
  * Props for the ProductSection component.
  */
-export type ProductSectionProps = {
+export type ProductSectionContainerProps = {
   accessToken: string
   products?: ProductCatalog
   inventory?: InventoryData
+}
+
+export type ProductSectionProps = {
+  items: Item[]
+  dataIsPending: boolean
+  error: Error | null
+  taxes_data: TransformedTax[]
+  cartInventoryInfo: Record<string, InventoryObject>
+  accessToken: string
+  variationIds: string[]
+  categoryObjects: CategoryObject[]
+  params: ParamsType
+  setParams: React.Dispatch<React.SetStateAction<ParamsType>>
+  inventoryMap: InventoryMap
+  imageMap: ImageMap
+  discountApplications: DiscountApplication[]
 }
 
 export type UseProductSectionDataReturn = {
@@ -123,6 +139,8 @@ export interface ParamsType {
       keywords: string[]
     }
   }
+  // limit
+  // cursor
 }
 
 // * Catalog object

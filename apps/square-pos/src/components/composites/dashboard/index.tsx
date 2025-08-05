@@ -2,27 +2,22 @@
 
 import ErrorBoundary from '@/components/composites/common/ErrorBoundary'
 import DashboardHeader from '@/components/composites/dashboard/header/DashboardHeader'
-import ProductSection from '@/components/composites/dashboard/products/ProductSection'
 import ProductSectionSkeleton from '@/components/composites/dashboard/products/skeletons/ProductSectionSkeleton'
 import { Heading } from '@/components/primitives/ui/typography'
-import type { DashboardDataReturn } from '@/shared/services/dashboardDataService'
+import type { DashboardDataReturn } from '@/containers/dashboard/dashboardDataService'
+import ProductSectionContainer from '@/containers/product/ProductSectionContainer'
 import { Suspense } from 'react'
 import { css } from '~/styled-system/css'
 import { Box, Center, Container, VStack } from '~/styled-system/jsx'
 
-interface DashboardContainerUIProps {
+interface Dashboard {
   userName: string
   accessToken: string
   products: DashboardDataReturn['products']
   inventory: DashboardDataReturn['inventoryData']
 }
 
-export default function DashboardContainerUI({
-  userName,
-  accessToken,
-  products,
-  inventory,
-}: DashboardContainerUIProps) {
+export default function Dashboard({ userName, accessToken, products, inventory }: Dashboard) {
   return (
     <Box minH="100vh">
       <DashboardHeader user={userName} />
@@ -60,10 +55,11 @@ export default function DashboardContainerUI({
                 </p>
               </Box>
 
-              {/* Product Section */}
+              {/* Product Section change this to a layout */}
+
               <ErrorBoundary>
                 <Suspense fallback={<ProductSectionSkeleton />}>
-                  <ProductSection
+                  <ProductSectionContainer
                     accessToken={accessToken}
                     products={products}
                     inventory={inventory}

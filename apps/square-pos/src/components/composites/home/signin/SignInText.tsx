@@ -1,4 +1,4 @@
-import LockIcon from '@/components/composites/home/signin/LockIcon'
+import LockIcon from '@/components/primitives/ui/lock-icon/LockIcon'
 import { Heading, Paragraph } from '@/components/primitives/ui/typography'
 import { css } from '~/styled-system/css'
 import { Box } from '~/styled-system/jsx'

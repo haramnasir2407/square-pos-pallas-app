@@ -1,4 +1,5 @@
 import { ButtonVariant } from '@/components/primitives/derived/Button'
+import { OrderConfirmationContainer } from '@/containers/order/OrderConfirmationContainer'
 import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
 import { calculateOrderApi } from '@/shared/services/orderService'
 import {
@@ -6,11 +7,12 @@ import {
   formatMoney,
   getDiscountName,
   getTaxName,
-} from '@/shared/utils/cart/cartDrawerUtils'
+} from '@/shared/utils/cartDrawerUtils'
 import { useEffect, useState } from 'react'
 import { BsHourglassSplit } from 'react-icons/bs'
 import { RiArrowGoBackFill } from 'react-icons/ri'
 import { Box, Flex } from '~/styled-system/jsx'
+import { checkoutButtonStyle } from '../cart/styles/CartDrawer.styles'
 import { OrderConfirmation } from './OrderConfirmation'
 import { OrderSummaryContent } from './OrderSummaryContent'
 import {
@@ -25,7 +27,6 @@ import {
   loadingTitle,
   summaryContainer,
 } from './styles/styles'
-import { checkoutButtonStyle } from '../cart/styles/CartDrawer.styles'
 /**
  * Displays a summary of the current order, including items, discounts, taxes, and totals.
  * Handles order calculation, error/loading states, and order confirmation.
@@ -103,7 +104,7 @@ export const OrderSummary = ({
   if (showConfirmation) {
     // * Show order confirmation dialog
     return (
-      <OrderConfirmation
+      <OrderConfirmationContainer
         items={items}
         accessToken={accessToken}
         orderDiscounts={ORDER_LEVEL_DISCOUNTS}
@@ -132,7 +133,11 @@ export const OrderSummary = ({
           <ButtonVariant variant="outlined" onClick={onGoBack} className={goBackButton}>
             <RiArrowGoBackFill /> Go back
           </ButtonVariant>
-          <ButtonVariant variant="primary" onClick={handlePlaceOrder} className={checkoutButtonStyle}>
+          <ButtonVariant
+            variant="primary"
+            onClick={handlePlaceOrder}
+            className={checkoutButtonStyle}
+          >
             Confirm and place order
           </ButtonVariant>
         </Flex>

@@ -84,12 +84,3 @@ export function createDiscountApplications(
     }
   })
 }
-
-/**
- * Filters out discount applications with no applied product IDs
- */
-export function filterValidDiscountApplications(
-  discountApplications: DiscountApplication[],
-): DiscountApplication[] {
-  return discountApplications.filter((app) => app.applied_product_ids.length > 0)
-}

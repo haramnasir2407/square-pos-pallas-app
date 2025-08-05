@@ -1,7 +1,7 @@
 // * api endpoint for creating an order
 
 import { API_CONFIG } from '@/shared/constants/api'
-import { apiFetch } from '@/shared/utils/common/apiFetch'
+import { apiFetch } from '@/shared/utils/apiFetch'
 import { type NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {

@@ -1,4 +1,4 @@
-import handleOAuthCallback from '@/shared/utils/auth/handleOAuthCallback' // default imports help to import single export
+import handleOAuthCallback from '@/components/composites/home/auth/handleOAuthCallback' // default imports help to import single export
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react' // names imports help to import multiple exports
@@ -25,7 +25,6 @@ export default function useSignInPageLogic() {
 
   const hasOAuthCode = searchParams.get('code')
 
-  console.log('isProcessing:', isProcessing)
   return {
     session,
     status,
@@ -36,3 +35,5 @@ export default function useSignInPageLogic() {
     setIsProcessing,
   }
 }
+
+// add middleware for checking session and redirecting to dashboard

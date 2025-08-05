@@ -60,34 +60,6 @@ export function extractCategories(productData: ProductCatalog): Category[] {
   ]
 }
 
-/**
- * Determines which data source to use based on whether there's a query
- */
-// export function determineProductData(
-//   data: any,
-//   products: any,
-//   params: { query?: string }
-// ): any {
-//   // If search/filter then use client data
-//   if (params.query) {
-//     return data;
-//   }
-//   return products;
-// }
-
-/**
- * Determines if client-side fetching is happening
- */
-// export function isClientSideFetching(
-//   params: { query?: string },
-//   isPending: boolean
-// ): boolean {
-//   return Boolean(params.query && isPending);
-// }
-
-/**
- * Extracts all item IDs from items array
- */
 export function extractItemIds(items: Item[]): string[] {
   return items.map((item) => item.id)
 }

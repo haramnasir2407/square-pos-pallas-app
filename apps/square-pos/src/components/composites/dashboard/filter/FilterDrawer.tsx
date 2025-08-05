@@ -2,7 +2,6 @@ import { ButtonVariant } from '@/components/primitives/derived/Button'
 import { Checkbox } from '@/components/primitives/ui/checkbox'
 import Drawer from '@/components/primitives/ui/drawer'
 import { Label } from '@/components/primitives/ui/label'
-import type { CategoryObject } from '@/shared/types/catalog'
 import { FaFilter } from 'react-icons/fa'
 import {
   body,
@@ -15,7 +14,7 @@ import {
   trigger,
 } from './styles/FilterDrawer.styles'
 
-export function FilterDrawerUI({
+export function FilterDrawer({
   open,
   setOpen,
   categoryObjects,
@@ -23,7 +22,7 @@ export function FilterDrawerUI({
   onToggle,
   onApply,
   onClear,
-}: FilterDrawerUIProps) {
+}: FilterDrawerProps) {
   return (
     <Drawer.Root open={open} onOpenChange={setOpen} side="left">
       <Drawer.Trigger className={trigger}>

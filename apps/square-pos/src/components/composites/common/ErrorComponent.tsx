@@ -1,7 +1,8 @@
 import { Box, Flex } from '~/styled-system/jsx'
 import { ButtonVariant } from '../../primitives/derived/Button'
-import { errorBox, errorButton, errorIcon } from '../../primitives/derived/styles/styles'
+
 import { Paragraph } from '../../primitives/ui/typography'
+import { errorBox, errorButton, errorIcon } from './styles/styles'
 
 export default function ErrorComponent({ error }: ErrorProps) {
   return (

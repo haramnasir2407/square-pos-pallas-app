@@ -1,5 +1,3 @@
-// apps/square-pos/src/shared/services/orderService.ts
-
 export async function calculateOrderApi(
   orderData: { idempotency_key: string; order: orderData },
   accessToken: string,

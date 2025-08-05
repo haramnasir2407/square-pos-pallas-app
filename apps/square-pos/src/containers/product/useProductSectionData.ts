@@ -1,7 +1,7 @@
-import { useDiscounts } from '@/shared/hooks/useDiscounts'
-import { usePricingRules } from '@/shared/hooks/usePricingRules'
-import { hasValidQuery, useProductList } from '@/shared/hooks/useProductList'
-import { useProductSets } from '@/shared/hooks/useProductSets'
+import { useDiscounts } from '@/containers/product/useDiscounts'
+import { usePricingRules } from '@/containers/product/usePricingRules'
+import { hasValidQuery, useProductList } from '@/containers/product/useProductList'
+import { useProductSets } from '@/containers/product/useProductSets'
 import { useMemo, useState } from 'react'
 import {
   extractCategories,
@@ -13,7 +13,7 @@ import {
   extractProductSets,
   extractTaxes,
   extractVariationIds,
-} from '../utils/common/dataExtractionUtils'
+} from '../../shared/utils/dataExtractionUtils'
 import {
   createDiscountToProductSetMap,
   transformCategories,
@@ -21,7 +21,7 @@ import {
   transformPricingRules,
   transformProductSets,
   transformTaxes,
-} from '../utils/common/productDataTransformers'
+} from '../../shared/utils/productDataTransformers'
 
 import type {
   ParamsType,
@@ -29,9 +29,9 @@ import type {
   UseProductSectionDataProps,
   UseProductSectionDataReturn,
 } from '@/shared/types/catalog'
-import { createDiscountApplications } from '@/shared/utils/discount/discountApplicationUtils'
-import { buildImageMap } from '@/shared/utils/image/imageUtils'
-import { buildCartInventoryInfo, buildInventoryMap } from '../utils/inventory/inventoryUtils'
+import { createDiscountApplications } from '@/shared/utils/discountApplicationUtils'
+import { buildImageMap } from '../../shared/utils/imageUtils'
+import { buildCartInventoryInfo, buildInventoryMap } from '../../shared/utils/inventoryUtils'
 
 /**
  * Custom hook to manage and aggregate all product section data for the dashboard.
@@ -138,6 +138,5 @@ export function useProductSectionData({
     variationIds,
     discountApplications,
     categoryObjects,
-    // catalogObjects: productData?.objects ?? [],
   }
 }

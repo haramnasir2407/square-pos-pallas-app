@@ -4,8 +4,14 @@ import type { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { css } from '~/styled-system/css'
 import { Box, Flex } from '~/styled-system/jsx'
-import { circle } from '~/styled-system/patterns'
-import { authSuccessIcon, authSuccessIconWrapper, authUserInitial } from './styles/styles'
+import {
+  authSuccessIcon,
+  authSuccessIconWrapper,
+  authUserInitial,
+  avatar,
+  heading,
+  merchantInfo,
+} from './styles/styles'
 
 type sessionProps = {
   session: Session
@@ -13,12 +19,7 @@ type sessionProps = {
 
 export default function Authenticated({ session }: sessionProps) {
   return (
-    <Flex
-      minH="100vh"
-      align="center"
-      justify="center"
-      bg="gray.200"
-    >
+    <Flex minH="100vh" align="center" justify="center" bg="gray.200">
       <Flex
         direction="column"
         gap="layout.default.md"
@@ -49,14 +50,7 @@ export default function Authenticated({ session }: sessionProps) {
               />
             </svg>
           </Flex>
-          <Heading
-            color="default"
-            className={css({
-              fontSize: '3xl',
-              fontWeight: 'bold',
-              mb: 'gap.component.sm',
-            })}
-          >
+          <Heading color="default" className={heading}>
             Already Signed In
           </Heading>
           <Paragraph textAlign="center" color="tertiary">
@@ -64,23 +58,9 @@ export default function Authenticated({ session }: sessionProps) {
           </Paragraph>
         </Box>
 
-        <Box
-          className={css({
-            bgColor: 'white',
-            rounded: 'xl',
-            boxShadow: 'md',
-            border: '1px solid white',
-            py: 'gap.component.md',
-            px: 'padding.inline.lg',
-          })}
-        >
+        <Box className={merchantInfo}>
           <Flex align="center" gap="gap.component.sm" mb="gap.component.sm">
-            <Box
-              className={circle({
-                size: '10',
-                bg: 'gray.100',
-              })}
-            >
+            <Box className={avatar}>
               <span className={authUserInitial}>{session.user?.name?.charAt(0) || 'U'}</span>
             </Box>
             <Box>

@@ -22,3 +22,19 @@ export const errorButton = css({
   color: 'error.text',
   fontSize: 'sm',
 })
+
+export const errorBoundary = flex({
+  mt: 'layout.section.md',
+  w: 'full',
+  justify: 'center',
+  align: 'center',
+  py: 'padding.block.lg',
+  mb: 'layout.section.md',
+  gap: 'gap.inline.sm',
+})
+
+export const errorHeading = flex({
+  alignItems: 'center',
+  gap: 'gap.inline.sm',
+  fontWeight: 'semibold',
+})

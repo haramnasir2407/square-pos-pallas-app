@@ -46,6 +46,13 @@ interface OrderSummaryProps {
  * @property onClose - Callback to close the confirmation dialog
  */
 interface OrderConfirmationProps {
+  isProcessing: boolean
+  orderResult: OrderResult | null
+  error: Error | null
+  onClose: () => void
+}
+
+interface OrderConfirmationContainerProps {
   items: CartItem[]
   accessToken: string
   orderDiscounts?: OrderDiscount[]

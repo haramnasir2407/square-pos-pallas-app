@@ -2,8 +2,8 @@
 
 import DashboardLoader from '@/components/composites/dashboard/loader/DashboardLoader'
 import FilterDrawer from '@/containers/filter'
-import { hasValidQuery } from '@/shared/hooks/useProductList'
-import { useProductSectionData } from '@/shared/hooks/useProductSectionData'
+import FilterDrawerContainer from '@/containers/filter'
+import { hasValidQuery } from '@/containers/product/useProductList'
 import type { ProductSectionProps } from '@/shared/types/catalog'
 import { css } from '~/styled-system/css'
 import { Box, Grid, HStack } from '~/styled-system/jsx'
@@ -17,22 +17,21 @@ import ProductCard from './ProductCard'
  */
 
 /* @compile */
-export default function ProductSection({ accessToken, products, inventory }: ProductSectionProps) {
-  const {
-    params,
-    setParams,
-    dataIsPending,
-    error,
-    items,
-    taxes_data,
-    cartInventoryInfo,
-    inventoryMap,
-    imageMap,
-    variationIds,
-    discountApplications,
-    categoryObjects,
-  } = useProductSectionData({ accessToken, products, inventory })
-
+export default function ProductSection({
+  accessToken,
+  cartInventoryInfo,
+  variationIds,
+  categoryObjects,
+  params,
+  setParams,
+  dataIsPending,
+  error,
+  items,
+  taxes_data,
+  inventoryMap,
+  imageMap,
+  discountApplications,
+}: ProductSectionProps) {
   // * Render the main product section layout
   return (
     <Box className={css({ w: 'full', mt: 'layout.section.sm' })}>
@@ -44,7 +43,7 @@ export default function ProductSection({ accessToken, products, inventory }: Pro
       />
       <HStack align="center" justify="center" gap="gap.inline.lg" mb="layout.section.sm">
         {/* filter button and search bar */}
-        <FilterDrawer
+        <FilterDrawerContainer
           categoryObjects={categoryObjects}
           setParams={(newParams) => setParams({ ...params, ...newParams })}
           prevParams={params}

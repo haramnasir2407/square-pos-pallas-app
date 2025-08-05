@@ -5,8 +5,8 @@ import { auth } from '~/auth'
 
 import fetchDashboardData, {
   type DashboardDataReturn,
-} from '@/shared/services/dashboardDataService'
-import DashboardContainerUI from './DashboardContainerUI'
+} from '@/containers/dashboard/dashboardDataService'
+import Dashboard from '../../components/composites/dashboard'
 
 /**
  * DashboardContainer is an async server component that handles all data fetching
@@ -22,13 +22,13 @@ export default async function DashboardContainer() {
     return null
   }
 
-  // * fetch data from the service
+  // * get data from the service
   const data: DashboardDataReturn = await fetchDashboardData({
     accessToken: session.accessToken ?? '',
   })
 
   return (
-    <DashboardContainerUI
+    <Dashboard
       userName={session.user?.name ?? ''}
       accessToken={session.accessToken ?? ''}
       products={data.products}

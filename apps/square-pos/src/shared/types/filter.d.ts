@@ -14,14 +14,8 @@ interface FilterButtonProps {
  * @property {(selectedCategories: CategoryObj[]) => void} onApply - Function to apply selected categories.
  * @property {CategoryObj[]} categoryObjects - List of available category objects.
  */
-interface FilterDrawerProps {
-  open: boolean
-  onClose: () => void
-  onApply: (selectedCategories: CategoryObject[]) => void
-  categoryObjects: CategoryObject[]
-}
 
-interface FilterDrawerUIProps {
+interface FilterDrawerProps {
   open: boolean
   setOpen: (open: boolean) => void
   categoryObjects: CategoryObject[]

@@ -4,7 +4,7 @@ import { Flex } from '~/styled-system/jsx'
 import { FiMinus } from 'react-icons/fi'
 import { GoPlus } from 'react-icons/go'
 
-type ControlsProps = {
+interface ControlsProps {
   quantity: number
   minQty?: number
   atMaxQty?: boolean

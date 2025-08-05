@@ -11,5 +11,6 @@ export const startSquareOAuth = () => {
   authUrl.searchParams.set('response_type', 'code')
   authUrl.searchParams.set('redirect_uri', redirectUri)
 
-  window.location.href = authUrl.toString()
+  window.location.href = authUrl.toString() // add this in container
 }
+// add to constants

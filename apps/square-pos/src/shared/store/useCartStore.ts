@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { calculateItemDiscountValue } from '../utils/cart/cartDrawerUtils'
+import { calculateItemDiscountValue } from '../utils/cartDrawerUtils'
 
 export type Discount = {
   discount_name: string
