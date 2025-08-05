@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/primitives/ui/skeleton'
 import { css } from '~/styled-system/css'
-import { Box, Flex, Grid } from '~/styled-system/jsx'
+import { Box, Grid } from '~/styled-system/jsx'
 
 export default function ProductGridSkeleton() {
   return (

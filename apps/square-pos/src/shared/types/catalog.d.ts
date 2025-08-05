@@ -54,7 +54,7 @@ export type UseProductSectionDataReturn = {
   variationIds: string[]
   categoryObjects: CategoryObject[]
   discountApplications: DiscountApplication[]
-  catalogObjects: CatalogObject[]
+  // catalogObjects: CatalogObject[]
 }
 
 interface SignInPageUIProps {

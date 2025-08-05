@@ -138,6 +138,6 @@ export function useProductSectionData({
     variationIds,
     discountApplications,
     categoryObjects,
-    catalogObjects: productData?.objects ?? [],
+    // catalogObjects: productData?.objects ?? [],
   }
 }

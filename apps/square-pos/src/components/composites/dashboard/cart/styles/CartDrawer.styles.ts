@@ -3,8 +3,8 @@ import { flex } from '~/styled-system/patterns'
 
 export const drawerTriggerStyle = flex({
   position: 'fixed',
-  top: { base: '2', sm: '2', md: '4' },
-  right: { base: '5', sm: '5', md: '10' },
+  top: { base: '2', sm: '2'},
+  right: { base: '5', sm: '5' },
   zIndex: 50,
   cursor: 'pointer',
   px: 'padding.inline.lg',
@@ -83,7 +83,7 @@ export const labelStyle = css({
 export const warningTextStyle = css({
   color: 'red.500',
   fontSize: 'xs',
-  ml: 'gap.component.sm',
+  // ml: 'gap.component.sm',
 })
 
 export const orderLevelInfoStyle = css({
