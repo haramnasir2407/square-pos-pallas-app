@@ -8,6 +8,8 @@ import type { Discount } from '@/shared/store/useCartStore'
 import Image from 'next/image'
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa6'
+import { FiMinus } from 'react-icons/fi'
+import { GoPlus } from 'react-icons/go'
 import { css } from '~/styled-system/css'
 import { Box, Flex } from '~/styled-system/jsx'
 import {
@@ -31,8 +33,6 @@ import {
   taxRow,
   taxSelect,
 } from './styles/CartItemCard.styles'
-import { FiMinus } from 'react-icons/fi'
-import { GoPlus } from 'react-icons/go'
 
 export default function CartItemCard({
   item,
