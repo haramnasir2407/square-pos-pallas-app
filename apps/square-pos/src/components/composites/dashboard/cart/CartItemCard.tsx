@@ -230,14 +230,9 @@ export default function CartItemCard({
         </Box>
       </Box>
       {/* Applied Discount and Tax */}
+
       {(item.itemDiscount || (item.is_taxable && item.itemTaxRate !== undefined)) && (
         <VStack gap={1} align="start" mt={1}>
-          {item.itemDiscount && (
-            <Box className={css({ fontSize: 'xs' })}>
-              Discount:&nbsp;
-              {item.itemDiscount.discount_name}
-            </Box>
-          )}
           {item.is_taxable && item.itemTaxRate !== undefined && (
             <Box className={css({ fontSize: 'xs' })}>
               Tax:&nbsp;{(() => {
@@ -246,6 +241,17 @@ export default function CartItemCard({
                 )
                 return tax ? `${tax.name} (${tax.percentage}%)` : `${item.itemTaxRate}%`
               })()}
+            </Box>
+          )}
+
+          {item.itemDiscount && (
+            <Box className={css({ fontSize: 'xs' })}>
+              Discount:&nbsp;
+              {item.itemDiscount.discount_name === 'Buy One Get One Free' && item.quantity >= 2
+                ? item.itemDiscount.discount_name
+                : item.itemDiscount.discount_name !== 'Buy One Get One Free'
+                  ? item.itemDiscount.discount_name
+                  : 'None'}
             </Box>
           )}
         </VStack>
