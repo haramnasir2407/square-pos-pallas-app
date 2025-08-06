@@ -38,11 +38,10 @@ export default async function fetchDashboardData(session: {
       products = await response.json()
     }
   } catch (e) {
-    // fail silently, fallback to client fetch
+    throw new Error(`Failed to fetch products: ${e}`)
   }
 
-  // * Extract item and variation IDs from products.
-
+  // * Extract item and variation IDs from products
   const items: Item[] =
     (products?.objects as CatalogObject[])?.filter((obj): obj is Item => obj.type === 'ITEM') || []
 
@@ -71,7 +70,7 @@ export default async function fetchDashboardData(session: {
       inventoryData = await response.json()
     }
   } catch (e) {
-    // fail silently, fallback to client fetch
+    throw new Error(`Failed to fetch inventory: ${e}`)
   }
 
   return { products, inventoryData }

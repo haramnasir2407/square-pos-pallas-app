@@ -18,7 +18,7 @@ export default function DashboardLoader() {
           size="lg"
           variant="default"
           color="default"
-          className={css({ margin: '0 auto', border: '4px solid rgb(39, 39, 39)' })}
+          className={css({ margin: '0 auto', border: '4px solid black' })}
         />
         <Paragraph
           size="large"

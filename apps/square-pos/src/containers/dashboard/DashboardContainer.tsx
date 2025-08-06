@@ -27,9 +27,9 @@ export default async function DashboardContainer() {
     accessToken: session.accessToken ?? '',
   })
 
+  // * pass data to ui component
   return (
     <Dashboard
-      userName={session.user?.name ?? ''}
       accessToken={session.accessToken ?? ''}
       products={data.products}
       inventory={data.inventoryData}

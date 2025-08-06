@@ -105,7 +105,17 @@ export default function CartItemCard({
                 Show options
               </Button>
             </Modal.Trigger>
-            <Modal.Content className={css({ width: { base: '8vw', sm: '80vw', md: '40vw' } })}>
+
+            <Modal.Content
+              className={css({
+                width: { base: '90vw', sm: '80vw', md: '40vw' },
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 1000,
+              })}
+            >
               <Modal.Header>
                 <Modal.Title>Apply item-level discounts and taxes</Modal.Title>
                 <Modal.Description>

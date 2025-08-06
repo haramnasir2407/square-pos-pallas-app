@@ -13,4 +13,3 @@ export const startSquareOAuth = () => {
 
   window.location.href = authUrl.toString() // add this in container
 }
-// add to constants

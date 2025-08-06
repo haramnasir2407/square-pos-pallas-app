@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   const session = await auth() // retrieve the session from the request
   const { pathname } = request.nextUrl
 
-  const isSignedIn = Boolean(session?.accessToken)
+  const isSignedIn = !!session?.accessToken
 
   // Redirect root to dashboard if signed in, otherwise to signin
   if (pathname === '/') {

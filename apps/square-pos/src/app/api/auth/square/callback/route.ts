@@ -1,6 +1,4 @@
 // this is for testing square oauth manually
-// for this set redirect uri to http://localhost:3000/api/auth/square/callback at square developer portal
-// and go to http://localhost:3000/test-square to test the oauth flow
 
 import { type NextRequest, NextResponse } from 'next/server'
 
@@ -8,9 +6,6 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const code = searchParams.get('code')
   const error = searchParams.get('error')
-
-  // console.log("Code:", code);
-  // console.log("Error:", error);
 
   if (error) {
     return NextResponse.json({ error }, { status: 400 })
@@ -58,7 +53,6 @@ export async function GET(request: NextRequest) {
 
     const tokens = JSON.parse(responseText)
     // console.log("Successfully received tokens:", tokens);
-
     // get merchant info
     const merchantResponse = await fetch(`${process.env.SQUARE_API_BASE}/v2/merchants/me`, {
       headers: {

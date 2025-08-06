@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Square POS App',
-  description: 'A NextJs app for managing you sqaure point-of-scale.',
+  description: 'A NextJs app for managing your square point-of-scale.',
 }
 
 export default function RootLayout({

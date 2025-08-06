@@ -9,7 +9,10 @@ export const cardContainer = css({
 export const image = css({ borderRadius: 'md' })
 
 export const itemInfo = css({ flex: 1 })
-export const itemName = css({ fontWeight: 'semibold', fontSize: 'sm' })
+export const itemName = css({
+  fontWeight: 'semibold',
+  fontSize: { base: 'xs', md: 'xs', lg: 'sm' },
+})
 export const itemPrice = css({ color: 'gray.600', fontSize: 'xs' })
 export const itemStock = css({ color: 'gray.400', fontSize: 'xs' })
 

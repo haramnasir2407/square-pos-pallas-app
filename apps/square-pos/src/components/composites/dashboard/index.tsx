@@ -7,13 +7,12 @@ import ProductSectionContainer from '@/containers/product/ProductSectionContaine
 import { Suspense } from 'react'
 
 interface Dashboard {
-  userName: string
   accessToken: string
   products: DashboardDataReturn['products']
   inventory: DashboardDataReturn['inventoryData']
 }
 
-export default function Dashboard({ userName, accessToken, products, inventory }: Dashboard) {
+export default function Dashboard({ accessToken, products, inventory }: Dashboard) {
   return (
     <ErrorBoundary>
       <Suspense fallback={<ProductSectionSkeleton />}>

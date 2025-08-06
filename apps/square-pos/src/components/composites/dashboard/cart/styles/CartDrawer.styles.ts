@@ -3,7 +3,7 @@ import { flex } from '~/styled-system/patterns'
 
 export const drawerTriggerStyle = flex({
   position: 'fixed',
-  top: { base: '2', sm: '2'},
+  top: { base: '2', sm: '2' },
   right: { base: '5', sm: '5' },
   zIndex: 50,
   cursor: 'pointer',
@@ -27,7 +27,7 @@ export const cartCountStyle = css({
 
 export const drawerContentStyle = css({
   height: '100vh',
-  width: { base: '100vw', sm: '80vw', md: '30vw' },
+  width: { base: '100vw', sm: '60vw', md: '40vw', lg: '30vw' },
   bg: 'white',
   boxShadow: 'lg',
   display: 'flex',
