@@ -1,5 +1,5 @@
 // default imports help to import single export
-import handleOAuthCallback from '@/shared/services/handleAuthService'
+import handleOAuthCallback from '@/containers/signin/handleAuthService'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react' // named imports help to import multiple exports
