@@ -165,12 +165,14 @@ export function handleOrderLevelChange({
 // Utility: Calculates the order summary for the drawer, considering order-level discounts/taxes if selected.
 export function getDrawerOrderSummary({
   isOrderLevelActive,
+  isItemLevelActive,
   items,
   selectedOrderDiscount,
   selectedOrderTax,
   getOrderSummary,
 }: {
   isOrderLevelActive: boolean
+  isItemLevelActive: boolean
   items: CartItem[]
   selectedOrderDiscount: SelectedOrderDiscount | null
   selectedOrderTax: SelectedOrderTax | null
@@ -181,27 +183,45 @@ export function getDrawerOrderSummary({
     total: number
   }
 }) {
+  const itemSummary = getOrderSummary()
+
+  let subtotal = itemSummary.subtotal
+  let discountAmount = itemSummary.discountAmount
+  let taxAmount = itemSummary.taxAmount
+
   if (isOrderLevelActive) {
-    const subtotal = items.reduce((sum, item) => sum + (item.price ?? 0) * item.quantity, 0)
-    let discountAmount = 0
-    let taxAmount = 0
+    // Apply order-level discount on top of item-level subtotal
+    let orderDiscountAmount = 0
     if (selectedOrderDiscount) {
       const percent = Number.parseFloat(selectedOrderDiscount.percentage)
       if (!Number.isNaN(percent)) {
-        discountAmount = (subtotal * percent) / 100
+        orderDiscountAmount = (subtotal * percent) / 100
       }
     }
-    const discountedSubtotal = subtotal - discountAmount
+
+    subtotal -= orderDiscountAmount
+    discountAmount += orderDiscountAmount
+
+    // Apply order-level tax on top of already discounted subtotal
+    let orderTaxAmount = 0
     if (selectedOrderTax) {
       const percent = Number.parseFloat(selectedOrderTax.percentage)
       if (!Number.isNaN(percent)) {
-        taxAmount = (discountedSubtotal * percent) / 100
+        orderTaxAmount = (subtotal * percent) / 100
       }
     }
-    const total = discountedSubtotal + taxAmount
-    return { subtotal, discountAmount, taxAmount, total }
+
+    taxAmount += orderTaxAmount
   }
-  return getOrderSummary()
+
+  const total = subtotal + taxAmount
+
+  return {
+    subtotal,
+    discountAmount,
+    taxAmount,
+    total,
+  }
 }
 
 // Utility: Handles toggling of item-level discounts.

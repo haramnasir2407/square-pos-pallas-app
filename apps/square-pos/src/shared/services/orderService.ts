@@ -1,4 +1,4 @@
-export async function calculateOrderApi(
+export async function calculateOrderService(
   orderData: { idempotency_key: string; order: orderData },
   accessToken: string,
 ) {
@@ -18,7 +18,7 @@ export async function calculateOrderApi(
   return response.json()
 }
 
-export async function createOrderApi(
+export async function createOrderService(
   orderData: { idempotency_key: string; order: orderData },
   accessToken: string,
 ) {

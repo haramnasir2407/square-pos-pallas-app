@@ -1,7 +1,7 @@
 import { fetchProducts } from '@/shared/services/productService'
 // this is a hook that fetches products from the Square API
 
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import type { ParamsType } from '../../shared/types/catalog'
 
 /**
@@ -35,6 +35,5 @@ export function useProductList(access_token: string, params?: ParamsType) {
     queryFn: () => fetchProducts(access_token, params),
     enabled: !!access_token && hasValidQuery(params?.query),
     staleTime: 5 * 60 * 1000,
-    placeholderData: keepPreviousData,
   })
 }

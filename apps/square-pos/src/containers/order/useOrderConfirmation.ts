@@ -1,4 +1,5 @@
-import { createOrderApi } from '@/shared/services/orderService'
+
+import { createOrderService } from '@/shared/services/orderService'
 import type { CartItem } from '@/shared/store/useCartStore'
 import { createOrderData } from '@/shared/utils/cartDrawerUtils'
 import { useEffect, useState } from 'react'
@@ -25,7 +26,7 @@ export function useOrderConfirmation({
         setError(null)
 
         const orderData = createOrderData({ items, orderDiscounts, orderTaxes })
-        const result = await createOrderApi(orderData, accessToken)
+        const result = await createOrderService(orderData, accessToken)
         setOrderResult(result)
       } catch (err) {
         setError(err instanceof Error ? err : new Error('An error occurred'))

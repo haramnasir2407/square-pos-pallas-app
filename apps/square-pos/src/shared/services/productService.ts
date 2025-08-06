@@ -3,25 +3,22 @@
 // the params object is an object with the query parameters
 // the function returns the data from the API
 
-import type { ParamsType } from "../types/catalog";
+import type { ParamsType } from '../types/catalog'
 
-export async function fetchProducts(
-  accessToken: string | undefined,
-  params?: ParamsType
-) {
+export async function fetchProducts(accessToken: string | undefined, params?: ParamsType) {
   if (!accessToken) {
-    return null;
+    return null
   }
 
   if (params) {
     const query = params.query as {
-      set_query?: { attribute_values: string[]; attribute_name: string };
-      text_query?: { keywords: string[] };
-    };
-    const setQuery = query?.set_query; // * for filter by category
-    const textQuery = query?.text_query; // * for search by keyword
+      set_query?: { attribute_values: string[]; attribute_name: string }
+      text_query?: { keywords: string[] }
+    }
+    const setQuery = query?.set_query // * for filter by category
+    const textQuery = query?.text_query // * for search by keyword
 
-    let queryObj = undefined;
+    let queryObj = undefined
 
     if (
       setQuery &&
@@ -33,36 +30,34 @@ export async function fetchProducts(
       queryObj = {
         set_query: setQuery,
         text_query: textQuery,
-      };
+      }
     } else if (setQuery && setQuery.attribute_values.length > 0) {
-      queryObj = { set_query: setQuery };
+      queryObj = { set_query: setQuery }
     } else if (textQuery && textQuery.keywords.length > 0) {
-      queryObj = { text_query: textQuery };
+      queryObj = { text_query: textQuery }
     }
 
-    const types = params.types;
+    const types = params.types
     const body = {
-      object_types: types
-        ? types.split(",").map((t: string) => t.trim().toUpperCase())
-        : [],
+      object_types: types ? types.split(',').map((t: string) => t.trim().toUpperCase()) : [],
       query: queryObj,
       include_related_objects: true,
-    };
+    }
 
-    const response = await fetch("/api/products/searchCatalog", {
-      method: "POST",
+    const response = await fetch('/api/products/searchCatalog', {
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify(body),
-    });
+    })
 
     if (!response.ok) {
-      throw new Error("Failed to fetch products(1)");
+      throw new Error('Failed to fetch products(1)')
     }
 
-    const data = await response.json();
-    return data;
+    const data = await response.json()
+    return data
   }
-  return null;
+  return null
 }

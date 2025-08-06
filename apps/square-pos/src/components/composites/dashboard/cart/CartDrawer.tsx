@@ -70,6 +70,7 @@ export default function CartDrawer({ accessToken, cartInventoryInfo }: CartDrawe
 
   const drawerOrderSummary = getDrawerOrderSummary({
     isOrderLevelActive: !!selectedOrderDiscount || !!selectedOrderTax,
+    isItemLevelActive: !!selectedDiscounts || !!selectedTaxes,
     items,
     selectedOrderDiscount,
     selectedOrderTax,

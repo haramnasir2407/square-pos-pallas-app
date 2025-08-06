@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { ORDER_LEVEL_DISCOUNTS, ORDER_LEVEL_TAXES } from '@/shared/constants/order_discounts_taxes'
-import { calculateOrderApi } from '@/shared/services/orderService'
 import { calculateOrderData } from '@/shared/utils/cartDrawerUtils'
 import type { CartItem } from '@/shared/store/useCartStore'
+import { calculateOrderService } from '@/shared/services/orderService'
 
 export const useOrderSummary = (items: CartItem[], accessToken: string) => {
   const [orderPreview, setOrderPreview] = useState<OrderPreview | null>(null)
@@ -19,7 +19,7 @@ export const useOrderSummary = (items: CartItem[], accessToken: string) => {
           orderTaxes: ORDER_LEVEL_TAXES,
         })
 
-        const result = await calculateOrderApi(orderData, accessToken)
+        const result = await calculateOrderService(orderData, accessToken)
         setOrderPreview(result)
       } catch (err) {
         console.error('Error creating order:', err)

@@ -6,7 +6,7 @@ export const containerStyle = css({
   rounded: 'xl',
   shadow: 'md',
   p: 'layout.default.sm',
-  maxW: { base: '90vw', sm: '60vw', md: '30vw' },
+  maxW: { base: '90vw', sm: '60vw', md: '40vw', lg: '30vw' },
   w: '100%',
 })
 
@@ -32,6 +32,5 @@ export const termsMargin = css({
 })
 
 export const linkStyle = css({
-  color: { base: token('colors.blue.50'), _hover: token('colors.blue.100') },
-  fontWeight: 'medium',
+  color: 'blue.100',
 })
