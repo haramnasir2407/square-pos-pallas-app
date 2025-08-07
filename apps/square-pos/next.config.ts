@@ -13,12 +13,11 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
   },
-  logging: { // logs which endpoints are cached or not
-    fetches: {
-      fullUrl: true,
-    },
-  },
-  /* config options here */
+  // logging: { // logs which endpoints are cached or not
+  //   fetches: {
+  //     fullUrl: true,
+  //   },
+  // },
 }
 
 export default nextConfig

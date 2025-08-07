@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { Badge } from '@/components/primitives/ui/badge'
 import { Button } from '@/components/primitives/ui/button'

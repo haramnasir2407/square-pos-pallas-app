@@ -5,10 +5,12 @@ import { css } from '~/styled-system/css'
 import { auth } from '~/auth'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  // server component
   const session = await auth()
   const userName = session?.user?.name ?? ''
 
   return (
+    // not hydrated on client (static content sent from server, no js bundle attached)
     <Box minH="100vh">
       <DashboardHeader user={userName} />
       <main

@@ -1,6 +1,7 @@
 import { FilterDrawer } from '@/components/composites/dashboard/filter/FilterDrawer'
 import { useFilterDrawer } from './useFilterDrawer'
 
+// CSR
 export default function FilterDrawerContainer({
   setParams,
   prevParams,

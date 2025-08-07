@@ -1,7 +1,8 @@
 import { API_CONFIG } from '@/shared/constants/api'
 import type { CatalogObject, InventoryData, Item, ProductCatalog } from '@/shared/types/catalog'
 
-// ? the data fetching logic can be added to service
+// * async server components ( can be made an async server action )
+// * dynamic rendering (fetched n rendered for every user request)
 
 export interface DashboardDataReturn {
   products: ProductCatalog

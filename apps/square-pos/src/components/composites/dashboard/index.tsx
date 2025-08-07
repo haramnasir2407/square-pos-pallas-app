@@ -11,7 +11,10 @@ interface Dashboard {
 }
 
 export default function Dashboard({ accessToken, products, inventory }: Dashboard) {
+  console.log("dashboard is server component")
   return (
+  // * pass server fetched data to client component as a promise (prop)
+  //* wrap in suspense to wait for promise to resolve
     <ErrorBoundary>
       <Suspense fallback={<ProductSectionSkeleton />}>
         <ProductSectionContainer // dynamic rendering

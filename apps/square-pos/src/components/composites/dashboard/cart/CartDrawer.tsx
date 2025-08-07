@@ -1,5 +1,7 @@
 'use client'
 
+// CSR
+
 import { ButtonVariant } from '@/components/primitives/derived/ButtonVariant'
 import { Badge } from '@/components/primitives/ui/badge'
 import Drawer from '@/components/primitives/ui/drawer'

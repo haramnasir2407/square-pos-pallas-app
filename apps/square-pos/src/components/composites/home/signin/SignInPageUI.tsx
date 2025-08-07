@@ -18,9 +18,9 @@ export default function SignInPageUI({
   error,
   hasOAuthCode,
 }: SignInPageUIProps) {
-  if (status === 'loading') {
-    return <HomeLoader />
-  }
+  // if (status === 'loading') {
+  //   return <HomeLoader />
+  // }
 
   if (session && !hasOAuthCode && !isProcessing) {
     return <Authenticated session={session} />

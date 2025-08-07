@@ -1,4 +1,5 @@
 // default imports help to import single export
+
 import handleOAuthCallback from '@/containers/signin/handleAuthService'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
@@ -11,6 +12,7 @@ export default function useSignInPageLogic() {
   const [error, setError] = useState<string | null>(null)
   const processedCodes = useRef<Set<string>>(new Set())
 
+  // CSR
   useEffect(() => {
     const code = searchParams.get('code')
     const error = searchParams.get('error')

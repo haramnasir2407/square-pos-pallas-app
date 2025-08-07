@@ -3,7 +3,7 @@
 // the params object is an object with the query parameters
 // the function returns the data from the API
 
-// * SERVER COMPONENT
+// * SERVER COMPONENT (dynamic rendering)
 
 import type { ParamsType } from '../types/catalog'
 

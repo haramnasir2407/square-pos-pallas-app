@@ -13,6 +13,7 @@ import Dashboard from '../../components/composites/dashboard'
  * and renders the dashboard UI for authenticated users. Redirects to home if not authenticated.
  */
 
+// * server component
 /* @compile */
 export default async function DashboardContainer() {
   // * Check the session
@@ -21,8 +22,9 @@ export default async function DashboardContainer() {
     redirect('/signin')
     return null
   }
+  console.log("dashboard is server component")
 
-  // * get data from the service
+  // * get data from the server
   const data: DashboardDataReturn = await fetchDashboardData({
     accessToken: session.accessToken ?? '',
   })

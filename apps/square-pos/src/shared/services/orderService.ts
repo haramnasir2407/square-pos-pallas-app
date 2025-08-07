@@ -1,3 +1,6 @@
+
+// * SERVER COMPONENT (dynamic rendering)
+
 export async function calculateOrderService(
   orderData: { idempotency_key: string; order: orderData },
   accessToken: string,

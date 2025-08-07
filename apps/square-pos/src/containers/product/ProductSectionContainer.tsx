@@ -1,5 +1,7 @@
 'use client'
 
+// CSR
+
 import ProductSection from '@/components/composites/dashboard/products/ProductSection'
 import { useProductSectionData } from '@/containers/product/useProductSectionData'
 import type { ProductSectionContainerProps, ProductSectionProps } from '@/shared/types/catalog'
