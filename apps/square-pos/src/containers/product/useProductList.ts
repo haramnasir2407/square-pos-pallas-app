@@ -34,6 +34,6 @@ export function useProductList(access_token: string, params?: ParamsType) {
     queryKey: ['products', params],
     queryFn: () => fetchProducts(access_token, params),
     enabled: !!access_token && hasValidQuery(params?.query),
-    staleTime: 5 * 60 * 1000,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   })
 }

@@ -12,3 +12,11 @@ Implement well-defined component patterns (container/layout/UI) and use composit
 Refactor the codebase to separate side-effects and API calls from components
 Create at least one discount item that can be applied to only one specific variant of the item
 note performance with n without react compiler
+
+
+Use Server Actions for "filter/search" buttons
+Use a <form> for filtering
+Trigger a server action to fetch filtered results
+No need for API routes or client fetch
+
+change the custom hooks (pricing rules, product sets, discounts, order) into react query or server actions

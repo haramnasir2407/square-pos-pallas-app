@@ -1,5 +1,3 @@
-// apps/square-pos/src/containers/DashboardContainer/DashboardContainerUI.tsx
-
 import ErrorBoundary from '@/components/composites/common/ErrorBoundary'
 import ProductSectionSkeleton from '@/components/composites/dashboard/products/skeletons/ProductSectionSkeleton'
 import type { DashboardDataReturn } from '@/containers/dashboard/dashboardDataService'
@@ -16,7 +14,7 @@ export default function Dashboard({ accessToken, products, inventory }: Dashboar
   return (
     <ErrorBoundary>
       <Suspense fallback={<ProductSectionSkeleton />}>
-        <ProductSectionContainer
+        <ProductSectionContainer // dynamic rendering
           accessToken={accessToken}
           products={products}
           inventory={inventory}

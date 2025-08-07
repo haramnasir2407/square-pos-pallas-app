@@ -15,6 +15,7 @@ export async function POST(request: NextRequest) {
       {
         method: 'POST',
         body: JSON.stringify({ object_types: ['PRODUCT_SET'] }),
+        next: { revalidate: 60 },
       },
       accessToken,
     )

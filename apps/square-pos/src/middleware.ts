@@ -23,14 +23,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/signin', request.url))
   }
 
-  // Protect API routes
-  // if (pathname.startsWith('/api') && !isSignedIn) {
-  //   return new NextResponse(
-  //     JSON.stringify({ error: 'Unauthorized' }),
-  //     { status: 401 }
-  //   )
-  // } '/api/:path*'
-
   return NextResponse.next()
 }
 
