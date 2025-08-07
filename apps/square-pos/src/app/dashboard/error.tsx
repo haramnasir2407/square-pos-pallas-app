@@ -18,12 +18,12 @@ export default function Error({
       className={flex({
         justify: 'center',
         align: 'center',
-        h: '100vh',
+        h: '50vh',
         gap: 'gap.inline.lg',
       })}
     >
       <Heading
-        className={flex({ alignItems: 'center', gap: 'gap.inline.sm', fontWeight: 'semibold' })}
+        className={flex({ alignItems: 'center', gap: 'gap.inline.sm', fontWeight: 'base' })}
       >
         <MdErrorOutline fill="red" size={20} /> Something went wrong! {error.message}{' '}
       </Heading>

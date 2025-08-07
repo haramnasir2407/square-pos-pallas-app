@@ -1,5 +1,5 @@
 export const startSquareOAuth = () => {
-  const clientId = process.env.NEXT_PUBLIC_SQUARE_CLIENT_ID ?? ''
+  const clientId = process.env.NEXT_PUBLIC_SQUARE_ID ?? ''
   const redirectUri = `${process.env.NEXT_PUBLIC_SQUARE_REDIRECT_URI}`
 
   const authUrl = new URL(`${process.env.NEXT_PUBLIC_SQUARE_API_BASE}/oauth2/authorize`)

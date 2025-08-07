@@ -36,5 +36,5 @@ export const errorBoundary = flex({
 export const errorHeading = flex({
   alignItems: 'center',
   gap: 'gap.inline.sm',
-  fontWeight: 'semibold',
+  fontWeight: 'normal',
 })

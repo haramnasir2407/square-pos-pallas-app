@@ -23,8 +23,8 @@ export async function GET(request: NextRequest) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: new URLSearchParams({
-        client_id: process.env.SQUARE_CLIENT_ID ?? '',
-        client_secret: process.env.SQUARE_CLIENT_SECRET ?? '',
+        client_id: process.env.AUTH_SQUARE_ID ?? '',
+        client_secret: process.env.AUTH_SQUARE_SECRET ?? '',
         code: code,
         grant_type: 'authorization_code',
         redirect_uri: `${process.env.SQUARE_REDIRECT_URI}`,

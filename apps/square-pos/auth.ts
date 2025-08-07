@@ -7,6 +7,7 @@ import NextAuth, {
   type NextAuthResult,
 } from 'next-auth'
 
+// import log from 'logging-service'
 import type { AdapterUser } from 'next-auth/adapters'
 import type { JWT } from 'next-auth/jwt'
 
@@ -87,6 +88,17 @@ const authConfig: NextAuthConfig = {
     signIn: '/signin',
     error: '/auth/error',
   },
+  // logger: {
+  //   error(code, ...message) {
+  //     log.error(code, message)
+  //   },
+  //   warn(code, ...message) {
+  //     log.warn(code, message)
+  //   },
+  //   debug(code, ...message) {
+  //     log.debug(code, message)
+  //   },
+  // },
   // debug: process.env.NODE_ENV === 'development',
 }
 

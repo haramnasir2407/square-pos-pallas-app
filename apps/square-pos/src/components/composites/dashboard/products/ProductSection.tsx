@@ -1,7 +1,4 @@
 'use client'
-
-import DashboardLoader from '@/components/composites/dashboard/loader/DashboardLoader'
-import FilterDrawer from '@/containers/filter'
 import FilterDrawerContainer from '@/containers/filter'
 import { hasValidQuery } from '@/containers/product/useProductList'
 import type { ProductSectionProps } from '@/shared/types/catalog'
@@ -10,6 +7,7 @@ import { Box, Grid, HStack } from '~/styled-system/jsx'
 import CartDrawer from '../cart/CartDrawer'
 import SearchBar from '../search/SearchBar'
 import ProductCard from './ProductCard'
+import ProductGridSkeleton from './skeletons/ProductGridSkeleton'
 
 /**
  * Section component for displaying a grid of products with filtering, search, and cart drawer.
@@ -53,8 +51,8 @@ export default function ProductSection({
           prevParams={params}
         />
       </HStack>
-      {hasValidQuery(params.query) && dataIsPending && <DashboardLoader />}
-      {/* {Boolean(error) && <div>Error loading products</div>} */}
+      {/* {hasValidQuery(params.query) && dataIsPending && <DashboardLoader />} */}
+      {hasValidQuery(params.query) && dataIsPending && <ProductGridSkeleton />}
 
       {!dataIsPending && !error && items.length === 0 && (
         <Box style={{ textAlign: 'center', margin: '2rem 0', color: 'gray' }}>No items found</Box>

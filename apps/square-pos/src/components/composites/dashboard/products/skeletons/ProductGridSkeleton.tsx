@@ -17,9 +17,9 @@ export default function ProductGridSkeleton() {
           <Skeleton
             key={i}
             className={css({
-              h: '64',
+              h: '72',
               borderRadius: 'lg',
-              w: '64',
+              w: '56',
             })}
           />
         ))}

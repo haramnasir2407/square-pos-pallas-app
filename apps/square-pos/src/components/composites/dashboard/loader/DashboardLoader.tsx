@@ -9,7 +9,7 @@ export default function DashboardLoader() {
       <Flex
         align="center"
         direction="column"
-        gap="layout.section.md"
+        gap="layout.section.sm"
         className={css({
           textAlign: 'center',
         })}
