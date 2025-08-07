@@ -20,3 +20,4 @@ Trigger a server action to fetch filtered results
 No need for API routes or client fetch
 
 change the custom hooks (pricing rules, product sets, discounts, order) into react query or server actions
+try using authjs old version for auth flow
