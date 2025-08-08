@@ -9,7 +9,7 @@ Create a custom product card component
 and cart item card
 and controls component
 Implement well-defined component patterns (container/layout/UI) and use composition to build a modular and maintainable codebase.
-Refactor the codebase to separate side-effects and API calls from components
+Refactor the codebase to s eparate side-effects and API calls from components
 Create at least one discount item that can be applied to only one specific variant of the item
 note performance with n without react compiler
 

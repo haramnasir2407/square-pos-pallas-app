@@ -1,5 +1,5 @@
-import { useOrderConfirmation } from './useOrderConfirmation'
 import { OrderConfirmation } from '@/components/composites/dashboard/order/OrderConfirmation'
+import { useOrderConfirmation } from './useOrderConfirmation'
 
 /**
  * Handles order creation and displays the result (success or error) with a summary.
@@ -12,7 +12,7 @@ export const OrderConfirmationContainer = ({
   orderTaxes,
   onClose,
 }: OrderConfirmationContainerProps) => {
-  const { isProcessing, orderResult, error } = useOrderConfirmation({
+  const { orderResult, isLoading, error } = useOrderConfirmation({
     items,
     accessToken,
     orderDiscounts,
@@ -21,7 +21,7 @@ export const OrderConfirmationContainer = ({
 
   return (
     <OrderConfirmation
-      isProcessing={isProcessing}
+      isProcessing={isLoading}
       orderResult={orderResult}
       error={error}
       onClose={onClose}

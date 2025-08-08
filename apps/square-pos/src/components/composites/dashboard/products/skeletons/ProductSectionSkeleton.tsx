@@ -33,7 +33,7 @@ export default function ProductSectionSkeleton() {
           />
         </Flex>
 
-        <ProductGridSkeleton />
+        <ProductGridSkeleton/>
       </Box>
     </VStack>
   )

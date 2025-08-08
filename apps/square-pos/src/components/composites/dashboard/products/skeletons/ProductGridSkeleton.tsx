@@ -1,4 +1,5 @@
 import { Skeleton } from '@/components/primitives/ui/skeleton'
+import type { Item } from '@/shared/types/catalog'
 import { css } from '~/styled-system/css'
 import { Box, Grid } from '~/styled-system/jsx'
 
@@ -13,7 +14,7 @@ export default function ProductGridSkeleton() {
           gridTemplateColumns: ['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)'], // responsive: 1/2/3 columns
         })}
       >
-        {Array.from({ length: 12 }).map((_, i) => (
+        {Array.from({ length: 6 }).map((_, i) => (
           <Skeleton
             key={i}
             className={css({
